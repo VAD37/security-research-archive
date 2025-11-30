@@ -1,0 +1,206 @@
+Ran 1 test for test/DebugFork.t.sol:DebugFork
+[PASS] test_basic_debug() (gas: 1110441)
+Logs:
+  feed: 0xd6938E55cc5f4B553948Cc153d360E8a8FA0de72
+  feed usd/weth price: 2.791678841096667534297e21
+  --------------------
+  market 0: Size | WETH | USDC | 120 | v1.7
+  market 1: Size | cbBTC | USDC | 120 | v1.7
+  market 2: Size | cbETH | USDC | 120 | v1.7
+  market 3: Size | VIRTUAL | USDC | 150 | v1.7
+  market 4: Size | AIXBT | USDC | 150 | v1.7
+  --------------------
+  borrowAToken 0: saUSDC
+  ---------MARKET 0-----------
+  market 0: 0xC2a429681CAd7C1ce36442fbf7A4a68B11eFF940
+  version: v1.7
+  --Fee--
+  swapFeeAPR: 0e0
+  fragmentationFee: 0e0
+  liquidationRewardPercent: 5e16
+  overdueCollateralProtocolPercent: 1e16
+  collateralProtocolPercent: 1e17
+  feeRecipient: 0x12328eA44AB6D7B18aa9Cc030714763734b625dB
+  --Risk--
+  crOpening: 1.3e18
+  crLiquidation: 1.2e18
+  minimumCreditBorrowAToken: 1e7
+  borrowATokenCap: 1e12
+  minTenor: 3.6e3
+  maxTenor: 1.5768e8
+  --Oracle--
+  priceFeed: 0xC74cb34Dcfb0C3e25E7a198d857334cE76B277AD
+  variablePoolBorrowRateStaleRateInterval: 0e0
+  --Data--
+  nextDebtPositionId: 738
+  nextCreditPositionId: 745
+  underlyingCollateralToken: 0x4200000000000000000000000000000000000006
+  underlyingBorrowToken: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+  collateralToken: 0x974583F05de1FD18C59C77C4A8803cf0c7db5333
+  borrowAToken: 0x0447430C327cCE6C0c43Ec0eb0271fecdAD471b2
+  debtToken: 0xB0a00C4B3d77c896f46DC6b204695E22de7A185d
+  variablePool: 0xA238Dd80C259a72e81d7e4664a9801593F98d1c5
+  ---------MARKET 1-----------
+  market 1: 0xB21Bbe052F5cE9ae681c59725f0A313765Fd016c
+  version: v1.7
+  --Fee--
+  swapFeeAPR: 0e0
+  fragmentationFee: 0e0
+  liquidationRewardPercent: 5e16
+  overdueCollateralProtocolPercent: 1e16
+  collateralProtocolPercent: 1e17
+  feeRecipient: 0x12328eA44AB6D7B18aa9Cc030714763734b625dB
+  --Risk--
+  crOpening: 1.3e18
+  crLiquidation: 1.2e18
+  minimumCreditBorrowAToken: 1e7
+  borrowATokenCap: 1e12
+  minTenor: 3.6e3
+  maxTenor: 1.5768e8
+  --Oracle--
+  priceFeed: 0xa7a48d276289Cd2136317F612ba4F24dfB1F180C
+  variablePoolBorrowRateStaleRateInterval: 0e0
+  --Data--
+  nextDebtPositionId: 45
+  nextCreditPositionId: 47
+  underlyingCollateralToken: 0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf
+  underlyingBorrowToken: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+  collateralToken: 0xC23cDB75083b3B05431cF25ba5407798C6090B6d
+  borrowAToken: 0x0447430C327cCE6C0c43Ec0eb0271fecdAD471b2
+  debtToken: 0x867aa129AC5fCfe191318D81f46Dd7CE39a2aFEC
+  variablePool: 0xA238Dd80C259a72e81d7e4664a9801593F98d1c5
+  ---------MARKET 2-----------
+  market 2: 0x0728522FBe416B9dBB0c12E9e84870AA8E17Ad11
+  version: v1.7
+  --Fee--
+  swapFeeAPR: 5e15
+  fragmentationFee: 0e0
+  liquidationRewardPercent: 5e16
+  overdueCollateralProtocolPercent: 1e16
+  collateralProtocolPercent: 1e17
+  feeRecipient: 0x12328eA44AB6D7B18aa9Cc030714763734b625dB
+  --Risk--
+  crOpening: 1.3e18
+  crLiquidation: 1.2e18
+  minimumCreditBorrowAToken: 1e7
+  borrowATokenCap: 1e12
+  minTenor: 3.6e3
+  maxTenor: 1.5768e8
+  --Oracle--
+  priceFeed: 0x04A8d1B8701d3EEBB586096edEedB19CaB3A002E
+  variablePoolBorrowRateStaleRateInterval: 0e0
+  --Data--
+  nextDebtPositionId: 4
+  nextCreditPositionId: 4
+  underlyingCollateralToken: 0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22
+  underlyingBorrowToken: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+  collateralToken: 0xc2bCD82FE43D6b384c3Ff56a9fb0bCf24585b00c
+  borrowAToken: 0x0447430C327cCE6C0c43Ec0eb0271fecdAD471b2
+  debtToken: 0x4a7C30a4ecC0E0D84Efcd9B1BC580FF82c776315
+  variablePool: 0xA238Dd80C259a72e81d7e4664a9801593F98d1c5
+  ---------MARKET 3-----------
+  market 3: 0x2a7168C467f97A4C56958b0DDE1144E450a60a36
+  version: v1.7
+  --Fee--
+  swapFeeAPR: 0e0
+  fragmentationFee: 0e0
+  liquidationRewardPercent: 0e0
+  overdueCollateralProtocolPercent: 1e16
+  collateralProtocolPercent: 1e17
+  feeRecipient: 0x12328eA44AB6D7B18aa9Cc030714763734b625dB
+  --Risk--
+  crOpening: 1.6e18
+  crLiquidation: 1.5e18
+  minimumCreditBorrowAToken: 1e7
+  borrowATokenCap: 1e12
+  minTenor: 3.6e3
+  maxTenor: 1.5768e8
+  --Oracle--
+  priceFeed: 0x19960f5ffa579a0573BF9b9D0D3258C34F9f69a1
+  variablePoolBorrowRateStaleRateInterval: 0e0
+  --Data--
+  nextDebtPositionId: 173
+  nextCreditPositionId: 173
+  underlyingCollateralToken: 0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b
+  underlyingBorrowToken: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+  collateralToken: 0x5A3E26654307DDF4c777D93FFf88d887703616Bb
+  borrowAToken: 0x0447430C327cCE6C0c43Ec0eb0271fecdAD471b2
+  debtToken: 0x5d5d79BEF70570Dd46f1860535346FcFD2d28EF9
+  variablePool: 0xA238Dd80C259a72e81d7e4664a9801593F98d1c5
+  ---------MARKET 4-----------
+  market 4: 0xc274A820C9BD8242Ec0Cf20C444E24bb6da31F98
+  version: v1.7
+  --Fee--
+  swapFeeAPR: 0e0
+  fragmentationFee: 0e0
+  liquidationRewardPercent: 0e0
+  overdueCollateralProtocolPercent: 1e16
+  collateralProtocolPercent: 1e17
+  feeRecipient: 0x12328eA44AB6D7B18aa9Cc030714763734b625dB
+  --Risk--
+  crOpening: 1.6e18
+  crLiquidation: 1.5e18
+  minimumCreditBorrowAToken: 1e7
+  borrowATokenCap: 1e12
+  minTenor: 3.6e3
+  maxTenor: 1.5768e8
+  --Oracle--
+  priceFeed: 0xd3E12ebBD94b2B0Ec6aE43830CC400Ce91b24132
+  variablePoolBorrowRateStaleRateInterval: 0e0
+  --Data--
+  nextDebtPositionId: 25
+  nextCreditPositionId: 25
+  underlyingCollateralToken: 0x4F9Fd6Be4a90f2620860d680c0d4d5Fb53d1A825
+  underlyingBorrowToken: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+  collateralToken: 0x96Ee5527c0669d5D0590b90fae1F86D4Bb2fE16a
+  borrowAToken: 0x0447430C327cCE6C0c43Ec0eb0271fecdAD471b2
+  debtToken: 0x89889899e465dCf98b9394B47d6Acb08E8C67748
+  variablePool: 0xA238Dd80C259a72e81d7e4664a9801593F98d1c5
+  ---------FEED-----------
+  priceFeed 0: 0xd6938E55cc5f4B553948Cc153d360E8a8FA0de72
+  price: 2.791678841096667534297e21
+  base: 0x71041dddad3595F9CEd3DcCFBe3D1F4b0a16Bb70
+  base: ETH / USD
+  quote: 0x7e860098F58bBFC8648a4311b374B1D669a2bc6B
+  quote: USDC / USD
+  ---------FEED-----------
+  priceFeed 1: 0x2d5f5b42387cBBd891315c3db3664276358fe50b
+  price: 9.8675051772578607476416e22
+  base: 0x07DA0E54543a844a80ABE69c8A12F22B3aA59f9D
+  base: cbBTC / USD
+  quote: 0x7e860098F58bBFC8648a4311b374B1D669a2bc6B
+  quote: USDC / USD
+  ---------FEED-----------
+  priceFeed 2: 0x43C4F2C9A9aF437524e8679576662da982b87499
+  price: 3.049514779051996116502e21
+  base: 0xd7818272B9e248357d13057AAb0B417aF31E817d
+  base: CBETH / USD
+  quote: 0x7e860098F58bBFC8648a4311b374B1D669a2bc6B
+  quote: USDC / USD
+  ---------FEED-----------
+  priceFeed 3: 0xC74cb34Dcfb0C3e25E7a198d857334cE76B277AD
+  price: 2.791678841096667534297e21
+  base: 0x71041dddad3595F9CEd3DcCFBe3D1F4b0a16Bb70
+  base: ETH / USD
+  quote: 0x7e860098F58bBFC8648a4311b374B1D669a2bc6B
+  quote: USDC / USD
+  ---------FEED-----------
+  priceFeed 4: 0xa7a48d276289Cd2136317F612ba4F24dfB1F180C
+  price: 9.8675051772578607476416e22
+  base: 0x07DA0E54543a844a80ABE69c8A12F22B3aA59f9D
+  base: cbBTC / USD
+  quote: 0x7e860098F58bBFC8648a4311b374B1D669a2bc6B
+  quote: USDC / USD
+  ---------FEED-----------
+  priceFeed 5: 0x04A8d1B8701d3EEBB586096edEedB19CaB3A002E
+  price: 3.049514779051996116502e21
+  base: 0xd7818272B9e248357d13057AAb0B417aF31E817d
+  base: CBETH / USD
+  quote: 0x7e860098F58bBFC8648a4311b374B1D669a2bc6B
+  quote: USDC / USD
+  ---------FEED-----------
+  priceFeed 6: 0xd3E12ebBD94b2B0Ec6aE43830CC400Ce91b24132
+  price: 2.23616e17
+  desc: PriceFeedUniswapV3TWAP | (AIXBT/USDC) (Uniswap v3 TWAP)
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 630.39ms (15.80ms CPU time)
