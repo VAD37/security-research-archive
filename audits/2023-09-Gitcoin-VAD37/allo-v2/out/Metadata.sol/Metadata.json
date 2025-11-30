@@ -1,0 +1,104 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "contracts/core/libraries/Metadata.sol",
+    "id": 2923,
+    "exportedSymbols": {
+      "Metadata": [
+        2922
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "42:4539:8",
+    "nodes": [
+      {
+        "id": 2915,
+        "nodeType": "PragmaDirective",
+        "src": "42:23:8",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "0.8",
+          ".19"
+        ]
+      },
+      {
+        "id": 2922,
+        "nodeType": "StructDefinition",
+        "src": "4351:229:8",
+        "nodes": [],
+        "canonicalName": "Metadata",
+        "members": [
+          {
+            "constant": false,
+            "id": 2918,
+            "mutability": "mutable",
+            "name": "protocol",
+            "nameLocation": "4473:8:8",
+            "nodeType": "VariableDeclaration",
+            "scope": 2922,
+            "src": "4465:16:8",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 2917,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "4465:7:8",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 2921,
+            "mutability": "mutable",
+            "name": "pointer",
+            "nameLocation": "4570:7:8",
+            "nodeType": "VariableDeclaration",
+            "scope": 2922,
+            "src": "4563:14:8",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage_ptr",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 2920,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "4563:6:8",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "name": "Metadata",
+        "nameLocation": "4358:8:8",
+        "scope": 2923,
+        "visibility": "public"
+      }
+    ],
+    "license": "AGPL-3.0-only"
+  },
+  "id": 8
+}

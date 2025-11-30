@@ -1,0 +1,241 @@
+{
+  "abi": [
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080604052348015600f57600080fd5b5060a98061001e6000396000f3fe608060405236606e576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601d60248201527f4d6f636b526576657274696e6752656365697665723a20526576657274000000604482015260640160405180910390fd5b600080fdfea2646970667358221220b57fcc4ad1eaa7e3897c338b0ead1995448134accaf60e4b2232ac3b9a359cef64736f6c63430008130033",
+    "sourceMap": "59:122:176:-:0;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405236606e576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601d60248201527f4d6f636b526576657274696e6752656365697665723a20526576657274000000604482015260640160405180910390fd5b600080fdfea2646970667358221220b57fcc4ad1eaa7e3897c338b0ead1995448134accaf60e4b2232ac3b9a359cef64736f6c63430008130033",
+    "sourceMap": "59:122:176:-:0;;;;;;133:39;;;;;216:2:182;133:39:176;;;198:21:182;255:2;235:18;;;228:30;294:31;274:18;;;267:59;343:18;;133:39:176;;;;;;;59:122;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"test/utils/MockRevertingReceiver.sol\":\"MockRevertingReceiver\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[\":@ethereum-waffle/=node_modules/@ethereum-waffle/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/\",\":@prb/math/=lib/v2-core/lib/prb-math/\",\":@prb/test/=lib/v2-core/lib/prb-test/src/\",\":@sablier/v2-core/=lib/v2-core/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eas-contracts/=lib/eas-contracts/contracts/\",\":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-gas-snapshot/=lib/permit2/lib/forge-gas-snapshot/src/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\",\":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":permit2/=lib/permit2/src/interfaces/\",\":prb-math/=lib/v2-core/lib/prb-math/src/\",\":prb-test/=lib/v2-core/lib/prb-test/src/\",\":solady/=node_modules/solady/\",\":solarray/=lib/v2-core/lib/solarray/src/\",\":solmate/=lib/permit2/lib/solmate/\",\":v2-core/=lib/v2-core/\"]},\"sources\":{\"test/utils/MockRevertingReceiver.sol\":{\"keccak256\":\"0xcc520efbba5d5053965a0306080437a1656a972b0bd2a2d14d5c19f10329c7b2\",\"urls\":[\"bzz-raw://5b164739c1b1278981fb129dd2be29f0d9e58b61f2756c614e63b8ee87aea5c2\",\"dweb:/ipfs/QmYd1RKT593X9hReoqjL4NDKGJZnX5wdpNMGVYi6pbwUdh\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "payable",
+          "type": "receive"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@ethereum-waffle/=node_modules/@ethereum-waffle/",
+        ":@openzeppelin/=node_modules/@openzeppelin/",
+        ":@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+        ":@prb/math/=lib/v2-core/lib/prb-math/",
+        ":@prb/test/=lib/v2-core/lib/prb-test/src/",
+        ":@sablier/v2-core/=lib/v2-core/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":eas-contracts/=lib/eas-contracts/contracts/",
+        ":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
+        ":eth-gas-reporter/=node_modules/eth-gas-reporter/",
+        ":forge-gas-snapshot/=lib/permit2/lib/forge-gas-snapshot/src/",
+        ":forge-std/=lib/forge-std/src/",
+        ":hardhat-deploy/=node_modules/hardhat-deploy/",
+        ":hardhat/=node_modules/hardhat/",
+        ":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/",
+        ":openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        ":permit2/=lib/permit2/src/interfaces/",
+        ":prb-math/=lib/v2-core/lib/prb-math/src/",
+        ":prb-test/=lib/v2-core/lib/prb-test/src/",
+        ":solady/=node_modules/solady/",
+        ":solarray/=lib/v2-core/lib/solarray/src/",
+        ":solmate/=lib/permit2/lib/solmate/",
+        ":v2-core/=lib/v2-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 1000
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "test/utils/MockRevertingReceiver.sol": "MockRevertingReceiver"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "test/utils/MockRevertingReceiver.sol": {
+        "keccak256": "0xcc520efbba5d5053965a0306080437a1656a972b0bd2a2d14d5c19f10329c7b2",
+        "urls": [
+          "bzz-raw://5b164739c1b1278981fb129dd2be29f0d9e58b61f2756c614e63b8ee87aea5c2",
+          "dweb:/ipfs/QmYd1RKT593X9hReoqjL4NDKGJZnX5wdpNMGVYi6pbwUdh"
+        ],
+        "license": null
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": {}
+  },
+  "ast": {
+    "absolutePath": "test/utils/MockRevertingReceiver.sol",
+    "id": 121043,
+    "exportedSymbols": {
+      "MockRevertingReceiver": [
+        121042
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:149:176",
+    "nodes": [
+      {
+        "id": 121033,
+        "nodeType": "PragmaDirective",
+        "src": "33:24:176",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".19"
+        ]
+      },
+      {
+        "id": 121042,
+        "nodeType": "ContractDefinition",
+        "src": "59:122:176",
+        "nodes": [
+          {
+            "id": 121041,
+            "nodeType": "FunctionDefinition",
+            "src": "96:83:176",
+            "nodes": [],
+            "body": {
+              "id": 121040,
+              "nodeType": "Block",
+              "src": "123:56:176",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "hexValue": "4d6f636b526576657274696e6752656365697665723a20526576657274",
+                        "id": 121037,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "140:31:176",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_0363e5cf9304d1375fd4474fa8a091d3ebf6cc1e7bd24515b6024dbe56c0a600",
+                          "typeString": "literal_string \"MockRevertingReceiver: Revert\""
+                        },
+                        "value": "MockRevertingReceiver: Revert"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_stringliteral_0363e5cf9304d1375fd4474fa8a091d3ebf6cc1e7bd24515b6024dbe56c0a600",
+                          "typeString": "literal_string \"MockRevertingReceiver: Revert\""
+                        }
+                      ],
+                      "id": 121036,
+                      "name": "revert",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -19,
+                        -19
+                      ],
+                      "referencedDeclaration": -19,
+                      "src": "133:6:176",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_revert_pure$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (string memory) pure"
+                      }
+                    },
+                    "id": 121038,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "133:39:176",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 121039,
+                  "nodeType": "ExpressionStatement",
+                  "src": "133:39:176"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "receive",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 121034,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "103:2:176"
+            },
+            "returnParameters": {
+              "id": 121035,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "123:0:176"
+            },
+            "scope": 121042,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "MockRevertingReceiver",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          121042
+        ],
+        "name": "MockRevertingReceiver",
+        "nameLocation": "68:21:176",
+        "scope": 121043,
+        "usedErrors": []
+      }
+    ]
+  },
+  "id": 176
+}

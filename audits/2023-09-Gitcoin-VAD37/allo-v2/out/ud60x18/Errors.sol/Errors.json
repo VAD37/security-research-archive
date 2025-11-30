@@ -1,0 +1,835 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "lib/v2-core/lib/prb-math/src/ud60x18/Errors.sol",
+    "id": 72359,
+    "exportedSymbols": {
+      "PRBMath_UD60x18_Ceil_Overflow": [
+        72290
+      ],
+      "PRBMath_UD60x18_Convert_Overflow": [
+        72295
+      ],
+      "PRBMath_UD60x18_Exp2_InputTooBig": [
+        72307
+      ],
+      "PRBMath_UD60x18_Exp_InputTooBig": [
+        72301
+      ],
+      "PRBMath_UD60x18_Gm_Overflow": [
+        72316
+      ],
+      "PRBMath_UD60x18_IntoSD1x18_Overflow": [
+        72322
+      ],
+      "PRBMath_UD60x18_IntoSD59x18_Overflow": [
+        72328
+      ],
+      "PRBMath_UD60x18_IntoUD2x18_Overflow": [
+        72334
+      ],
+      "PRBMath_UD60x18_IntoUint128_Overflow": [
+        72340
+      ],
+      "PRBMath_UD60x18_IntoUint40_Overflow": [
+        72346
+      ],
+      "PRBMath_UD60x18_Log_InputTooSmall": [
+        72352
+      ],
+      "PRBMath_UD60x18_Sqrt_Overflow": [
+        72358
+      ],
+      "UD60x18": [
+        73582
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "32:1716:112",
+    "nodes": [
+      {
+        "id": 72282,
+        "nodeType": "PragmaDirective",
+        "src": "32:25:112",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".19"
+        ]
+      },
+      {
+        "id": 72284,
+        "nodeType": "ImportDirective",
+        "src": "59:42:112",
+        "nodes": [],
+        "absolutePath": "lib/v2-core/lib/prb-math/src/ud60x18/ValueType.sol",
+        "file": "./ValueType.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 72359,
+        "sourceUnit": 73651,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 72283,
+              "name": "UD60x18",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 73582,
+              "src": "68:7:112",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 72290,
+        "nodeType": "ErrorDefinition",
+        "src": "163:47:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72285,
+          "nodeType": "StructuredDocumentation",
+          "src": "103:60:112",
+          "text": "@notice Thrown when ceiling a number overflows UD60x18."
+        },
+        "errorSelector": "6149f6b9",
+        "name": "PRBMath_UD60x18_Ceil_Overflow",
+        "nameLocation": "169:29:112",
+        "parameters": {
+          "id": 72289,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72288,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "207:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72290,
+              "src": "199:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72287,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72286,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "199:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "199:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "199:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "198:11:112"
+        }
+      },
+      {
+        "id": 72295,
+        "nodeType": "ErrorDefinition",
+        "src": "308:50:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72291,
+          "nodeType": "StructuredDocumentation",
+          "src": "212:96:112",
+          "text": "@notice Thrown when converting a basic integer to the fixed-point format overflows UD60x18."
+        },
+        "errorSelector": "1cd951a7",
+        "name": "PRBMath_UD60x18_Convert_Overflow",
+        "nameLocation": "314:32:112",
+        "parameters": {
+          "id": 72294,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72293,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "355:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72295,
+              "src": "347:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              },
+              "typeName": {
+                "id": 72292,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "347:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "346:11:112"
+        }
+      },
+      {
+        "id": 72301,
+        "nodeType": "ErrorDefinition",
+        "src": "459:49:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72296,
+          "nodeType": "StructuredDocumentation",
+          "src": "360:99:112",
+          "text": "@notice Thrown when taking the natural exponent of a base greater than 133_084258667509499441."
+        },
+        "errorSelector": "1af63aca",
+        "name": "PRBMath_UD60x18_Exp_InputTooBig",
+        "nameLocation": "465:31:112",
+        "parameters": {
+          "id": 72300,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72299,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "505:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72301,
+              "src": "497:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72298,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72297,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "497:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "497:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "497:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "496:11:112"
+        }
+      },
+      {
+        "id": 72307,
+        "nodeType": "ErrorDefinition",
+        "src": "592:50:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72302,
+          "nodeType": "StructuredDocumentation",
+          "src": "510:82:112",
+          "text": "@notice Thrown when taking the binary exponent of a base greater than 192e18."
+        },
+        "errorSelector": "b3b6ba1f",
+        "name": "PRBMath_UD60x18_Exp2_InputTooBig",
+        "nameLocation": "598:32:112",
+        "parameters": {
+          "id": 72306,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72305,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "639:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72307,
+              "src": "631:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72304,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72303,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "631:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "631:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "631:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "630:11:112"
+        }
+      },
+      {
+        "id": 72316,
+        "nodeType": "ErrorDefinition",
+        "src": "749:56:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72308,
+          "nodeType": "StructuredDocumentation",
+          "src": "644:105:112",
+          "text": "@notice Thrown when taking the geometric mean of two numbers and multiplying them overflows UD60x18."
+        },
+        "errorSelector": "ae7f3b37",
+        "name": "PRBMath_UD60x18_Gm_Overflow",
+        "nameLocation": "755:27:112",
+        "parameters": {
+          "id": 72315,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72311,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "791:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72316,
+              "src": "783:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72310,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72309,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "783:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "783:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "783:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            },
+            {
+              "constant": false,
+              "id": 72314,
+              "mutability": "mutable",
+              "name": "y",
+              "nameLocation": "802:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72316,
+              "src": "794:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72313,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72312,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "794:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "794:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "794:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "782:22:112"
+        }
+      },
+      {
+        "id": 72322,
+        "nodeType": "ErrorDefinition",
+        "src": "891:53:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72317,
+          "nodeType": "StructuredDocumentation",
+          "src": "807:84:112",
+          "text": "@notice Thrown when trying to cast a UD60x18 number that doesn't fit in SD1x18."
+        },
+        "errorSelector": "381af80b",
+        "name": "PRBMath_UD60x18_IntoSD1x18_Overflow",
+        "nameLocation": "897:35:112",
+        "parameters": {
+          "id": 72321,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72320,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "941:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72322,
+              "src": "933:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72319,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72318,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "933:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "933:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "933:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "932:11:112"
+        }
+      },
+      {
+        "id": 72328,
+        "nodeType": "ErrorDefinition",
+        "src": "1031:54:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72323,
+          "nodeType": "StructuredDocumentation",
+          "src": "946:85:112",
+          "text": "@notice Thrown when trying to cast a UD60x18 number that doesn't fit in SD59x18."
+        },
+        "errorSelector": "f4618684",
+        "name": "PRBMath_UD60x18_IntoSD59x18_Overflow",
+        "nameLocation": "1037:36:112",
+        "parameters": {
+          "id": 72327,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72326,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "1082:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72328,
+              "src": "1074:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72325,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72324,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "1074:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "1074:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "1074:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "1073:11:112"
+        }
+      },
+      {
+        "id": 72334,
+        "nodeType": "ErrorDefinition",
+        "src": "1171:53:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72329,
+          "nodeType": "StructuredDocumentation",
+          "src": "1087:84:112",
+          "text": "@notice Thrown when trying to cast a UD60x18 number that doesn't fit in UD2x18."
+        },
+        "errorSelector": "f59b8dd0",
+        "name": "PRBMath_UD60x18_IntoUD2x18_Overflow",
+        "nameLocation": "1177:35:112",
+        "parameters": {
+          "id": 72333,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72332,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "1221:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72334,
+              "src": "1213:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72331,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72330,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "1213:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "1213:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "1213:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "1212:11:112"
+        }
+      },
+      {
+        "id": 72340,
+        "nodeType": "ErrorDefinition",
+        "src": "1311:54:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72335,
+          "nodeType": "StructuredDocumentation",
+          "src": "1226:85:112",
+          "text": "@notice Thrown when trying to cast a UD60x18 number that doesn't fit in uint128."
+        },
+        "errorSelector": "4916adce",
+        "name": "PRBMath_UD60x18_IntoUint128_Overflow",
+        "nameLocation": "1317:36:112",
+        "parameters": {
+          "id": 72339,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72338,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "1362:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72340,
+              "src": "1354:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72337,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72336,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "1354:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "1354:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "1354:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "1353:11:112"
+        }
+      },
+      {
+        "id": 72346,
+        "nodeType": "ErrorDefinition",
+        "src": "1451:53:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72341,
+          "nodeType": "StructuredDocumentation",
+          "src": "1367:84:112",
+          "text": "@notice Thrown when trying to cast a UD60x18 number that doesn't fit in uint40."
+        },
+        "errorSelector": "583c666a",
+        "name": "PRBMath_UD60x18_IntoUint40_Overflow",
+        "nameLocation": "1457:35:112",
+        "parameters": {
+          "id": 72345,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72344,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "1501:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72346,
+              "src": "1493:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72343,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72342,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "1493:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "1493:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "1493:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "1492:11:112"
+        }
+      },
+      {
+        "id": 72352,
+        "nodeType": "ErrorDefinition",
+        "src": "1576:51:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72347,
+          "nodeType": "StructuredDocumentation",
+          "src": "1506:70:112",
+          "text": "@notice Thrown when taking the logarithm of a number less than 1."
+        },
+        "errorSelector": "36d32ef0",
+        "name": "PRBMath_UD60x18_Log_InputTooSmall",
+        "nameLocation": "1582:33:112",
+        "parameters": {
+          "id": 72351,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72350,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "1624:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72352,
+              "src": "1616:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72349,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72348,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "1616:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "1616:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "1616:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "1615:11:112"
+        }
+      },
+      {
+        "id": 72358,
+        "nodeType": "ErrorDefinition",
+        "src": "1700:47:112",
+        "nodes": [],
+        "documentation": {
+          "id": 72353,
+          "nodeType": "StructuredDocumentation",
+          "src": "1629:71:112",
+          "text": "@notice Thrown when calculating the square root overflows UD60x18."
+        },
+        "errorSelector": "edc236ad",
+        "name": "PRBMath_UD60x18_Sqrt_Overflow",
+        "nameLocation": "1706:29:112",
+        "parameters": {
+          "id": 72357,
+          "nodeType": "ParameterList",
+          "parameters": [
+            {
+              "constant": false,
+              "id": 72356,
+              "mutability": "mutable",
+              "name": "x",
+              "nameLocation": "1744:1:112",
+              "nodeType": "VariableDeclaration",
+              "scope": 72358,
+              "src": "1736:9:112",
+              "stateVariable": false,
+              "storageLocation": "default",
+              "typeDescriptions": {
+                "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                "typeString": "UD60x18"
+              },
+              "typeName": {
+                "id": 72355,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 72354,
+                  "name": "UD60x18",
+                  "nameLocations": [
+                    "1736:7:112"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 73582,
+                  "src": "1736:7:112"
+                },
+                "referencedDeclaration": 73582,
+                "src": "1736:7:112",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_UD60x18_$73582",
+                  "typeString": "UD60x18"
+                }
+              },
+              "visibility": "internal"
+            }
+          ],
+          "src": "1735:11:112"
+        }
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 112
+}

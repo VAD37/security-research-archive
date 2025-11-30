@@ -1,0 +1,1408 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "uid",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "schema",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint64",
+              "name": "time",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "expirationTime",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "revocationTime",
+              "type": "uint64"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "refUID",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "attester",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "revocable",
+              "type": "bool"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct Attestation",
+          "name": "attestation",
+          "type": "tuple"
+        }
+      ],
+      "name": "attest",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "isPayable",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "uid",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "schema",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint64",
+              "name": "time",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "expirationTime",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "revocationTime",
+              "type": "uint64"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "refUID",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "attester",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "revocable",
+              "type": "bool"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct Attestation[]",
+          "name": "attestations",
+          "type": "tuple[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "values",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "multiAttest",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "uid",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "schema",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint64",
+              "name": "time",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "expirationTime",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "revocationTime",
+              "type": "uint64"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "refUID",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "attester",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "revocable",
+              "type": "bool"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct Attestation[]",
+          "name": "attestations",
+          "type": "tuple[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "values",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "multiRevoke",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "uid",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "schema",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint64",
+              "name": "time",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "expirationTime",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "revocationTime",
+              "type": "uint64"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "refUID",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "attester",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "revocable",
+              "type": "bool"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct Attestation",
+          "name": "attestation",
+          "type": "tuple"
+        }
+      ],
+      "name": "revoke",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "attest((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes))": "e60c3505",
+    "isPayable()": "ce46e046",
+    "multiAttest((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes)[],uint256[])": "91db0b7e",
+    "multiRevoke((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes)[],uint256[])": "88e5b2d9",
+    "revoke((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes))": "e49617e1"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"uid\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"schema\",\"type\":\"bytes32\"},{\"internalType\":\"uint64\",\"name\":\"time\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"expirationTime\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"revocationTime\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"refUID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"attester\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"revocable\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"internalType\":\"struct Attestation\",\"name\":\"attestation\",\"type\":\"tuple\"}],\"name\":\"attest\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isPayable\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"uid\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"schema\",\"type\":\"bytes32\"},{\"internalType\":\"uint64\",\"name\":\"time\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"expirationTime\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"revocationTime\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"refUID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"attester\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"revocable\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"internalType\":\"struct Attestation[]\",\"name\":\"attestations\",\"type\":\"tuple[]\"},{\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"multiAttest\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"uid\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"schema\",\"type\":\"bytes32\"},{\"internalType\":\"uint64\",\"name\":\"time\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"expirationTime\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"revocationTime\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"refUID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"attester\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"revocable\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"internalType\":\"struct Attestation[]\",\"name\":\"attestations\",\"type\":\"tuple[]\"},{\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"multiRevoke\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"uid\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"schema\",\"type\":\"bytes32\"},{\"internalType\":\"uint64\",\"name\":\"time\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"expirationTime\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"revocationTime\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"refUID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"attester\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"revocable\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"internalType\":\"struct Attestation\",\"name\":\"attestation\",\"type\":\"tuple\"}],\"name\":\"revoke\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"attest((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes))\":{\"params\":{\"attestation\":\"The new attestation.\"},\"returns\":{\"_0\":\"Whether the attestation is valid.\"}},\"isPayable()\":{\"returns\":{\"_0\":\"Whether the resolver supports ETH transfers.\"}},\"multiAttest((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes)[],uint256[])\":{\"params\":{\"attestations\":\"The new attestations.\",\"values\":\"Explicit ETH amounts which were sent with each attestation.\"},\"returns\":{\"_0\":\"Whether all the attestations are valid.\"}},\"multiRevoke((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes)[],uint256[])\":{\"params\":{\"attestations\":\"The existing attestations to be revoked.\",\"values\":\"Explicit ETH amounts which were sent with each revocation.\"},\"returns\":{\"_0\":\"Whether the attestations can be revoked.\"}},\"revoke((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes))\":{\"params\":{\"attestation\":\"The existing attestation to be revoked.\"},\"returns\":{\"_0\":\"Whether the attestation can be revoked.\"}}},\"title\":\"ISchemaResolver\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"attest((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes))\":{\"notice\":\"Processes an attestation and verifies whether it's valid.\"},\"isPayable()\":{\"notice\":\"Checks if the resolver can be sent ETH.\"},\"multiAttest((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes)[],uint256[])\":{\"notice\":\"Processes multiple attestations and verifies whether they are valid.\"},\"multiRevoke((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes)[],uint256[])\":{\"notice\":\"Processes revocation of multiple attestation and verifies they can be revoked.\"},\"revoke((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes))\":{\"notice\":\"Processes an attestation revocation and verifies if it can be revoked.\"}},\"notice\":\"The interface of an optional schema resolver.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"lib/eas-contracts/contracts/resolver/ISchemaResolver.sol\":\"ISchemaResolver\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[\":@ethereum-waffle/=node_modules/@ethereum-waffle/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/\",\":@prb/math/=lib/v2-core/lib/prb-math/\",\":@prb/test/=lib/v2-core/lib/prb-test/src/\",\":@sablier/v2-core/=lib/v2-core/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eas-contracts/=lib/eas-contracts/contracts/\",\":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-gas-snapshot/=lib/permit2/lib/forge-gas-snapshot/src/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\",\":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":permit2/=lib/permit2/src/interfaces/\",\":prb-math/=lib/v2-core/lib/prb-math/src/\",\":prb-test/=lib/v2-core/lib/prb-test/src/\",\":solady/=node_modules/solady/\",\":solarray/=lib/v2-core/lib/solarray/src/\",\":solmate/=lib/permit2/lib/solmate/\",\":v2-core/=lib/v2-core/\"]},\"sources\":{\"lib/eas-contracts/contracts/Common.sol\":{\"keccak256\":\"0x957bd2e6d0d6d637f86208b135c29fbaf4412cb08e5e7a61ede16b80561bf685\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://da1dc9aedbb1d4d39c46c2235918d3adfbc5741dd34a46010cf425d134e7936d\",\"dweb:/ipfs/QmWUk6bXnLaghS2riF3GTFEeURCzgYFMA5woa6AsgPwEgc\"]},\"lib/eas-contracts/contracts/resolver/ISchemaResolver.sol\":{\"keccak256\":\"0xb74b64e20b90b35004750d2c78ceb114a304975d22d71bd9a2a9de0d483f0395\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0d0a30499e28e7c4ed62f2d8a88c46623c96830cc23e04ce6e9cd0cd0b11a03d\",\"dweb:/ipfs/QmYWNWu1cn7XDSaFgiMyn2L2coud3DNiGoNrNNo8QYcdyC\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "struct Attestation",
+              "name": "attestation",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "uid",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "schema",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "time",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "expirationTime",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "revocationTime",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "refUID",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "address",
+                  "name": "recipient",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "attester",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "revocable",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "data",
+                  "type": "bytes"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "attest",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "pure",
+          "type": "function",
+          "name": "isPayable",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct Attestation[]",
+              "name": "attestations",
+              "type": "tuple[]",
+              "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "uid",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "schema",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "time",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "expirationTime",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "revocationTime",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "refUID",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "address",
+                  "name": "recipient",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "attester",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "revocable",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "data",
+                  "type": "bytes"
+                }
+              ]
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "values",
+              "type": "uint256[]"
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "multiAttest",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct Attestation[]",
+              "name": "attestations",
+              "type": "tuple[]",
+              "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "uid",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "schema",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "time",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "expirationTime",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "revocationTime",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "refUID",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "address",
+                  "name": "recipient",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "attester",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "revocable",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "data",
+                  "type": "bytes"
+                }
+              ]
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "values",
+              "type": "uint256[]"
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "multiRevoke",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct Attestation",
+              "name": "attestation",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "uid",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "schema",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "time",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "expirationTime",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "revocationTime",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "refUID",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "address",
+                  "name": "recipient",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "attester",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "revocable",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "data",
+                  "type": "bytes"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "revoke",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "attest((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes))": {
+            "params": {
+              "attestation": "The new attestation."
+            },
+            "returns": {
+              "_0": "Whether the attestation is valid."
+            }
+          },
+          "isPayable()": {
+            "returns": {
+              "_0": "Whether the resolver supports ETH transfers."
+            }
+          },
+          "multiAttest((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes)[],uint256[])": {
+            "params": {
+              "attestations": "The new attestations.",
+              "values": "Explicit ETH amounts which were sent with each attestation."
+            },
+            "returns": {
+              "_0": "Whether all the attestations are valid."
+            }
+          },
+          "multiRevoke((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes)[],uint256[])": {
+            "params": {
+              "attestations": "The existing attestations to be revoked.",
+              "values": "Explicit ETH amounts which were sent with each revocation."
+            },
+            "returns": {
+              "_0": "Whether the attestations can be revoked."
+            }
+          },
+          "revoke((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes))": {
+            "params": {
+              "attestation": "The existing attestation to be revoked."
+            },
+            "returns": {
+              "_0": "Whether the attestation can be revoked."
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "attest((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes))": {
+            "notice": "Processes an attestation and verifies whether it's valid."
+          },
+          "isPayable()": {
+            "notice": "Checks if the resolver can be sent ETH."
+          },
+          "multiAttest((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes)[],uint256[])": {
+            "notice": "Processes multiple attestations and verifies whether they are valid."
+          },
+          "multiRevoke((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes)[],uint256[])": {
+            "notice": "Processes revocation of multiple attestation and verifies they can be revoked."
+          },
+          "revoke((bytes32,bytes32,uint64,uint64,uint64,bytes32,address,address,bool,bytes))": {
+            "notice": "Processes an attestation revocation and verifies if it can be revoked."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@ethereum-waffle/=node_modules/@ethereum-waffle/",
+        ":@openzeppelin/=node_modules/@openzeppelin/",
+        ":@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+        ":@prb/math/=lib/v2-core/lib/prb-math/",
+        ":@prb/test/=lib/v2-core/lib/prb-test/src/",
+        ":@sablier/v2-core/=lib/v2-core/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":eas-contracts/=lib/eas-contracts/contracts/",
+        ":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
+        ":eth-gas-reporter/=node_modules/eth-gas-reporter/",
+        ":forge-gas-snapshot/=lib/permit2/lib/forge-gas-snapshot/src/",
+        ":forge-std/=lib/forge-std/src/",
+        ":hardhat-deploy/=node_modules/hardhat-deploy/",
+        ":hardhat/=node_modules/hardhat/",
+        ":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/",
+        ":openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        ":permit2/=lib/permit2/src/interfaces/",
+        ":prb-math/=lib/v2-core/lib/prb-math/src/",
+        ":prb-test/=lib/v2-core/lib/prb-test/src/",
+        ":solady/=node_modules/solady/",
+        ":solarray/=lib/v2-core/lib/solarray/src/",
+        ":solmate/=lib/permit2/lib/solmate/",
+        ":v2-core/=lib/v2-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 1000
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "lib/eas-contracts/contracts/resolver/ISchemaResolver.sol": "ISchemaResolver"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "lib/eas-contracts/contracts/Common.sol": {
+        "keccak256": "0x957bd2e6d0d6d637f86208b135c29fbaf4412cb08e5e7a61ede16b80561bf685",
+        "urls": [
+          "bzz-raw://da1dc9aedbb1d4d39c46c2235918d3adfbc5741dd34a46010cf425d134e7936d",
+          "dweb:/ipfs/QmWUk6bXnLaghS2riF3GTFEeURCzgYFMA5woa6AsgPwEgc"
+        ],
+        "license": "MIT"
+      },
+      "lib/eas-contracts/contracts/resolver/ISchemaResolver.sol": {
+        "keccak256": "0xb74b64e20b90b35004750d2c78ceb114a304975d22d71bd9a2a9de0d483f0395",
+        "urls": [
+          "bzz-raw://0d0a30499e28e7c4ed62f2d8a88c46623c96830cc23e04ce6e9cd0cd0b11a03d",
+          "dweb:/ipfs/QmYWNWu1cn7XDSaFgiMyn2L2coud3DNiGoNrNNo8QYcdyC"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": {}
+  },
+  "ast": {
+    "absolutePath": "lib/eas-contracts/contracts/resolver/ISchemaResolver.sol",
+    "id": 17547,
+    "exportedSymbols": {
+      "Attestation": [
+        17133
+      ],
+      "ISchemaResolver": [
+        17546
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:1781:37",
+    "nodes": [
+      {
+        "id": 17492,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:37",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 17494,
+        "nodeType": "ImportDirective",
+        "src": "58:44:37",
+        "nodes": [],
+        "absolutePath": "lib/eas-contracts/contracts/Common.sol",
+        "file": "../Common.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 17547,
+        "sourceUnit": 17150,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 17493,
+              "name": "Attestation",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 17133,
+              "src": "67:11:37",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 17546,
+        "nodeType": "ContractDefinition",
+        "src": "189:1624:37",
+        "nodes": [
+          {
+            "id": 17501,
+            "nodeType": "FunctionDefinition",
+            "src": "338:50:37",
+            "nodes": [],
+            "documentation": {
+              "id": 17496,
+              "nodeType": "StructuredDocumentation",
+              "src": "221:112:37",
+              "text": "@notice Checks if the resolver can be sent ETH.\n @return Whether the resolver supports ETH transfers."
+            },
+            "functionSelector": "ce46e046",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isPayable",
+            "nameLocation": "347:9:37",
+            "parameters": {
+              "id": 17497,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "356:2:37"
+            },
+            "returnParameters": {
+              "id": 17500,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 17499,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17501,
+                  "src": "382:4:37",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 17498,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "382:4:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "381:6:37"
+            },
+            "scope": 17546,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 17510,
+            "nodeType": "FunctionDefinition",
+            "src": "566:82:37",
+            "nodes": [],
+            "documentation": {
+              "id": 17502,
+              "nodeType": "StructuredDocumentation",
+              "src": "394:167:37",
+              "text": "@notice Processes an attestation and verifies whether it's valid.\n @param attestation The new attestation.\n @return Whether the attestation is valid."
+            },
+            "functionSelector": "e60c3505",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "attest",
+            "nameLocation": "575:6:37",
+            "parameters": {
+              "id": 17506,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 17505,
+                  "mutability": "mutable",
+                  "name": "attestation",
+                  "nameLocation": "603:11:37",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17510,
+                  "src": "582:32:37",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Attestation_$17133_calldata_ptr",
+                    "typeString": "struct Attestation"
+                  },
+                  "typeName": {
+                    "id": 17504,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 17503,
+                      "name": "Attestation",
+                      "nameLocations": [
+                        "582:11:37"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 17133,
+                      "src": "582:11:37"
+                    },
+                    "referencedDeclaration": 17133,
+                    "src": "582:11:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Attestation_$17133_storage_ptr",
+                      "typeString": "struct Attestation"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "581:34:37"
+            },
+            "returnParameters": {
+              "id": 17509,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 17508,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17510,
+                  "src": "642:4:37",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 17507,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "642:4:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "641:6:37"
+            },
+            "scope": 17546,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 17523,
+            "nodeType": "FunctionDefinition",
+            "src": "927:139:37",
+            "nodes": [],
+            "documentation": {
+              "id": 17511,
+              "nodeType": "StructuredDocumentation",
+              "src": "654:268:37",
+              "text": "@notice Processes multiple attestations and verifies whether they are valid.\n @param attestations The new attestations.\n @param values Explicit ETH amounts which were sent with each attestation.\n @return Whether all the attestations are valid."
+            },
+            "functionSelector": "91db0b7e",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "multiAttest",
+            "nameLocation": "936:11:37",
+            "parameters": {
+              "id": 17519,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 17515,
+                  "mutability": "mutable",
+                  "name": "attestations",
+                  "nameLocation": "980:12:37",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17523,
+                  "src": "957:35:37",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Attestation_$17133_calldata_ptr_$dyn_calldata_ptr",
+                    "typeString": "struct Attestation[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 17513,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 17512,
+                        "name": "Attestation",
+                        "nameLocations": [
+                          "957:11:37"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 17133,
+                        "src": "957:11:37"
+                      },
+                      "referencedDeclaration": 17133,
+                      "src": "957:11:37",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Attestation_$17133_storage_ptr",
+                        "typeString": "struct Attestation"
+                      }
+                    },
+                    "id": 17514,
+                    "nodeType": "ArrayTypeName",
+                    "src": "957:13:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Attestation_$17133_storage_$dyn_storage_ptr",
+                      "typeString": "struct Attestation[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 17518,
+                  "mutability": "mutable",
+                  "name": "values",
+                  "nameLocation": "1021:6:37",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17523,
+                  "src": "1002:25:37",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_calldata_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 17516,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1002:7:37",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 17517,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1002:9:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "947:86:37"
+            },
+            "returnParameters": {
+              "id": 17522,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 17521,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17523,
+                  "src": "1060:4:37",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 17520,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1060:4:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1059:6:37"
+            },
+            "scope": 17546,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 17532,
+            "nodeType": "FunctionDefinition",
+            "src": "1282:82:37",
+            "nodes": [],
+            "documentation": {
+              "id": 17524,
+              "nodeType": "StructuredDocumentation",
+              "src": "1072:205:37",
+              "text": "@notice Processes an attestation revocation and verifies if it can be revoked.\n @param attestation The existing attestation to be revoked.\n @return Whether the attestation can be revoked."
+            },
+            "functionSelector": "e49617e1",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "revoke",
+            "nameLocation": "1291:6:37",
+            "parameters": {
+              "id": 17528,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 17527,
+                  "mutability": "mutable",
+                  "name": "attestation",
+                  "nameLocation": "1319:11:37",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17532,
+                  "src": "1298:32:37",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Attestation_$17133_calldata_ptr",
+                    "typeString": "struct Attestation"
+                  },
+                  "typeName": {
+                    "id": 17526,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 17525,
+                      "name": "Attestation",
+                      "nameLocations": [
+                        "1298:11:37"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 17133,
+                      "src": "1298:11:37"
+                    },
+                    "referencedDeclaration": 17133,
+                    "src": "1298:11:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Attestation_$17133_storage_ptr",
+                      "typeString": "struct Attestation"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1297:34:37"
+            },
+            "returnParameters": {
+              "id": 17531,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 17530,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17532,
+                  "src": "1358:4:37",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 17529,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1358:4:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1357:6:37"
+            },
+            "scope": 17546,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 17545,
+            "nodeType": "FunctionDefinition",
+            "src": "1672:139:37",
+            "nodes": [],
+            "documentation": {
+              "id": 17533,
+              "nodeType": "StructuredDocumentation",
+              "src": "1370:297:37",
+              "text": "@notice Processes revocation of multiple attestation and verifies they can be revoked.\n @param attestations The existing attestations to be revoked.\n @param values Explicit ETH amounts which were sent with each revocation.\n @return Whether the attestations can be revoked."
+            },
+            "functionSelector": "88e5b2d9",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "multiRevoke",
+            "nameLocation": "1681:11:37",
+            "parameters": {
+              "id": 17541,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 17537,
+                  "mutability": "mutable",
+                  "name": "attestations",
+                  "nameLocation": "1725:12:37",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17545,
+                  "src": "1702:35:37",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Attestation_$17133_calldata_ptr_$dyn_calldata_ptr",
+                    "typeString": "struct Attestation[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 17535,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 17534,
+                        "name": "Attestation",
+                        "nameLocations": [
+                          "1702:11:37"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 17133,
+                        "src": "1702:11:37"
+                      },
+                      "referencedDeclaration": 17133,
+                      "src": "1702:11:37",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Attestation_$17133_storage_ptr",
+                        "typeString": "struct Attestation"
+                      }
+                    },
+                    "id": 17536,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1702:13:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Attestation_$17133_storage_$dyn_storage_ptr",
+                      "typeString": "struct Attestation[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 17540,
+                  "mutability": "mutable",
+                  "name": "values",
+                  "nameLocation": "1766:6:37",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17545,
+                  "src": "1747:25:37",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_calldata_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 17538,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1747:7:37",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 17539,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1747:9:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1692:86:37"
+            },
+            "returnParameters": {
+              "id": 17544,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 17543,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17545,
+                  "src": "1805:4:37",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 17542,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1805:4:37",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1804:6:37"
+            },
+            "scope": 17546,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "ISchemaResolver",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 17495,
+          "nodeType": "StructuredDocumentation",
+          "src": "104:85:37",
+          "text": "@title ISchemaResolver\n @notice The interface of an optional schema resolver."
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          17546
+        ],
+        "name": "ISchemaResolver",
+        "nameLocation": "199:15:37",
+        "scope": 17547,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 37
+}

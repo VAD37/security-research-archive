@@ -1,0 +1,2912 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "recipientId",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "Allocated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "recipientId",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "recipientAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "Distributed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "allo",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "profileId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "poolId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "active",
+          "type": "bool"
+        }
+      ],
+      "name": "PoolActive",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "recipientId",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "Registered",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "_data",
+          "type": "bytes"
+        },
+        {
+          "internalType": "address",
+          "name": "_sender",
+          "type": "address"
+        }
+      ],
+      "name": "allocate",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_recipientIds",
+          "type": "address[]"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_data",
+          "type": "bytes"
+        },
+        {
+          "internalType": "address",
+          "name": "_sender",
+          "type": "address"
+        }
+      ],
+      "name": "distribute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAllo",
+      "outputs": [
+        {
+          "internalType": "contract IAllo",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_recipientIds",
+          "type": "address[]"
+        },
+        {
+          "internalType": "bytes[]",
+          "name": "_data",
+          "type": "bytes[]"
+        }
+      ],
+      "name": "getPayouts",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "recipientAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IStrategy.PayoutSummary[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPoolAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPoolId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_recipientId",
+          "type": "address"
+        }
+      ],
+      "name": "getRecipientStatus",
+      "outputs": [
+        {
+          "internalType": "enum IStrategy.Status",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getStrategyId",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "increasePoolAmount",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_poolId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_data",
+          "type": "bytes"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "isPoolActive",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_allocator",
+          "type": "address"
+        }
+      ],
+      "name": "isValidAllocator",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "_data",
+          "type": "bytes"
+        },
+        {
+          "internalType": "address",
+          "name": "_sender",
+          "type": "address"
+        }
+      ],
+      "name": "registerRecipient",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "allocate(bytes,address)": "ef2920fc",
+    "distribute(address[],bytes,address)": "0a6f0ee9",
+    "getAllo()": "15cc481e",
+    "getPayouts(address[],bytes[])": "b2b878d0",
+    "getPoolAmount()": "4ab4ba42",
+    "getPoolId()": "38fff2d0",
+    "getRecipientStatus(address)": "eb11af93",
+    "getStrategyId()": "42fda9c7",
+    "increasePoolAmount(uint256)": "f5b0dfb7",
+    "initialize(uint256,bytes)": "edd146cc",
+    "isPoolActive()": "df868ed3",
+    "isValidAllocator(address)": "4d31d087",
+    "registerRecipient(bytes,address)": "2bbe0cae"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipientId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"Allocated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipientId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"recipientAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"Distributed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"allo\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"profileId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"active\",\"type\":\"bool\"}],\"name\":\"PoolActive\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipientId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"Registered\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"_sender\",\"type\":\"address\"}],\"name\":\"allocate\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_recipientIds\",\"type\":\"address[]\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"_sender\",\"type\":\"address\"}],\"name\":\"distribute\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllo\",\"outputs\":[{\"internalType\":\"contract IAllo\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_recipientIds\",\"type\":\"address[]\"},{\"internalType\":\"bytes[]\",\"name\":\"_data\",\"type\":\"bytes[]\"}],\"name\":\"getPayouts\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"recipientAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"internalType\":\"struct IStrategy.PayoutSummary[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPoolAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPoolId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_recipientId\",\"type\":\"address\"}],\"name\":\"getRecipientStatus\",\"outputs\":[{\"internalType\":\"enum IStrategy.Status\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getStrategyId\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"increasePoolAmount\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_poolId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isPoolActive\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_allocator\",\"type\":\"address\"}],\"name\":\"isValidAllocator\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"_sender\",\"type\":\"address\"}],\"name\":\"registerRecipient\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"@thelostone-mc <aditya@gitcoin.co>, @0xKurt <kurt@gitcoin.co>, @codenamejason <jason@gitcoin.co>, @0xZakk <zakk@gitcoin.co>, @nfrgosselin <nate@gitcoin.co> @0xZakk <zakk@gitcoin.co>, @nfrgosselin <nate@gitcoin.co>\",\"events\":{\"Allocated(address,uint256,address,address)\":{\"params\":{\"amount\":\"The amount allocated\",\"recipientId\":\"The ID of the recipient\",\"token\":\"The token allocated\"}},\"Distributed(address,address,uint256,address)\":{\"params\":{\"amount\":\"The amount distributed\",\"recipientAddress\":\"The recipient\",\"recipientId\":\"The ID of the recipient\",\"sender\":\"The sender\"}},\"Initialized(address,bytes32,uint256,bytes)\":{\"params\":{\"allo\":\"The Allo contract\",\"poolId\":\"The ID of the pool\",\"profileId\":\"The ID of the profile\"}},\"PoolActive(bool)\":{\"params\":{\"active\":\"The status of the pool\"}},\"Registered(address,bytes,address)\":{\"params\":{\"data\":\"The data passed to the 'registerRecipient' function\",\"recipientId\":\"The ID of the recipient\",\"sender\":\"The sender\"}}},\"kind\":\"dev\",\"methods\":{\"allocate(bytes,address)\":{\"details\":\"The encoded '_data' will be determined by the strategy implementation.\",\"params\":{\"_data\":\"The data to use to allocate to the recipient\",\"_sender\":\"The address of the sender\"}},\"distribute(address[],bytes,address)\":{\"details\":\"most strategies will track a TOTAL amount per recipient, and a PAID amount, and pay the difference this contract will need to track the amount paid already, so that it doesn't double pay.\"},\"getAllo()\":{\"returns\":{\"_0\":\"The 'Allo' contract\"}},\"getPayouts(address[],bytes[])\":{\"details\":\"Input the values you would send to distribute(), get the amounts each recipient in the array would receive.      The encoded '_data' will be determined by the strategy, and will be used to determine the payout.\",\"params\":{\"_data\":\"The encoded data\",\"_recipientIds\":\"The IDs of the recipients\"}},\"getPoolAmount()\":{\"returns\":{\"_0\":\"The balance of the pool\"}},\"getPoolId()\":{\"returns\":{\"_0\":\"The ID of the pool\"}},\"getRecipientStatus(address)\":{\"params\":{\"_recipientId\":\"The ID of the recipient\"},\"returns\":{\"_0\":\"The status of the recipient\"}},\"getStrategyId()\":{\"returns\":{\"_0\":\"The ID of the strategy\"}},\"increasePoolAmount(uint256)\":{\"params\":{\"_amount\":\"The amount to increase the pool by\"}},\"initialize(uint256,bytes)\":{\"params\":{\"_data\":\"The encoded data\",\"_poolId\":\"The ID of the pool\"}},\"isPoolActive()\":{\"returns\":{\"_0\":\"Whether the pool is active or not\"}},\"isValidAllocator(address)\":{\"params\":{\"_allocator\":\"The allocator to check\"},\"returns\":{\"_0\":\"Whether the allocator is valid or not\"}},\"registerRecipient(bytes,address)\":{\"details\":\"Able to change status all the way up to 'Accepted', or to 'Pending' and if there are more steps, additional      functions should be added to allow the owner to check this. The owner could also check attestations directly      and then accept for instance. The '_data' will be determined by the strategy implementation.\",\"params\":{\"_data\":\"The data to use to register the recipient\",\"_sender\":\"The address of the sender\"},\"returns\":{\"_0\":\"The ID of the recipient\"}}},\"title\":\"IStrategy Interface\",\"version\":1},\"userdoc\":{\"events\":{\"Allocated(address,uint256,address,address)\":{\"notice\":\"Emitted when a recipient is allocated to.\"},\"Distributed(address,address,uint256,address)\":{\"notice\":\"Emitted when tokens are distributed.\"},\"Initialized(address,bytes32,uint256,bytes)\":{\"notice\":\"Emitted when strategy is initialized.\"},\"PoolActive(bool)\":{\"notice\":\"Emitted when pool is set to active status.\"},\"Registered(address,bytes,address)\":{\"notice\":\"Emitted when a recipient is registered.\"}},\"kind\":\"user\",\"methods\":{\"allocate(bytes,address)\":{\"notice\":\"This will allocate to a recipient.\"},\"distribute(address[],bytes,address)\":{\"notice\":\"This will distribute funds (tokens) to recipients.\"},\"getAllo()\":{\"notice\":\"Getter for the address of the Allo contract.\"},\"getPayouts(address[],bytes[])\":{\"notice\":\"Checks the amount allocated to a recipient for distribution.\"},\"getPoolAmount()\":{\"notice\":\"Checks the amount of tokens in the pool.\"},\"getPoolId()\":{\"notice\":\"Getter for the 'poolId' for this strategy.\"},\"getRecipientStatus(address)\":{\"notice\":\"Checks the status of a recipient probably tracked in a mapping, but will depend on the implementation      for example, the OpenSelfRegistration only maps users to bool, and then assumes Accepted for those      since there is no need for Pending or Rejected.\"},\"getStrategyId()\":{\"notice\":\"Getter for the 'id' of the strategy.\"},\"increasePoolAmount(uint256)\":{\"notice\":\"Increases the balance of the pool.\"},\"initialize(uint256,bytes)\":{\"notice\":\"@dev The default BaseStrategy version will not use the data  if a strategy wants to use it, they will overwrite it,      use it, and then call super.initialize().\"},\"isPoolActive()\":{\"notice\":\"whether pool is active.\"},\"isValidAllocator(address)\":{\"notice\":\"Checks whether a allocator is valid or not, will usually be true for all strategies      and will depend on the strategy implementation.\"},\"registerRecipient(bytes,address)\":{\"notice\":\"This will register a recipient, set their status (and any other strategy specific values), and         return the ID of the recipient.\"}},\"notice\":\"BaseStrategy is the base contract that all strategies should inherit from and uses this interface.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/core/interfaces/IStrategy.sol\":\"IStrategy\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[\":@ethereum-waffle/=node_modules/@ethereum-waffle/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/\",\":@prb/math/=lib/v2-core/lib/prb-math/\",\":@prb/test/=lib/v2-core/lib/prb-test/src/\",\":@sablier/v2-core/=lib/v2-core/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eas-contracts/=lib/eas-contracts/contracts/\",\":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-gas-snapshot/=lib/permit2/lib/forge-gas-snapshot/src/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\",\":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":permit2/=lib/permit2/src/interfaces/\",\":prb-math/=lib/v2-core/lib/prb-math/src/\",\":prb-test/=lib/v2-core/lib/prb-test/src/\",\":solady/=node_modules/solady/\",\":solarray/=lib/v2-core/lib/solarray/src/\",\":solmate/=lib/permit2/lib/solmate/\",\":v2-core/=lib/v2-core/\"]},\"sources\":{\"contracts/core/interfaces/IAllo.sol\":{\"keccak256\":\"0xdd932a8ae96941626cc671c8aa404b001daed9be13c550fa67ce0dd676c610d3\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://3b614de2e6ac5290ecc7087085aa299659debad909ba16a87ae66ced47efdcac\",\"dweb:/ipfs/QmPsULZYfgoNLwsMiMxmbKKs1RsyTAVnAPKmG2Tvp4zXBx\"]},\"contracts/core/interfaces/IRegistry.sol\":{\"keccak256\":\"0x3a2edcea094551fc86612932d42bd6b4682d20fb7b46cfdbeee39ba85367749f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c922d497fdfdd2f43a009959429c761d1fb61501ca5d91abf9ae873ac58d437e\",\"dweb:/ipfs/QmaiUx4uVajytmFJQJdGh2mJK2RKn4xNVrARurJdF3iwzA\"]},\"contracts/core/interfaces/IStrategy.sol\":{\"keccak256\":\"0x11734e9ba21d9b4ca0a5cdcf2a397d1f8d744e7b11f9918ed99ab73cac94c089\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://f51182c3c4cddec87c1bf3413eccefb8cde14cacc90df205efdcf592cff6113c\",\"dweb:/ipfs/QmXbKcETEaaGPzFyiHHbEL4WuLRdJQeQHYnVaH1hUeDX1u\"]},\"contracts/core/libraries/Metadata.sol\":{\"keccak256\":\"0x452a95a8762fafd51d36295138f7e14189cbaaca7274d6fd34a59ad57a442d44\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://2cc5507da2550ab9bfa0fbb263e703f9e70b831190bb7b2bcdbb231cab49795c\",\"dweb:/ipfs/QmQXCD8v2HppXAX17aH49JvNyyfDYzGMrg63QNabUEXPpn\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "recipientId",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "address",
+              "name": "sender",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Allocated",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "recipientId",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "recipientAddress",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "address",
+              "name": "sender",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Distributed",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "allo",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes32",
+              "name": "profileId",
+              "type": "bytes32",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "poolId",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Initialized",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bool",
+              "name": "active",
+              "type": "bool",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "PoolActive",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "recipientId",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes",
+              "indexed": false
+            },
+            {
+              "internalType": "address",
+              "name": "sender",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Registered",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "_data",
+              "type": "bytes"
+            },
+            {
+              "internalType": "address",
+              "name": "_sender",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "allocate"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "_recipientIds",
+              "type": "address[]"
+            },
+            {
+              "internalType": "bytes",
+              "name": "_data",
+              "type": "bytes"
+            },
+            {
+              "internalType": "address",
+              "name": "_sender",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "distribute"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getAllo",
+          "outputs": [
+            {
+              "internalType": "contract IAllo",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "_recipientIds",
+              "type": "address[]"
+            },
+            {
+              "internalType": "bytes[]",
+              "name": "_data",
+              "type": "bytes[]"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getPayouts",
+          "outputs": [
+            {
+              "internalType": "struct IStrategy.PayoutSummary[]",
+              "name": "",
+              "type": "tuple[]",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "recipientAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getPoolAmount",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getPoolId",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_recipientId",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getRecipientStatus",
+          "outputs": [
+            {
+              "internalType": "enum IStrategy.Status",
+              "name": "",
+              "type": "uint8"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getStrategyId",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "increasePoolAmount"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_poolId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "_data",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "initialize"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "isPoolActive",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_allocator",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "isValidAllocator",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "_data",
+              "type": "bytes"
+            },
+            {
+              "internalType": "address",
+              "name": "_sender",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "registerRecipient",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "allocate(bytes,address)": {
+            "details": "The encoded '_data' will be determined by the strategy implementation.",
+            "params": {
+              "_data": "The data to use to allocate to the recipient",
+              "_sender": "The address of the sender"
+            }
+          },
+          "distribute(address[],bytes,address)": {
+            "details": "most strategies will track a TOTAL amount per recipient, and a PAID amount, and pay the difference this contract will need to track the amount paid already, so that it doesn't double pay."
+          },
+          "getAllo()": {
+            "returns": {
+              "_0": "The 'Allo' contract"
+            }
+          },
+          "getPayouts(address[],bytes[])": {
+            "details": "Input the values you would send to distribute(), get the amounts each recipient in the array would receive.      The encoded '_data' will be determined by the strategy, and will be used to determine the payout.",
+            "params": {
+              "_data": "The encoded data",
+              "_recipientIds": "The IDs of the recipients"
+            }
+          },
+          "getPoolAmount()": {
+            "returns": {
+              "_0": "The balance of the pool"
+            }
+          },
+          "getPoolId()": {
+            "returns": {
+              "_0": "The ID of the pool"
+            }
+          },
+          "getRecipientStatus(address)": {
+            "params": {
+              "_recipientId": "The ID of the recipient"
+            },
+            "returns": {
+              "_0": "The status of the recipient"
+            }
+          },
+          "getStrategyId()": {
+            "returns": {
+              "_0": "The ID of the strategy"
+            }
+          },
+          "increasePoolAmount(uint256)": {
+            "params": {
+              "_amount": "The amount to increase the pool by"
+            }
+          },
+          "initialize(uint256,bytes)": {
+            "params": {
+              "_data": "The encoded data",
+              "_poolId": "The ID of the pool"
+            }
+          },
+          "isPoolActive()": {
+            "returns": {
+              "_0": "Whether the pool is active or not"
+            }
+          },
+          "isValidAllocator(address)": {
+            "params": {
+              "_allocator": "The allocator to check"
+            },
+            "returns": {
+              "_0": "Whether the allocator is valid or not"
+            }
+          },
+          "registerRecipient(bytes,address)": {
+            "details": "Able to change status all the way up to 'Accepted', or to 'Pending' and if there are more steps, additional      functions should be added to allow the owner to check this. The owner could also check attestations directly      and then accept for instance. The '_data' will be determined by the strategy implementation.",
+            "params": {
+              "_data": "The data to use to register the recipient",
+              "_sender": "The address of the sender"
+            },
+            "returns": {
+              "_0": "The ID of the recipient"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "allocate(bytes,address)": {
+            "notice": "This will allocate to a recipient."
+          },
+          "distribute(address[],bytes,address)": {
+            "notice": "This will distribute funds (tokens) to recipients."
+          },
+          "getAllo()": {
+            "notice": "Getter for the address of the Allo contract."
+          },
+          "getPayouts(address[],bytes[])": {
+            "notice": "Checks the amount allocated to a recipient for distribution."
+          },
+          "getPoolAmount()": {
+            "notice": "Checks the amount of tokens in the pool."
+          },
+          "getPoolId()": {
+            "notice": "Getter for the 'poolId' for this strategy."
+          },
+          "getRecipientStatus(address)": {
+            "notice": "Checks the status of a recipient probably tracked in a mapping, but will depend on the implementation      for example, the OpenSelfRegistration only maps users to bool, and then assumes Accepted for those      since there is no need for Pending or Rejected."
+          },
+          "getStrategyId()": {
+            "notice": "Getter for the 'id' of the strategy."
+          },
+          "increasePoolAmount(uint256)": {
+            "notice": "Increases the balance of the pool."
+          },
+          "initialize(uint256,bytes)": {
+            "notice": "@dev The default BaseStrategy version will not use the data  if a strategy wants to use it, they will overwrite it,      use it, and then call super.initialize()."
+          },
+          "isPoolActive()": {
+            "notice": "whether pool is active."
+          },
+          "isValidAllocator(address)": {
+            "notice": "Checks whether a allocator is valid or not, will usually be true for all strategies      and will depend on the strategy implementation."
+          },
+          "registerRecipient(bytes,address)": {
+            "notice": "This will register a recipient, set their status (and any other strategy specific values), and         return the ID of the recipient."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@ethereum-waffle/=node_modules/@ethereum-waffle/",
+        ":@openzeppelin/=node_modules/@openzeppelin/",
+        ":@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+        ":@prb/math/=lib/v2-core/lib/prb-math/",
+        ":@prb/test/=lib/v2-core/lib/prb-test/src/",
+        ":@sablier/v2-core/=lib/v2-core/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":eas-contracts/=lib/eas-contracts/contracts/",
+        ":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
+        ":eth-gas-reporter/=node_modules/eth-gas-reporter/",
+        ":forge-gas-snapshot/=lib/permit2/lib/forge-gas-snapshot/src/",
+        ":forge-std/=lib/forge-std/src/",
+        ":hardhat-deploy/=node_modules/hardhat-deploy/",
+        ":hardhat/=node_modules/hardhat/",
+        ":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/",
+        ":openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        ":permit2/=lib/permit2/src/interfaces/",
+        ":prb-math/=lib/v2-core/lib/prb-math/src/",
+        ":prb-test/=lib/v2-core/lib/prb-test/src/",
+        ":solady/=node_modules/solady/",
+        ":solarray/=lib/v2-core/lib/solarray/src/",
+        ":solmate/=lib/permit2/lib/solmate/",
+        ":v2-core/=lib/v2-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 1000
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/core/interfaces/IStrategy.sol": "IStrategy"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "contracts/core/interfaces/IAllo.sol": {
+        "keccak256": "0xdd932a8ae96941626cc671c8aa404b001daed9be13c550fa67ce0dd676c610d3",
+        "urls": [
+          "bzz-raw://3b614de2e6ac5290ecc7087085aa299659debad909ba16a87ae66ced47efdcac",
+          "dweb:/ipfs/QmPsULZYfgoNLwsMiMxmbKKs1RsyTAVnAPKmG2Tvp4zXBx"
+        ],
+        "license": "AGPL-3.0-only"
+      },
+      "contracts/core/interfaces/IRegistry.sol": {
+        "keccak256": "0x3a2edcea094551fc86612932d42bd6b4682d20fb7b46cfdbeee39ba85367749f",
+        "urls": [
+          "bzz-raw://c922d497fdfdd2f43a009959429c761d1fb61501ca5d91abf9ae873ac58d437e",
+          "dweb:/ipfs/QmaiUx4uVajytmFJQJdGh2mJK2RKn4xNVrARurJdF3iwzA"
+        ],
+        "license": "MIT"
+      },
+      "contracts/core/interfaces/IStrategy.sol": {
+        "keccak256": "0x11734e9ba21d9b4ca0a5cdcf2a397d1f8d744e7b11f9918ed99ab73cac94c089",
+        "urls": [
+          "bzz-raw://f51182c3c4cddec87c1bf3413eccefb8cde14cacc90df205efdcf592cff6113c",
+          "dweb:/ipfs/QmXbKcETEaaGPzFyiHHbEL4WuLRdJQeQHYnVaH1hUeDX1u"
+        ],
+        "license": "AGPL-3.0-only"
+      },
+      "contracts/core/libraries/Metadata.sol": {
+        "keccak256": "0x452a95a8762fafd51d36295138f7e14189cbaaca7274d6fd34a59ad57a442d44",
+        "urls": [
+          "bzz-raw://2cc5507da2550ab9bfa0fbb263e703f9e70b831190bb7b2bcdbb231cab49795c",
+          "dweb:/ipfs/QmQXCD8v2HppXAX17aH49JvNyyfDYzGMrg63QNabUEXPpn"
+        ],
+        "license": "AGPL-3.0-only"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": {}
+  },
+  "ast": {
+    "absolutePath": "contracts/core/interfaces/IStrategy.sol",
+    "id": 2797,
+    "exportedSymbols": {
+      "IAllo": [
+        2433
+      ],
+      "IStrategy": [
+        2796
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "42:10653:5",
+    "nodes": [
+      {
+        "id": 2627,
+        "nodeType": "PragmaDirective",
+        "src": "42:24:5",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".19"
+        ]
+      },
+      {
+        "id": 2629,
+        "nodeType": "ImportDirective",
+        "src": "82:34:5",
+        "nodes": [],
+        "absolutePath": "contracts/core/interfaces/IAllo.sol",
+        "file": "./IAllo.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 2797,
+        "sourceUnit": 2434,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 2628,
+              "name": "IAllo",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 2433,
+              "src": "90:5:5",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 2796,
+        "nodeType": "ContractDefinition",
+        "src": "4478:6216:5",
+        "nodes": [
+          {
+            "id": 2638,
+            "nodeType": "EnumDefinition",
+            "src": "4665:139:5",
+            "nodes": [],
+            "canonicalName": "IStrategy.Status",
+            "members": [
+              {
+                "id": 2631,
+                "name": "None",
+                "nameLocation": "4687:4:5",
+                "nodeType": "EnumValue",
+                "src": "4687:4:5"
+              },
+              {
+                "id": 2632,
+                "name": "Pending",
+                "nameLocation": "4701:7:5",
+                "nodeType": "EnumValue",
+                "src": "4701:7:5"
+              },
+              {
+                "id": 2633,
+                "name": "Accepted",
+                "nameLocation": "4718:8:5",
+                "nodeType": "EnumValue",
+                "src": "4718:8:5"
+              },
+              {
+                "id": 2634,
+                "name": "Rejected",
+                "nameLocation": "4736:8:5",
+                "nodeType": "EnumValue",
+                "src": "4736:8:5"
+              },
+              {
+                "id": 2635,
+                "name": "Appealed",
+                "nameLocation": "4754:8:5",
+                "nodeType": "EnumValue",
+                "src": "4754:8:5"
+              },
+              {
+                "id": 2636,
+                "name": "InReview",
+                "nameLocation": "4772:8:5",
+                "nodeType": "EnumValue",
+                "src": "4772:8:5"
+              },
+              {
+                "id": 2637,
+                "name": "Canceled",
+                "nameLocation": "4790:8:5",
+                "nodeType": "EnumValue",
+                "src": "4790:8:5"
+              }
+            ],
+            "name": "Status",
+            "nameLocation": "4670:6:5"
+          },
+          {
+            "id": 2643,
+            "nodeType": "StructDefinition",
+            "src": "4872:86:5",
+            "nodes": [],
+            "canonicalName": "IStrategy.PayoutSummary",
+            "members": [
+              {
+                "constant": false,
+                "id": 2640,
+                "mutability": "mutable",
+                "name": "recipientAddress",
+                "nameLocation": "4911:16:5",
+                "nodeType": "VariableDeclaration",
+                "scope": 2643,
+                "src": "4903:24:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2639,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4903:7:5",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2642,
+                "mutability": "mutable",
+                "name": "amount",
+                "nameLocation": "4945:6:5",
+                "nodeType": "VariableDeclaration",
+                "scope": 2643,
+                "src": "4937:14:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2641,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4937:7:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "PayoutSummary",
+            "nameLocation": "4879:13:5",
+            "scope": 2796,
+            "visibility": "public"
+          },
+          {
+            "id": 2654,
+            "nodeType": "EventDefinition",
+            "src": "5238:79:5",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 2644,
+              "nodeType": "StructuredDocumentation",
+              "src": "5058:175:5",
+              "text": "@notice Emitted when strategy is initialized.\n @param allo The Allo contract\n @param profileId The ID of the profile\n @param poolId The ID of the pool"
+            },
+            "eventSelector": "ef1e1837ec90bc3e923731135520d55610d83e2facf0f45963412f5b29ecacf4",
+            "name": "Initialized",
+            "nameLocation": "5244:11:5",
+            "parameters": {
+              "id": 2653,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2646,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "allo",
+                  "nameLocation": "5264:4:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2654,
+                  "src": "5256:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2645,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5256:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2648,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "profileId",
+                  "nameLocation": "5278:9:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2654,
+                  "src": "5270:17:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2647,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5270:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2650,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "poolId",
+                  "nameLocation": "5297:6:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2654,
+                  "src": "5289:14:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2649,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5289:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2652,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "5311:4:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2654,
+                  "src": "5305:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2651,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5305:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5255:61:5"
+            }
+          },
+          {
+            "id": 2663,
+            "nodeType": "EventDefinition",
+            "src": "5535:74:5",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 2655,
+              "nodeType": "StructuredDocumentation",
+              "src": "5323:207:5",
+              "text": "@notice Emitted when a recipient is registered.\n @param recipientId The ID of the recipient\n @param data The data passed to the 'registerRecipient' function\n @param sender The sender"
+            },
+            "eventSelector": "a197306e3dd5494a61a695381aa809a53b8e377a685e84e404a85d5a8da6cc62",
+            "name": "Registered",
+            "nameLocation": "5541:10:5",
+            "parameters": {
+              "id": 2662,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2657,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "recipientId",
+                  "nameLocation": "5568:11:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2663,
+                  "src": "5552:27:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2656,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5552:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2659,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "5587:4:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2663,
+                  "src": "5581:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2658,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5581:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2661,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "sender",
+                  "nameLocation": "5601:6:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2663,
+                  "src": "5593:14:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2660,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5593:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5551:57:5"
+            }
+          },
+          {
+            "id": 2674,
+            "nodeType": "EventDefinition",
+            "src": "5808:92:5",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 2664,
+              "nodeType": "StructuredDocumentation",
+              "src": "5615:188:5",
+              "text": "@notice Emitted when a recipient is allocated to.\n @param recipientId The ID of the recipient\n @param amount The amount allocated\n @param token The token allocated"
+            },
+            "eventSelector": "463ffc2cf8b1596445c417388ed30e53eb67cf6668cb2be7f0addf8a78c8441b",
+            "name": "Allocated",
+            "nameLocation": "5814:9:5",
+            "parameters": {
+              "id": 2673,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2666,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "recipientId",
+                  "nameLocation": "5840:11:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2674,
+                  "src": "5824:27:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2665,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5824:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2668,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "5861:6:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2674,
+                  "src": "5853:14:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2667,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5853:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2670,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "token",
+                  "nameLocation": "5877:5:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2674,
+                  "src": "5869:13:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2669,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5869:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2672,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "sender",
+                  "nameLocation": "5892:6:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2674,
+                  "src": "5884:14:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2671,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5884:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5823:76:5"
+            }
+          },
+          {
+            "id": 2685,
+            "nodeType": "EventDefinition",
+            "src": "6134:105:5",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 2675,
+              "nodeType": "StructuredDocumentation",
+              "src": "5906:223:5",
+              "text": "@notice Emitted when tokens are distributed.\n @param recipientId The ID of the recipient\n @param recipientAddress The recipient\n @param amount The amount distributed\n @param sender The sender"
+            },
+            "eventSelector": "b5b51454adfa840bd593658325a60a50b0216f12eb5d2937efe6cea935675b7d",
+            "name": "Distributed",
+            "nameLocation": "6140:11:5",
+            "parameters": {
+              "id": 2684,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2677,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "recipientId",
+                  "nameLocation": "6168:11:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2685,
+                  "src": "6152:27:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2676,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6152:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2679,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "recipientAddress",
+                  "nameLocation": "6189:16:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2685,
+                  "src": "6181:24:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2678,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6181:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2681,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "6215:6:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2685,
+                  "src": "6207:14:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2680,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6207:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2683,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "sender",
+                  "nameLocation": "6231:6:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2685,
+                  "src": "6223:14:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2682,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6223:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6151:87:5"
+            }
+          },
+          {
+            "id": 2690,
+            "nodeType": "EventDefinition",
+            "src": "6349:30:5",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 2686,
+              "nodeType": "StructuredDocumentation",
+              "src": "6245:99:5",
+              "text": "@notice Emitted when pool is set to active status.\n @param active The status of the pool"
+            },
+            "eventSelector": "d94c9bc4d43c51d8dc345a016d8e3d994432fac68e72832e4cf3a616bd8efae0",
+            "name": "PoolActive",
+            "nameLocation": "6355:10:5",
+            "parameters": {
+              "id": 2689,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2688,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "active",
+                  "nameLocation": "6371:6:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2690,
+                  "src": "6366:11:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 2687,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6366:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6365:13:5"
+            }
+          },
+          {
+            "id": 2697,
+            "nodeType": "FunctionDefinition",
+            "src": "6576:49:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2691,
+              "nodeType": "StructuredDocumentation",
+              "src": "6479:92:5",
+              "text": "@notice Getter for the address of the Allo contract.\n @return The 'Allo' contract"
+            },
+            "functionSelector": "15cc481e",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getAllo",
+            "nameLocation": "6585:7:5",
+            "parameters": {
+              "id": 2692,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6592:2:5"
+            },
+            "returnParameters": {
+              "id": 2696,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2695,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2697,
+                  "src": "6618:5:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IAllo_$2433",
+                    "typeString": "contract IAllo"
+                  },
+                  "typeName": {
+                    "id": 2694,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 2693,
+                      "name": "IAllo",
+                      "nameLocations": [
+                        "6618:5:5"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 2433,
+                      "src": "6618:5:5"
+                    },
+                    "referencedDeclaration": 2433,
+                    "src": "6618:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IAllo_$2433",
+                      "typeString": "contract IAllo"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6617:7:5"
+            },
+            "scope": 2796,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2703,
+            "nodeType": "FunctionDefinition",
+            "src": "6725:53:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2698,
+              "nodeType": "StructuredDocumentation",
+              "src": "6631:89:5",
+              "text": "@notice Getter for the 'poolId' for this strategy.\n @return The ID of the pool"
+            },
+            "functionSelector": "38fff2d0",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPoolId",
+            "nameLocation": "6734:9:5",
+            "parameters": {
+              "id": 2699,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6743:2:5"
+            },
+            "returnParameters": {
+              "id": 2702,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2701,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2703,
+                  "src": "6769:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2700,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6769:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6768:9:5"
+            },
+            "scope": 2796,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2709,
+            "nodeType": "FunctionDefinition",
+            "src": "6876:57:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2704,
+              "nodeType": "StructuredDocumentation",
+              "src": "6784:87:5",
+              "text": "@notice Getter for the 'id' of the strategy.\n @return The ID of the strategy"
+            },
+            "functionSelector": "42fda9c7",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getStrategyId",
+            "nameLocation": "6885:13:5",
+            "parameters": {
+              "id": 2705,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6898:2:5"
+            },
+            "returnParameters": {
+              "id": 2708,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2707,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2709,
+                  "src": "6924:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2706,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6924:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6923:9:5"
+            },
+            "scope": 2796,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2717,
+            "nodeType": "FunctionDefinition",
+            "src": "7203:75:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2710,
+              "nodeType": "StructuredDocumentation",
+              "src": "6939:259:5",
+              "text": "@notice Checks whether a allocator is valid or not, will usually be true for all strategies\n      and will depend on the strategy implementation.\n @param _allocator The allocator to check\n @return Whether the allocator is valid or not"
+            },
+            "functionSelector": "4d31d087",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isValidAllocator",
+            "nameLocation": "7212:16:5",
+            "parameters": {
+              "id": 2713,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2712,
+                  "mutability": "mutable",
+                  "name": "_allocator",
+                  "nameLocation": "7237:10:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2717,
+                  "src": "7229:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2711,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "7229:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "7228:20:5"
+            },
+            "returnParameters": {
+              "id": 2716,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2715,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2717,
+                  "src": "7272:4:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 2714,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "7272:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "7271:6:5"
+            },
+            "scope": 2796,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2723,
+            "nodeType": "FunctionDefinition",
+            "src": "7374:48:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2718,
+              "nodeType": "StructuredDocumentation",
+              "src": "7284:85:5",
+              "text": "@notice whether pool is active.\n @return Whether the pool is active or not"
+            },
+            "functionSelector": "df868ed3",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isPoolActive",
+            "nameLocation": "7383:12:5",
+            "parameters": {
+              "id": 2719,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "7395:2:5"
+            },
+            "returnParameters": {
+              "id": 2722,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2721,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2723,
+                  "src": "7416:4:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 2720,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "7416:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "7415:6:5"
+            },
+            "scope": 2796,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2729,
+            "nodeType": "FunctionDefinition",
+            "src": "7525:57:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2724,
+              "nodeType": "StructuredDocumentation",
+              "src": "7428:92:5",
+              "text": "@notice Checks the amount of tokens in the pool.\n @return The balance of the pool"
+            },
+            "functionSelector": "4ab4ba42",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPoolAmount",
+            "nameLocation": "7534:13:5",
+            "parameters": {
+              "id": 2725,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "7547:2:5"
+            },
+            "returnParameters": {
+              "id": 2728,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2727,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2729,
+                  "src": "7573:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2726,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "7573:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "7572:9:5"
+            },
+            "scope": 2796,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2735,
+            "nodeType": "FunctionDefinition",
+            "src": "7697:54:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2730,
+              "nodeType": "StructuredDocumentation",
+              "src": "7588:104:5",
+              "text": "@notice Increases the balance of the pool.\n @param _amount The amount to increase the pool by"
+            },
+            "functionSelector": "f5b0dfb7",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "increasePoolAmount",
+            "nameLocation": "7706:18:5",
+            "parameters": {
+              "id": 2733,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2732,
+                  "mutability": "mutable",
+                  "name": "_amount",
+                  "nameLocation": "7733:7:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2735,
+                  "src": "7725:15:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2731,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "7725:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "7724:17:5"
+            },
+            "returnParameters": {
+              "id": 2734,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "7750:0:5"
+            },
+            "scope": 2796,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2744,
+            "nodeType": "FunctionDefinition",
+            "src": "8144:81:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2736,
+              "nodeType": "StructuredDocumentation",
+              "src": "7757:382:5",
+              "text": "@notice Checks the status of a recipient probably tracked in a mapping, but will depend on the implementation\n      for example, the OpenSelfRegistration only maps users to bool, and then assumes Accepted for those\n      since there is no need for Pending or Rejected.\n @param _recipientId The ID of the recipient\n @return The status of the recipient"
+            },
+            "functionSelector": "eb11af93",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getRecipientStatus",
+            "nameLocation": "8153:18:5",
+            "parameters": {
+              "id": 2739,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2738,
+                  "mutability": "mutable",
+                  "name": "_recipientId",
+                  "nameLocation": "8180:12:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2744,
+                  "src": "8172:20:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2737,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "8172:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "8171:22:5"
+            },
+            "returnParameters": {
+              "id": 2743,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2742,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2744,
+                  "src": "8217:6:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_Status_$2638",
+                    "typeString": "enum IStrategy.Status"
+                  },
+                  "typeName": {
+                    "id": 2741,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 2740,
+                      "name": "Status",
+                      "nameLocations": [
+                        "8217:6:5"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 2638,
+                      "src": "8217:6:5"
+                    },
+                    "referencedDeclaration": 2638,
+                    "src": "8217:6:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_Status_$2638",
+                      "typeString": "enum IStrategy.Status"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "8216:8:5"
+            },
+            "scope": 2796,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2758,
+            "nodeType": "FunctionDefinition",
+            "src": "8633:145:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2745,
+              "nodeType": "StructuredDocumentation",
+              "src": "8231:397:5",
+              "text": "@notice Checks the amount allocated to a recipient for distribution.\n @dev Input the values you would send to distribute(), get the amounts each recipient in the array would receive.\n      The encoded '_data' will be determined by the strategy, and will be used to determine the payout.\n @param _recipientIds The IDs of the recipients\n @param _data The encoded data"
+            },
+            "functionSelector": "b2b878d0",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPayouts",
+            "nameLocation": "8642:10:5",
+            "parameters": {
+              "id": 2752,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2748,
+                  "mutability": "mutable",
+                  "name": "_recipientIds",
+                  "nameLocation": "8670:13:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2758,
+                  "src": "8653:30:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2746,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "8653:7:5",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 2747,
+                    "nodeType": "ArrayTypeName",
+                    "src": "8653:9:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2751,
+                  "mutability": "mutable",
+                  "name": "_data",
+                  "nameLocation": "8700:5:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2758,
+                  "src": "8685:20:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "bytes[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2749,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "8685:5:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "id": 2750,
+                    "nodeType": "ArrayTypeName",
+                    "src": "8685:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                      "typeString": "bytes[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "8652:54:5"
+            },
+            "returnParameters": {
+              "id": 2757,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2756,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2758,
+                  "src": "8754:22:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_PayoutSummary_$2643_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct IStrategy.PayoutSummary[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2754,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 2753,
+                        "name": "PayoutSummary",
+                        "nameLocations": [
+                          "8754:13:5"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 2643,
+                        "src": "8754:13:5"
+                      },
+                      "referencedDeclaration": 2643,
+                      "src": "8754:13:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_PayoutSummary_$2643_storage_ptr",
+                        "typeString": "struct IStrategy.PayoutSummary"
+                      }
+                    },
+                    "id": 2755,
+                    "nodeType": "ArrayTypeName",
+                    "src": "8754:15:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_PayoutSummary_$2643_storage_$dyn_storage_ptr",
+                      "typeString": "struct IStrategy.PayoutSummary[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "8753:24:5"
+            },
+            "scope": 2796,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2766,
+            "nodeType": "FunctionDefinition",
+            "src": "9153:66:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2759,
+              "nodeType": "StructuredDocumentation",
+              "src": "8878:270:5",
+              "text": "@notice\n @dev The default BaseStrategy version will not use the data  if a strategy wants to use it, they will overwrite it,\n      use it, and then call super.initialize().\n @param _poolId The ID of the pool\n @param _data The encoded data"
+            },
+            "functionSelector": "edd146cc",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "initialize",
+            "nameLocation": "9162:10:5",
+            "parameters": {
+              "id": 2764,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2761,
+                  "mutability": "mutable",
+                  "name": "_poolId",
+                  "nameLocation": "9181:7:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2766,
+                  "src": "9173:15:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2760,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "9173:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2763,
+                  "mutability": "mutable",
+                  "name": "_data",
+                  "nameLocation": "9203:5:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2766,
+                  "src": "9190:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2762,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "9190:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "9172:37:5"
+            },
+            "returnParameters": {
+              "id": 2765,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "9218:0:5"
+            },
+            "scope": 2796,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2776,
+            "nodeType": "FunctionDefinition",
+            "src": "9885:99:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2767,
+              "nodeType": "StructuredDocumentation",
+              "src": "9225:655:5",
+              "text": "@notice This will register a recipient, set their status (and any other strategy specific values), and\n         return the ID of the recipient.\n @dev Able to change status all the way up to 'Accepted', or to 'Pending' and if there are more steps, additional\n      functions should be added to allow the owner to check this. The owner could also check attestations directly\n      and then accept for instance. The '_data' will be determined by the strategy implementation.\n @param _data The data to use to register the recipient\n @param _sender The address of the sender\n @return The ID of the recipient"
+            },
+            "functionSelector": "2bbe0cae",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "registerRecipient",
+            "nameLocation": "9894:17:5",
+            "parameters": {
+              "id": 2772,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2769,
+                  "mutability": "mutable",
+                  "name": "_data",
+                  "nameLocation": "9925:5:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2776,
+                  "src": "9912:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2768,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "9912:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2771,
+                  "mutability": "mutable",
+                  "name": "_sender",
+                  "nameLocation": "9940:7:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2776,
+                  "src": "9932:15:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2770,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "9932:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "9911:37:5"
+            },
+            "returnParameters": {
+              "id": 2775,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2774,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2776,
+                  "src": "9975:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2773,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "9975:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "9974:9:5"
+            },
+            "scope": 2796,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2784,
+            "nodeType": "FunctionDefinition",
+            "src": "10240:72:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2777,
+              "nodeType": "StructuredDocumentation",
+              "src": "9990:245:5",
+              "text": "@notice This will allocate to a recipient.\n @dev The encoded '_data' will be determined by the strategy implementation.\n @param _data The data to use to allocate to the recipient\n @param _sender The address of the sender"
+            },
+            "functionSelector": "ef2920fc",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "allocate",
+            "nameLocation": "10249:8:5",
+            "parameters": {
+              "id": 2782,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2779,
+                  "mutability": "mutable",
+                  "name": "_data",
+                  "nameLocation": "10271:5:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2784,
+                  "src": "10258:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2778,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "10258:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2781,
+                  "mutability": "mutable",
+                  "name": "_sender",
+                  "nameLocation": "10286:7:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2784,
+                  "src": "10278:15:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2780,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "10278:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "10257:37:5"
+            },
+            "returnParameters": {
+              "id": 2783,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "10311:0:5"
+            },
+            "scope": 2796,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 2795,
+            "nodeType": "FunctionDefinition",
+            "src": "10594:98:5",
+            "nodes": [],
+            "documentation": {
+              "id": 2785,
+              "nodeType": "StructuredDocumentation",
+              "src": "10318:271:5",
+              "text": "@notice This will distribute funds (tokens) to recipients.\n @dev most strategies will track a TOTAL amount per recipient, and a PAID amount, and pay the difference\n this contract will need to track the amount paid already, so that it doesn't double pay."
+            },
+            "functionSelector": "0a6f0ee9",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "distribute",
+            "nameLocation": "10603:10:5",
+            "parameters": {
+              "id": 2793,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2788,
+                  "mutability": "mutable",
+                  "name": "_recipientIds",
+                  "nameLocation": "10631:13:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2795,
+                  "src": "10614:30:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2786,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "10614:7:5",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 2787,
+                    "nodeType": "ArrayTypeName",
+                    "src": "10614:9:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2790,
+                  "mutability": "mutable",
+                  "name": "_data",
+                  "nameLocation": "10659:5:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2795,
+                  "src": "10646:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2789,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "10646:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2792,
+                  "mutability": "mutable",
+                  "name": "_sender",
+                  "nameLocation": "10674:7:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2795,
+                  "src": "10666:15:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2791,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "10666:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "10613:69:5"
+            },
+            "returnParameters": {
+              "id": 2794,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "10691:0:5"
+            },
+            "scope": 2796,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IStrategy",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 2630,
+          "nodeType": "StructuredDocumentation",
+          "src": "4109:368:5",
+          "text": "@title IStrategy Interface\n @author @thelostone-mc <aditya@gitcoin.co>, @0xKurt <kurt@gitcoin.co>, @codenamejason <jason@gitcoin.co>, @0xZakk <zakk@gitcoin.co>, @nfrgosselin <nate@gitcoin.co> @0xZakk <zakk@gitcoin.co>, @nfrgosselin <nate@gitcoin.co>\n @notice BaseStrategy is the base contract that all strategies should inherit from and uses this interface."
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          2796
+        ],
+        "name": "IStrategy",
+        "nameLocation": "4488:9:5",
+        "scope": 2797,
+        "usedErrors": []
+      }
+    ],
+    "license": "AGPL-3.0-only"
+  },
+  "id": 5
+}

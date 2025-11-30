@@ -1,0 +1,75 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "lib/openzeppelin-contracts/contracts/utils/cryptography/draft-EIP712.sol",
+    "id": 64324,
+    "exportedSymbols": {
+      "ECDSA": [
+        63588
+      ],
+      "EIP712": [
+        63792
+      ],
+      "IERC5267": [
+        62195
+      ],
+      "Math": [
+        65225
+      ],
+      "ShortString": [
+        62672
+      ],
+      "ShortStrings": [
+        62883
+      ],
+      "SignedMath": [
+        65330
+      ],
+      "StorageSlot": [
+        62993
+      ],
+      "Strings": [
+        63222
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "119:112:81",
+    "nodes": [
+      {
+        "id": 64322,
+        "nodeType": "PragmaDirective",
+        "src": "119:23:81",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 64323,
+        "nodeType": "ImportDirective",
+        "src": "208:22:81",
+        "nodes": [],
+        "absolutePath": "lib/openzeppelin-contracts/contracts/utils/cryptography/EIP712.sol",
+        "file": "./EIP712.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 64324,
+        "sourceUnit": 63793,
+        "symbolAliases": [],
+        "unitAlias": ""
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 81
+}

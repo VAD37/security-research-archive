@@ -1,0 +1,546 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220acfac9bea06e3cb3cf493ce8720b3109e2eb74c6bdff0f3c607def2ed9afb88964736f6c63430008130033",
+    "sourceMap": "4570:540:6:-:0;;;;;;;;;;;;;;;-1:-1:-1;;;4570:540:6;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220acfac9bea06e3cb3cf493ce8720b3109e2eb74c6bdff0f3c607def2ed9afb88964736f6c63430008130033",
+    "sourceMap": "4570:540:6:-:0;;;;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"author\":\"@thelostone-mc <aditya@gitcoin.co>, @0xKurt <kurt@gitcoin.co>, @codenamejason <jason@gitcoin.co>, @0xZakk <zakk@gitcoin.co>, @nfrgosselin <nate@gitcoin.co>\",\"details\":\"Handles the creation of clones for the strategy contracts and returns the address of the clone\",\"kind\":\"dev\",\"methods\":{},\"title\":\"Clone library\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"A helper library to create deterministic clones of the strategy contracts when a pool is created\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/core/libraries/Clone.sol\":\"Clone\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[\":@ethereum-waffle/=node_modules/@ethereum-waffle/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/\",\":@prb/math/=lib/v2-core/lib/prb-math/\",\":@prb/test/=lib/v2-core/lib/prb-test/src/\",\":@sablier/v2-core/=lib/v2-core/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eas-contracts/=lib/eas-contracts/contracts/\",\":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-gas-snapshot/=lib/permit2/lib/forge-gas-snapshot/src/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\",\":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":permit2/=lib/permit2/src/interfaces/\",\":prb-math/=lib/v2-core/lib/prb-math/src/\",\":prb-test/=lib/v2-core/lib/prb-test/src/\",\":solady/=node_modules/solady/\",\":solarray/=lib/v2-core/lib/solarray/src/\",\":solmate/=lib/permit2/lib/solmate/\",\":v2-core/=lib/v2-core/\"]},\"sources\":{\"contracts/core/libraries/Clone.sol\":{\"keccak256\":\"0xca28d1cc08faf9a5247e3e860e3562ad2c3586103013414ee590ecc70bc5e239\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://a5d68435cdbd8719a79b7dfb4777643b1d619a68dcceac6b149a9275d6205f05\",\"dweb:/ipfs/QmdGLp5urDT5ssdwFuQbk33AUXDt9575YYz5JyQWG3AepZ\"]},\"lib/openzeppelin-contracts-upgradeable/contracts/proxy/ClonesUpgradeable.sol\":{\"keccak256\":\"0x3d98edeb5d5be8410fca707b73dabe7544d1dd11e35b73dd907c473fe43cc3ae\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1a3fa9fc3aec149b8ad0dd8895277ab11e9244e9d2b7adc8404b22de974fc964\",\"dweb:/ipfs/QmRggzxs1WjuvGJSAKb2Nw5r7P3VDMefCWKTbkNPKRkv2j\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@ethereum-waffle/=node_modules/@ethereum-waffle/",
+        ":@openzeppelin/=node_modules/@openzeppelin/",
+        ":@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+        ":@prb/math/=lib/v2-core/lib/prb-math/",
+        ":@prb/test/=lib/v2-core/lib/prb-test/src/",
+        ":@sablier/v2-core/=lib/v2-core/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":eas-contracts/=lib/eas-contracts/contracts/",
+        ":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
+        ":eth-gas-reporter/=node_modules/eth-gas-reporter/",
+        ":forge-gas-snapshot/=lib/permit2/lib/forge-gas-snapshot/src/",
+        ":forge-std/=lib/forge-std/src/",
+        ":hardhat-deploy/=node_modules/hardhat-deploy/",
+        ":hardhat/=node_modules/hardhat/",
+        ":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/",
+        ":openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        ":permit2/=lib/permit2/src/interfaces/",
+        ":prb-math/=lib/v2-core/lib/prb-math/src/",
+        ":prb-test/=lib/v2-core/lib/prb-test/src/",
+        ":solady/=node_modules/solady/",
+        ":solarray/=lib/v2-core/lib/solarray/src/",
+        ":solmate/=lib/permit2/lib/solmate/",
+        ":v2-core/=lib/v2-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 1000
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/core/libraries/Clone.sol": "Clone"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "contracts/core/libraries/Clone.sol": {
+        "keccak256": "0xca28d1cc08faf9a5247e3e860e3562ad2c3586103013414ee590ecc70bc5e239",
+        "urls": [
+          "bzz-raw://a5d68435cdbd8719a79b7dfb4777643b1d619a68dcceac6b149a9275d6205f05",
+          "dweb:/ipfs/QmdGLp5urDT5ssdwFuQbk33AUXDt9575YYz5JyQWG3AepZ"
+        ],
+        "license": "AGPL-3.0-only"
+      },
+      "lib/openzeppelin-contracts-upgradeable/contracts/proxy/ClonesUpgradeable.sol": {
+        "keccak256": "0x3d98edeb5d5be8410fca707b73dabe7544d1dd11e35b73dd907c473fe43cc3ae",
+        "urls": [
+          "bzz-raw://1a3fa9fc3aec149b8ad0dd8895277ab11e9244e9d2b7adc8404b22de974fc964",
+          "dweb:/ipfs/QmRggzxs1WjuvGJSAKb2Nw5r7P3VDMefCWKTbkNPKRkv2j"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": {}
+  },
+  "ast": {
+    "absolutePath": "contracts/core/libraries/Clone.sol",
+    "id": 2830,
+    "exportedSymbols": {
+      "Clone": [
+        2829
+      ],
+      "ClonesUpgradeable": [
+        61042
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "42:5069:6",
+    "nodes": [
+      {
+        "id": 2798,
+        "nodeType": "PragmaDirective",
+        "src": "42:23:6",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "0.8",
+          ".19"
+        ]
+      },
+      {
+        "id": 2799,
+        "nodeType": "ImportDirective",
+        "src": "89:82:6",
+        "nodes": [],
+        "absolutePath": "lib/openzeppelin-contracts-upgradeable/contracts/proxy/ClonesUpgradeable.sol",
+        "file": "openzeppelin-contracts-upgradeable/contracts/proxy/ClonesUpgradeable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 2830,
+        "sourceUnit": 61043,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 2829,
+        "nodeType": "ContractDefinition",
+        "src": "4570:540:6",
+        "nodes": [
+          {
+            "id": 2828,
+            "nodeType": "FunctionDefinition",
+            "src": "4749:359:6",
+            "nodes": [],
+            "body": {
+              "id": 2827,
+              "nodeType": "Block",
+              "src": "4832:276:6",
+              "nodes": [],
+              "statements": [
+                {
+                  "assignments": [
+                    2811
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2811,
+                      "mutability": "mutable",
+                      "name": "salt",
+                      "nameLocation": "4930:4:6",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2827,
+                      "src": "4922:12:6",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      },
+                      "typeName": {
+                        "id": 2810,
+                        "name": "bytes32",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "4922:7:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2820,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "arguments": [
+                          {
+                            "expression": {
+                              "id": 2815,
+                              "name": "msg",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": -15,
+                              "src": "4964:3:6",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_magic_message",
+                                "typeString": "msg"
+                              }
+                            },
+                            "id": 2816,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "4968:6:6",
+                            "memberName": "sender",
+                            "nodeType": "MemberAccess",
+                            "src": "4964:10:6",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "id": 2817,
+                            "name": "_nonce",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 2805,
+                            "src": "4976:6:6",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "id": 2813,
+                            "name": "abi",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -1,
+                            "src": "4947:3:6",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_abi",
+                              "typeString": "abi"
+                            }
+                          },
+                          "id": 2814,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberLocation": "4951:12:6",
+                          "memberName": "encodePacked",
+                          "nodeType": "MemberAccess",
+                          "src": "4947:16:6",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_abiencodepacked_pure$__$returns$_t_bytes_memory_ptr_$",
+                            "typeString": "function () pure returns (bytes memory)"
+                          }
+                        },
+                        "id": 2818,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "4947:36:6",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "id": 2812,
+                      "name": "keccak256",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -8,
+                      "src": "4937:9:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                        "typeString": "function (bytes memory) pure returns (bytes32)"
+                      }
+                    },
+                    "id": 2819,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "4937:47:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "4922:62:6"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 2823,
+                        "name": "_contract",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2803,
+                        "src": "5085:9:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "id": 2824,
+                        "name": "salt",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2811,
+                        "src": "5096:4:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "id": 2821,
+                        "name": "ClonesUpgradeable",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 61042,
+                        "src": "5048:17:6",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ClonesUpgradeable_$61042_$",
+                          "typeString": "type(library ClonesUpgradeable)"
+                        }
+                      },
+                      "id": 2822,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "5066:18:6",
+                      "memberName": "cloneDeterministic",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 61007,
+                      "src": "5048:36:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_bytes32_$returns$_t_address_$",
+                        "typeString": "function (address,bytes32) returns (address)"
+                      }
+                    },
+                    "id": 2825,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "5048:53:6",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 2809,
+                  "id": 2826,
+                  "nodeType": "Return",
+                  "src": "5041:60:6"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 2801,
+              "nodeType": "StructuredDocumentation",
+              "src": "4590:154:6",
+              "text": "@dev Create a clone of the contract\n @param _contract The address of the contract to clone\n @param _nonce The nonce to use for the clone"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createClone",
+            "nameLocation": "4758:11:6",
+            "parameters": {
+              "id": 2806,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2803,
+                  "mutability": "mutable",
+                  "name": "_contract",
+                  "nameLocation": "4778:9:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2828,
+                  "src": "4770:17:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2802,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4770:7:6",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2805,
+                  "mutability": "mutable",
+                  "name": "_nonce",
+                  "nameLocation": "4797:6:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2828,
+                  "src": "4789:14:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2804,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4789:7:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4769:35:6"
+            },
+            "returnParameters": {
+              "id": 2809,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2808,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2828,
+                  "src": "4823:7:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2807,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4823:7:6",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4822:9:6"
+            },
+            "scope": 2829,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Clone",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": {
+          "id": 2800,
+          "nodeType": "StructuredDocumentation",
+          "src": "4164:406:6",
+          "text": "@title Clone library\n @author @thelostone-mc <aditya@gitcoin.co>, @0xKurt <kurt@gitcoin.co>, @codenamejason <jason@gitcoin.co>, @0xZakk <zakk@gitcoin.co>, @nfrgosselin <nate@gitcoin.co>\n @notice A helper library to create deterministic clones of the strategy contracts when a pool is created\n @dev Handles the creation of clones for the strategy contracts and returns the address of the clone"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          2829
+        ],
+        "name": "Clone",
+        "nameLocation": "4578:5:6",
+        "scope": 2830,
+        "usedErrors": []
+      }
+    ],
+    "license": "AGPL-3.0-only"
+  },
+  "id": 6
+}
