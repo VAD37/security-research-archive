@@ -1,0 +1,13 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+# https://rpc.ankr.com/bsc
+# https://bsc-rpc.publicnode.com
+
+eth_rpc_url = "https://bsc-pokt.nodies.app"
+# eth_rpc_url = "https://rpc.ankr.com/bsc"
+# eth_rpc_url = "https://rpc.ankr.com/bsc/2b09d103b7f9e76de26dc003a6f2e638094c863573b34003dc7bccf9d525000b"
+# fork_block_number = 37385521

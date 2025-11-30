@@ -1,0 +1,46 @@
+## View Only
+
+    DiamondCutFacet: 0x61595c597fB5b00067507d8850E5c9161406Ae9c
+    DiamondLoupeFacet: 0x903441522f439304Ec39DD34DA67074aa32A17a5
+
+## admin only
+
+storage role is mapping keccak
+    AccessControlEnumerableFacet: 0x01cfD0d1F556AC279Da0924602883b2D6973F51c
+
+    PausableFacet: 0x99f360bE1Ff828266F5Bf20ded3aD209D3d62920
+    ChainlinkPriceFacet: 0xF93F04eefDe067C56800df6F685A76168F777220
+
+## include selfcall
+
+    VaultFacet: 0x967B50407B58fB963929Bbfae63c454C8D194F73
+    PriceFacadeFacet: 0x6Caa8FE103243CD25306adBe4C5d8a14963a57c9
+
+## user exposed
+
+- ApxRewardFacet: `addReserves()` increase `pool.reserve`
+0x9bB035B78c9037bDde0c4246611A3b2c45F69D66
+- AlpManagerFacet: 0xc370Ae142b4444BEA0F7bC5D638B23B3302f4477
+- mint ALP have no limitation
+- ALP mint and burn use chainlink oracle
+
+## Unsorted
+
+    StakeRewardFacet: 0xEC050cfDF99002b6A5cea9c4b1602B241c11e5F5
+    FeeManagerFacet: 0x9Ea7616CDADcCb488b0cdFaB424576f7A6cE1ABA
+    PairsManagerFacet: 0x009230B8e92D1a798FF98126F664aAf5c63C2De9
+    BrokerManagerFacet: 0x41a5814536cDB3cd096802C0fd610a2158577044
+    LimitOrderFacet: 0x010D2fA0A62F2243819724992d8BCaA4582fC021
+    TradingCheckerFacet: 0x69DE8A24bC698307b92867776aCE8A8B45175553
+    TradingConfigFacet: 0x52AE9016f29763cF5ED6985771F04e1cF694d94B
+    TradingCoreFacet: 0xb3f48DE72155e866dfdc301f55B435D1Ee805ef4
+    TradingPortalFacet: 0x58341Fc230A58a87642672c8799Fc98B3Df4Aa69
+    TradingReaderFacet: 0x3a868944a5C78fD1C76F6437064E50ff3F75423A
+    TradingOpenFacet: 0xdbe2b7e92f00dBd70478199577393bE5BBe37201
+    TradingCloseFacet: 0xb203d3b25d8C5d5E9d1f266E32eCd205F0449c68
+    PredictionManagerFacet: 0xb8860d150dDcb1F3f71EEa00D005d787D124Da33
+    SlippageManagerFacet: 0xc2DA30e062E7E78e7E2E1a3Ffc40734D5d258D81
+    TimeLockFacet: 0x73293578681cFcf72C8C2d9b9eF526A7454445a4
+    PredictUpDownFacet: 0xAcb897fCB7E21aB392C5794b29E2FF4aF34a098A
+    TransitionFacet: 0xaD2548773Ef7C880DE96Acba1eF02215Df7611f6
+    HookManagerFacet: 0xee5Be604B964222Db9f8d4e11F77eA189476DBD6
