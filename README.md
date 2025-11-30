@@ -1,8 +1,4 @@
-# VAD37 personal audit
+# VAD37 security research archive
 
-I found myself going through lots of smart contract audit and did not track my progress throughout the years.
-There come the time I want to stop working part-time security researcher and focus on stable career.
-
-This archive project hold my records and opinions on many project I join/drop/full-submission.
-
+This repo hold snapshot archive of codebases I audited or studied for smart-contract/DeFi security
 

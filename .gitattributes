@@ -1,0 +1,4 @@
+ctf/paradigm-ctf-2023/free-real-estate/challenge/airdrop-merkle-proofs.json.gz filter=lfs diff=lfs merge=lfs -text
+audits/2023-05-maia/crytic-export/combined_solc.json filter=lfs diff=lfs merge=lfs -text
+audits/2023-09-Gitcoin-VAD37/allo-v2/out/build-info/1a5bd7833ac9b25508a34e268ae3c57f.json filter=lfs diff=lfs merge=lfs -text
+ctf/remedy-ctf-2025/ofac-executive-order-13337/circuit_final.zkey filter=lfs diff=lfs merge=lfs -text
