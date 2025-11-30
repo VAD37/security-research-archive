@@ -1,0 +1,51 @@
+name: Tests
+on: [push, pull_request]
+
+env:
+  FOUNDRY_PROFILE: ci
+  POLYGON_MAINNET_RPC: ${{ secrets.POLYGON_MAINNET_RPC }}
+  ETHEREUM_MAINNET_RPC: ${{ secrets.ETHEREUM_MAINNET_RPC }}
+  ARBITRUM_MAINNET_RPC: ${{ secrets.ARBITRUM_MAINNET_RPC }}
+  ARBITRUM_SEPOLIA_RPC: ${{ secrets.ARBITRUM_SEPOLIA_RPC }}
+  FIX_BLOCK_ARBITRUM_MAINNET: false
+  BLOCK_NUMBER_ARBITRUM_MAINNET: 268596680
+  FIX_BLOCK_ARBITRUM_SEPOLIA: false
+  BLOCK_NUMBER_ARBITRUM_SEPOLIA: 92996012
+
+jobs:
+  test:
+    strategy:
+      fail-fast: true
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        if: github.event_name == 'pull_request'
+        with:
+          fetch-depth: 0
+          submodules: recursive
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - uses: actions/checkout@v4
+        if: github.event_name == 'push'
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Install Dependencies
+        run: forge install
+
+
+      - name:  Setup .env from env.example
+        run: cp .env.example .env
+
+      - name: Build Contracts & Run Tests
+        run: |
+              NO_COLOR=1 forge test 2>&1 | tee -a $GITHUB_STEP_SUMMARY
+              test_exit_status=${PIPESTATUS[0]}
+              exit $test_exit_status

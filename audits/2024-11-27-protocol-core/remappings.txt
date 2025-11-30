@@ -1,0 +1,5 @@
+@forge-std/=lib/forge-std/
+@uniswap/v3-periphery/=lib/v3-periphery/
+@uniswap/v3-core/=lib/v3-core/
+@uniswap/swap-router-contracts/=lib/swap-router-contracts/
+@openzeppelin/=lib/openzeppelin-contracts/
