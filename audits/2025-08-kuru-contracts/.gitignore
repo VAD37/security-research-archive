@@ -1,0 +1,36 @@
+# Foundry
+.forge-snapshots
+out/
+cache/
+artifacts/
+broadcast/
+lib/
+*.t.sol
+
+# Node.js
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# TypeScript
+*.tsbuildinfo
+
+# Env files
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.code-workspace
+
