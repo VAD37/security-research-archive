@@ -1,0 +1,48 @@
+{
+  "transactions": [
+    {
+      "hash": "0xd0a423880a571f61ffc98c550ac1155050e6bc4ee421b095c9ce2a454226ad2d",
+      "transactionType": "CALL",
+      "contractName": null,
+      "contractAddress": "0x9d6DbCad057CC71196820a97DF9D718b7465C71E",
+      "function": null,
+      "arguments": null,
+      "transaction": {
+        "type": "0x02",
+        "from": "0xceda27a38eb4caa8f269a87b36dcc3115f6d2a1d",
+        "to": "0x9d6dbcad057cc71196820a97df9d718b7465c71e",
+        "gas": "0xeb1a",
+        "value": "0x0",
+        "data": "0xb8b8d35a0000000000000000000000000000000000000000000000000000000000000004",
+        "nonce": "0x0",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [
+    {
+      "transactionHash": "0xd0a423880a571f61ffc98c550ac1155050e6bc4ee421b095c9ce2a454226ad2d",
+      "transactionIndex": "0x0",
+      "blockHash": "0x22a27f621eceb1825ce533e7b70391fb8d0eea8498f800dad3c5a8afdc5e0520",
+      "blockNumber": "0x115ceaf",
+      "from": "0xCeDA27a38EB4CAa8f269a87B36Dcc3115f6d2a1D",
+      "to": "0x9d6DbCad057CC71196820a97DF9D718b7465C71E",
+      "cumulativeGasUsed": "0xaa36",
+      "gasUsed": "0xaa36",
+      "contractAddress": null,
+      "logs": [],
+      "status": "0x1",
+      "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "effectiveGasPrice": "0xb2d05e00"
+    }
+  ],
+  "libraries": [],
+  "pending": [],
+  "returns": {},
+  "timestamp": 1695568873,
+  "chain": 1,
+  "multi": false,
+  "commit": "2588885"
+}

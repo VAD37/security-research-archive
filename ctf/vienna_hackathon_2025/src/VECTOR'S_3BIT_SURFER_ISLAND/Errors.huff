@@ -1,0 +1,13 @@
+// Simple require and revert implementation
+
+#define macro _REVERT(err4Bytes) = takes(0) returns(0) {
+    <err4Bytes> 0x00 mstore
+    0x04 0x1c revert
+}
+
+#define macro REQUIRE(err4Bytes) = takes(1) returns(0) {
+    // input stack               // [condition]
+    requireOkeyJMP jumpi 
+    _REVERT(<err4Bytes>)
+    requireOkeyJMP:
+}

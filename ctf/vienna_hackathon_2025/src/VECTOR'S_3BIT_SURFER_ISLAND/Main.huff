@@ -1,0 +1,64 @@
+#include "./Core.huff"
+
+#define function solve(uint256 seed, uint256 actions) nonpayable returns()
+
+#define constant POT_ADDRESS         = 0x1234567890abcdef1234567890abcdef12345678
+// bytes4(keccak256("addPoints(address)"))
+#define constant ADDPOINTS_SELECTOR  = 0xad7b985e
+
+
+#define macro MAIN() = takes(0) returns(0) {
+    JMPsolve:
+    // solve
+    // takes:                      [seed, actions]
+    
+    
+    0x24 calldataload            // [actions]
+    0x04 calldataload            // [seed, actions]
+    getSeeds()                   // [seedB, seedA, actions]
+    0x00                         // [pos, seedB, seedA, actions]
+    0x02                         // [currentLane, pos, seedB, seedA, actions]
+
+    loopSolveStart:
+    dup2                         // [posCopy, currentLane, pos, seedB, seedA, actions]
+    0x30                         // [48, posCopy, currentLane, pos, seedB, seedA, actions]
+    eq                           endLoop jumpi
+    solve()
+    //                           [newLane, pos, actions, seedB, seedA ]
+    loopSolveStart jump
+
+    endLoop:
+    // points call
+
+    ADD_POINTS()
+}
+
+// --- MACROS ---
+#define macro ADD_POINTS() = {
+    [ADDPOINTS_SELECTOR] 0xe0 shl
+    0x00 mstore
+    caller 0x04 mstore
+
+    CALL(0x00, 0x00, 0x24, 0x00, 0x00, POT_ADDRESS, gas)
+}
+
+
+// from huffmate
+#define macro CALL(
+    ret_size,
+    ret_offset,
+    arg_size,
+    arg_offset,
+    value,
+    to,
+    maxgas
+) = takes (0) returns (1) {
+    <ret_size>              // [retSize]
+    <ret_offset>            // [retOffset, retSize]
+    <arg_size>              // [argSize, retOffset, retSize]
+    <arg_offset>            // [argOffset, argSize, retOffset, retSize]
+    <value>                 // [value, argOffset, argSize, retOffset, retSize]
+    <to>                    // [to, value, argOffset, argSize, retOffset, retSize]
+    <maxgas>                // [gas, to, value, argOffset, argSize, retOffset, retSize]
+    call                    // [success]
+}

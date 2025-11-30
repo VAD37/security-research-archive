@@ -1,0 +1,27 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+
+include_paths = [
+    "dragon-tyrant",
+    "hello-world",
+    "dropper",
+    "hopping-into-place",
+    "skill-based-game",
+    "black-sheep",
+    "enterprise-blockchain",
+    "jotterp",
+    "cosmic-radiation",
+    "suspicious-charity",
+    "dai-plus-plus",
+    "free-real-estate",
+    "one-hundred-percent",
+    "dodont",
+    "grains-of-sand",
+    "oven",
+    "token-locker",
+]
+ # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+# ETH_RPC_URL=https://eth-mainnet.alchemyapi.io/v2/kIP2_euA9T6Z-e5MjHzTzRUmgqCLsHUA
+eth_rpc_url = "https://eth-mainnet.alchemyapi.io/v2/kIP2_euA9T6Z-e5MjHzTzRUmgqCLsHUA"

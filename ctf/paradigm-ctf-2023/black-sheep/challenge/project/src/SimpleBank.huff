@@ -1,0 +1,72 @@
+/* Interface */
+#define function withdraw(bytes32,uint8,bytes32,bytes32) payable returns ()
+
+
+#define macro CHECKVALUE() = takes (0) returns (0) {
+    callvalue 0x10 gt over jumpi
+    0x00 dup1 revert
+    over:
+        0x00//retSize
+        0x00//retOffset
+        0x00//argsSize
+        0x00//argsOffset
+        callvalue 0x02 mul //value
+        caller //address
+        0xFFFFFFFF //@ gas
+        call //@ call() This check will call the sender with value twice what was passed in.
+}//@return success: return 0 if reverted, 1 for succeed
+#define macro CHECKSIG() = takes (0) returns (1) {
+    0x04 calldataload //@calldata after function selector 
+    0x00 mstore //store first bytes32
+    0x24 calldataload
+    0x20 mstore //store uint8 
+    0x44 calldataload
+    0x40 mstore//store bytes32 
+    0x64 calldataload
+    0x60 mstore//store bytes32
+    0x20//retSize: byte size to copy (size of the return data).
+    0x80//retOffset where to store the return data of the sub context.
+    0x80//argsSize 4 bytes32 or 128 bytes
+    0x00//argsOffset
+    0x1//@address ecRecover
+    0xFFFFFFFF//gas
+    staticcall //@staticcall()
+    iszero invalidSigner jumpi
+    0x80 mload
+    0xd8dA6Bf26964AF9D7eed9e03e53415D37AA96044 eq correctSigner jumpi
+    end jump
+
+    correctSigner:
+        0x00
+        end jump
+    invalidSigner:
+        0x01
+        end jump
+    end:
+}
+#define macro WITHDRAW() = takes (0) returns (0){
+    CHECKVALUE()
+    CHECKSIG()
+    iszero iszero noauth jumpi
+    0x00 dup1 dup1 dup1
+    selfbalance caller
+    gas call//@call give entire balance to caller
+    end jump
+    noauth:
+        0x00 dup1 revert
+    end:
+}
+
+
+#define macro MAIN() = takes (0) returns (0) {
+    // Identify which function is being called.
+    0x00 calldataload 0xE0 shr
+    dup1 __FUNC_SIG(withdraw) eq withdrawj jumpi //@call withdraw() function if selector is correct
+    callvalue 0x00 lt recieve jumpi
+
+    0x00 0x00 revert
+
+    withdrawj:
+        WITHDRAW()
+    recieve:
+}

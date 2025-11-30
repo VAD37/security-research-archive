@@ -1,0 +1,14 @@
+ds-test/=lib/forge-std/lib/ds-test/src/
+erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/
+forge-ctf/=lib/forge-ctf/src/
+forge-std/=lib/forge-std/src/
+openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/
+openzeppelin-contracts/=lib/openzeppelin-contracts/
+openzeppelin/=lib/openzeppelin-contracts/contracts/
+solmate/=lib/solmate/src/
+src/=src/
+@uniswap/v3-core=lib/uniswap/v3-core
+@uniswap/v3-periphery=lib/uniswap/v3-periphery
+@clones-with-immutable-args=lib/clones-with-immutable-args
+@openzeppelin=lib/openzeppelin-contracts
+@chainlink=lib/chainlink

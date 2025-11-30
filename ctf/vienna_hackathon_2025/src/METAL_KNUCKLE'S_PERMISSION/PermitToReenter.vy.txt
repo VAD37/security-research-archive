@@ -1,0 +1,76 @@
+# @version 0.3.7
+
+# Compiled by vyper 0.3.7+commit.6020b8b
+# hex output in: PermitToReenter.hex 
+
+interface Pot:
+    def addPoints(user: address): nonpayable
+
+struct Sig:
+    _index: uint256
+    hashed: bytes32
+    v: uint8
+    r: bytes32
+    s: bytes32
+
+pot: public(immutable(Pot))
+
+
+# Only the owners can deposit, mapping(address,uint)
+amounts: public(HashMap[address, uint256])
+
+# A private list of the owners addresses
+owners: immutable(address[3])
+_hasReentrancy: bool
+
+# owner 1 private key: 0x614f5e36cd55ddab0947d1723693fef5456e5bee24738ba90bd33c0c6e68e269
+@external
+def __init__(_pot: Pot):
+    owners = [
+        0x6B477781b0e68031109f21887e6B5afEAaEB002b,
+        0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266, #pk: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+        0x220866B1A2219f40e72f5c628B65D54268cA3A9D
+    ]
+    pot = _pot
+
+@nonreentrant("what")
+@external
+def solve():
+    assert self._hasReentrancy
+    ## Solved
+    pot.addPoints(msg.sender)
+
+@nonreentrant("what")
+@external
+@payable
+def withdraw():
+    self._hasReentrancy = True
+    _amount: uint256 = self.amounts[msg.sender]
+    self.amounts[msg.sender] = 0
+    raw_call(msg.sender, b"", value=_amount)
+    self._hasReentrancy = False
+
+@external
+@payable
+def deposit():
+    assert owners[0] == msg.sender or owners[1] == msg.sender or owners[2] == msg.sender
+    self.amounts[msg.sender] += msg.value
+
+@internal
+def checkSigner(sig: Sig):
+    _index: uint256 = sig._index
+    hashed: bytes32 = sig.hashed
+    v: uint8 = sig.v
+    r: bytes32 = sig.r
+    s: bytes32 = sig.s
+    assert hashed == keccak256(concat(convert(owners[_index], bytes32), convert(msg.sender, bytes32))), "Invalid signature"
+    assert ecrecover(hashed, v, r, s) == owners[_index], "Invalid signer"
+
+@external
+def multisig(_sigs: DynArray[Sig, 3] ):
+    for i in range(3):
+        self.checkSigner(_sigs[i])
+    
+    ## Solved
+    pot.addPoints(msg.sender)
+

@@ -1,0 +1,222 @@
+// 3bits Surfer – core map‑generation & action‑decoding helpers
+// Each obstacle is encoded in 3 bits. A packed 256‑bit “seed” provides
+// up to 85 obstacles (256 / 3 ≈ 85).
+// Bit layout per lane (least‑significant first):
+//   000 – empty tile (free lane)
+//   001 – WALL      (impassable → must lane‑switch)
+//   010 – ROCK     (jump to avoid)
+//   011 – WIRE      (dodge to avoid)
+//
+// There are 3 lanes, lane 1, lane 2, lane 3
+// The player starts on the CENTER lane (lane 2).
+// Their 256‑bit ACTIONS word is parsed in 3‑bit chunks, yielding one of
+//   NONE, LANE_UP, LANE_DOWN, JUMP, DODGE (values 0‑4).
+// Any other action is considered a NONE.
+// ────────────────────────────────────────────────────────────────
+
+// ───────────────────────────────────────── CONSTANTS ────────────
+const ACTION_NONE   // 0 : keep current lane, no vertical move
+const ACTION_UP     // 1 : move to lane above (index‑1)
+const ACTION_DOWN   // 2 : move to lane below (index+1)
+const ACTION_JUMP   // 3 : jump over a ROCK
+const ACTION_DODGE  // 4 : slide under a WIRE
+
+const LANE_EMPTY //= 0  bits:000
+const LANE_WALL //= 1   bits:001
+const LANE_ROCK //= 2  bits:010
+const LANE_WIRE //= 3   bits:011
+
+// Helper macro to require internal invariants (wraps revert)
+extern REQUIRE(err) stack(1, 0) writes(CONTROL_FLOW)
+
+// ──────────────────────────────────── PUBLIC HELPERS ───────────
+
+// return is useful for the loop in the game
+fn solve(currentLane, pos, seedA, seedB, actions) -> (newLane, newPos, seedA, seedB, actions) {
+    lanes = buildTracks(seedA, seedB, pos)
+    action = getAction(actions, pos)
+    newLane = solvePosition(lanes, action, currentLane)
+    newPos = add(pos, 1)
+}
+
+fn updateCurrentLane(currentLane, userAction) -> (newLane) {
+    // Calculate lane change based on action
+    
+    // For ACTION_UP (1): -1 * (userAction == 1) will be -1 if true, 0 if false
+    upMove = mul(sub(0, 1), eq(userAction, ACTION_UP))
+    
+    // For ACTION_DOWN (2): 1 * (userAction == 2) will be 1 if true, 0 if false
+    downMove = mul(1, eq(userAction, ACTION_DOWN))
+
+    newLane = add(currentLane, add(upMove, downMove))
+    // Check if currentLane is within valid range
+    // bytes4(keccak256("INVALID_LANE()")) = 0x52ee6251
+    REQUIRE<0x52ee6251>(and(gt(newLane, 0), lt(newLane, 4)))
+}
+
+// what is the obstacle in front of the player?
+fn getFrontObstacle(lanes, currentLane, pos) -> (obstacle) {
+    _lanes = buildLane(lanes, pos)
+    obstacle = _getFrontObstacle(_lanes, currentLane)
+}
+
+// lanes is a 9 bits number, each lane is 3 bits
+fn _getFrontObstacle(lanes, currentLane) -> (obstacle) {
+    obstacle = add(
+        add(
+            mul(and(lanes, 7), eq(currentLane, 1)),
+            mul(and(shr(3, lanes), 7), eq(currentLane, 2))
+        ),
+        mul(and(shr(6, lanes), 7), eq(currentLane, 3))
+    )
+}
+
+/**
+ * @notice Combine lane change and collision rules.
+ * @dev    1. Update lane (UP/DOWN)  
+ *         2. Read obstacle in that lane  
+ *         3. Require proper action (JUMP/DODGE) or empty tile
+ */
+fn solvePosition(lanes, action, currentLane) -> (_newLane) {
+    _newLane = updateCurrentLane(currentLane, action)
+
+    obstacle = _getFrontObstacle(lanes, _newLane)
+
+    
+    
+    validateMove(obstacle, action)
+}
+
+/**
+ * @dev Enforce collision logic for the active tile.
+ *      WALL   → always revert (cannot be entered)
+ *      ROCK   → require ACTION_JUMP
+ *      WIRE   → require ACTION_DODGE
+ */
+fn validateMove(obstacle, userAction) {
+    // if the obstacle is a wall, we can't move
+    // WALL() = 0xa10673e
+    REQUIRE<0xa10673e>(iszero(eq(obstacle, LANE_WALL)))
+
+    // if the obstacle is a rock, we have to jump
+    // ROCK() = 0xb93e0e39
+    REQUIRE<0xb93e0e39>(or(iszero(eq(obstacle, LANE_ROCK)), eq(userAction, ACTION_JUMP)))
+
+    // if the obstacle is a wire, we have to dodge
+    // WIRE() = 0x0ff98295
+    REQUIRE<0x0ff98295>(or(iszero(eq(obstacle, LANE_WIRE)), eq(userAction, ACTION_DODGE)))
+}
+
+// Returns the 9‑bit packed representation of the 3 lanes (lane0⟢lane2)
+// for a given obstacle index `pos`, using two independent random seeds.
+// Picking logic: if the obstacle in seed A is zero we fall back to seed B
+// (guarantees at least one non‑zero obstacle per lane).
+fn buildTracks(seedA, seedB, pos) -> (lanes /*9 bits*/) {
+    // Expand obstacle codes into 9‑bit lane masks
+    lanesA = buildLane(seedA, pos)
+    lanesB = buildLane(seedB, pos)
+
+    lane1 = select(and(lanesA, 7), and(lanesB, 7))
+    lane2 = joinLane(lanesA, lanesB, 3)
+    lane3 = joinLane(lanesA, lanesB, 6)
+
+    lanes = or(lane1, or(shl(3, lane2), shl(6, lane3)))
+}
+
+/**
+ * @dev Pick one 3-bit lane from (lanesA, lanesB) with preference order
+ *      “A then B”.  `offset` = 0,3,6 for lanes 1,2,3 respectively.
+ */
+fn joinLane(lanesA, lanesB, offset) -> (out) {
+    mask = shl(offset, 7)
+    out = select(shr(offset, and(lanesA, mask)), shr(offset, and(lanesB, mask)))
+}
+
+fn buildLane(seed, pos) -> (lanes /*9 bits*/) {
+    obstacle = decodeObstacle(seed, pos)
+    lanes = encodeObstacle(obstacle)
+}
+
+/**
+ * @notice Extract a single 3-bit obstacle code from packed `seed`.
+ */
+fn decodeObstacle(seed, pos) -> (obstacle){
+    mask = shl(mul(pos, 3), 7)                   // 0b111 shifted into place
+    obstacle = shr(mul(pos, 3), and(seed, mask))
+}
+
+/**
+ * @notice Expand a 3-bit obstacle code into 9 bits
+ *         (duplicated across the three lanes using a lookup mask).
+ *
+ * @dev    `0x862311` is a pre-computed 24-bit table that maps
+ *         obstacle→lane occupancy.
+ *
+ *         code → value = code/3 + 1
+ *         value encodes “empty or obstacle type” per lane.
+ */
+fn encodeObstacle(code) -> (lanes /*9 bits*/){
+    value = add(div(code, 3), 1)
+
+    // Pre‑computed lane masks per obstacle type (0x862311 hard‑coded)
+    laneMask = and(shr(mul(code, 3), 0x862311), 7) // &7 = 0b111
+
+    // 0 free space
+    // 1 WALL
+    // 2 ROCK (do a jump to avoid)
+    // 3 WIRE (do a dodge to avoid)
+
+    lane1 = mul(value, and(laneMask, 1)) // bit 0
+    lane2 = mul(value, and(shr(1,laneMask), 1)) // bit 1
+    lane3 = mul(value, and(shr(2,laneMask), 1)) // bit 2
+
+    // returns all lanes in a single uint256, each lane is 3 bits
+    lanes = or(lane1, or(shl(3, lane2), shl(6, lane3)))
+}
+
+/**
+ * @notice Decode a 3-bit action for tile index `pos`.
+ * @dev    Values > 4 are masked to 0-7 and later treated as NONE.
+ */
+fn getAction(actions, pos) -> (action){
+    mask = shl(mul(pos, 3), 7) // we only need 3 bits
+    action = shr(mul(pos, 3), and(actions, mask))
+    
+    // sanitise; valid range 0‑7
+    action = and(action, 7) // valid actions are 0, 1, 2, 3, 4, 5
+}
+
+/**
+ * @notice Returns each 3-bit lane separately.
+ */
+fn getObstacleDecompressed(obstacle) -> (lane1, lane2, lane3) {
+    lanes = encodeObstacle(obstacle)
+    lane1 = and(lanes, 7)
+    lane2 = shr(3, and(lanes, shl(3, 7)))
+    lane3 = shr(6, and(lanes, shl(6, 7)))
+}
+
+// ──────────────────────────────── GENERIC UTILITIES ─────────────
+
+/**
+ * @dev Return `a` unless it is zero, otherwise return `b`.
+ */
+fn select(a, b) -> (out)
+{
+    mask = iszero(a)
+    out  = add(mul(a, iszero(mask)), mul(b, mask))
+}
+
+/**
+ * @notice Derive two pseudo-random seeds from
+ *         (caller, arbitrary user-supplied seed).
+ */
+fn getSeeds(seed) -> (seedA, seedB)
+{
+    mstore(0x00, caller())
+    mstore(0x20, seed)
+
+    seedA = sha3(0x00, 0x40)    // hash(caller || seed)
+    mstore(0x00, seedA)
+    seedB = sha3(0x00, 0x20)    // hash(seedA)
+}

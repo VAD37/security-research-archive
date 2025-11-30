@@ -1,0 +1,333 @@
+#include "./Errors.huff"
+
+// 0 : keep current lane, no vertical move
+#define constant ACTION_NONE = 0x0
+// 1 : move to lane above (index‑1)
+#define constant ACTION_UP = 0x1
+// 2 : move to lane below (index+1)
+#define constant ACTION_DOWN = 0x2
+// 3 : jump over a ROCK
+#define constant ACTION_JUMP = 0x3
+// 4 : slide under a WIRE
+#define constant ACTION_DODGE = 0x4
+
+#define constant LANE_EMPTY = 0x0
+#define constant LANE_WALL = 0x1
+#define constant LANE_ROCK = 0x2
+#define constant LANE_WIRE = 0x3
+
+
+// balls-insert-start
+#define macro _getFrontObstacle() = takes(2) returns(1) {
+    // takes:                      [currentLane, lanes]
+    0x1                         // [currentLane, lanes, 0x1]
+    dup3                        // [currentLane, lanes, 0x1, currentLane]
+    eq                          // [currentLane, lanes, eq(currentLane, 0x1)]
+    0x2                         // [currentLane, lanes, eq(currentLane, 0x1), 0x2]
+    0x3                         // [currentLane, lanes, eq(currentLane, 0x1), 0x2, 0x3]
+    dup5                        // [currentLane, lanes, eq(currentLane, 0x1), 0x2, 0x3, currentLane]
+    eq                          // [currentLane, lanes, eq(currentLane, 0x1), 0x2, eq(currentLane, 0x3)]
+    0x7                         // [currentLane, lanes, eq(currentLane, 0x1), 0x2, eq(currentLane, 0x3), 0x7]
+    dup5                        // [currentLane, lanes, eq(currentLane, 0x1), 0x2, eq(currentLane, 0x3), 0x7, lanes]
+    0x6                         // [currentLane, lanes, eq(currentLane, 0x1), 0x2, eq(currentLane, 0x3), 0x7, lanes, 0x6]
+    shr                         // [currentLane, lanes, eq(currentLane, 0x1), 0x2, eq(currentLane, 0x3), 0x7, shr(0x6, lanes)]
+    and                         // [currentLane, lanes, eq(currentLane, 0x1), 0x2, eq(currentLane, 0x3), and(shr(0x6, lanes), 0x7)]
+    mul                         // [currentLane, lanes, eq(currentLane, 0x1), 0x2, mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3))]
+    swap4                       // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), lanes, eq(currentLane, 0x1), 0x2, currentLane]
+    eq                          // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), lanes, eq(currentLane, 0x1), eq(currentLane, 0x2)]
+    0x7                         // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), lanes, eq(currentLane, 0x1), eq(currentLane, 0x2), 0x7]
+    dup4                        // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), lanes, eq(currentLane, 0x1), eq(currentLane, 0x2), 0x7, lanes]
+    0x3                         // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), lanes, eq(currentLane, 0x1), eq(currentLane, 0x2), 0x7, lanes, 0x3]
+    shr                         // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), lanes, eq(currentLane, 0x1), eq(currentLane, 0x2), 0x7, shr(0x3, lanes)]
+    and                         // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), lanes, eq(currentLane, 0x1), eq(currentLane, 0x2), and(shr(0x3, lanes), 0x7)]
+    mul                         // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), lanes, eq(currentLane, 0x1), mul(and(shr(0x3, lanes), 0x7), eq(currentLane, 0x2))]
+    swap2                       // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), mul(and(shr(0x3, lanes), 0x7), eq(currentLane, 0x2)), eq(currentLane, 0x1), lanes]
+    0x7                         // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), mul(and(shr(0x3, lanes), 0x7), eq(currentLane, 0x2)), eq(currentLane, 0x1), lanes, 0x7]
+    and                         // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), mul(and(shr(0x3, lanes), 0x7), eq(currentLane, 0x2)), eq(currentLane, 0x1), and(0x7, lanes)]
+    mul                         // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), mul(and(shr(0x3, lanes), 0x7), eq(currentLane, 0x2)), mul(and(0x7, lanes), eq(currentLane, 0x1))]
+    add                         // [mul(and(shr(0x6, lanes), 0x7), eq(currentLane, 0x3)), add(mul(and(0x7, lanes), eq(currentLane, 0x1)), mul(and(shr(0x3, lanes), 0x7), eq(currentLane, 0x2)))]
+    add                         // [obstacle]
+    // returns:                    [obstacle]
+}
+
+#define macro buildLane() = takes(2) returns(1) {
+    // takes:                      [pos, seed]
+    decodeObstacle()            // [obstacle]
+    encodeObstacle()            // [lanes]
+    // returns:                    [lanes]
+}
+
+#define macro buildTracks() = takes(3) returns(1) {
+    // takes:                      [pos, seedB, seedA]
+    swap2                       // [seedA, seedB, pos]
+    dup1                        // [seedA, seedB, pos, pos]
+    swap2                       // [seedA, pos, pos, seedB]
+    buildLane()                 // [seedA, pos, lanesB]
+    swap2                       // [lanesB, pos, seedA]
+    buildLane()                 // [lanesB, lanesA]
+    0x3                         // [lanesB, lanesA, 0x3]
+    dup3                        // [lanesB, lanesA, 0x3, lanesB]
+    0x6                         // [lanesB, lanesA, 0x3, lanesB, 0x6]
+    0x7                         // [lanesB, lanesA, 0x3, lanesB, 0x6, 0x7]
+    dup6                        // [lanesB, lanesA, 0x3, lanesB, 0x6, 0x7, lanesB]
+    and                         // [lanesB, lanesA, 0x3, lanesB, 0x6, and(lanesB, 0x7)]
+    dup5                        // [lanesB, lanesA, 0x3, lanesB, 0x6, and(lanesB, 0x7), lanesA]
+    0x7                         // [lanesB, lanesA, 0x3, lanesB, 0x6, and(lanesB, 0x7), lanesA, 0x7]
+    and                         // [lanesB, lanesA, 0x3, lanesB, 0x6, and(lanesB, 0x7), and(0x7, lanesA)]
+    select()                    // [lanesB, lanesA, 0x3, lanesB, 0x6, lane1]
+    swap5                       // [lane1, lanesA, 0x3, lanesB, 0x6, lanesB]
+    dup5                        // [lane1, lanesA, 0x3, lanesB, 0x6, lanesB, lanesA]
+    joinLane()                  // [lane1, lanesA, 0x3, lanesB, lane3]
+    0x6                         // [lane1, lanesA, 0x3, lanesB, lane3, 0x6]
+    shl                         // [lane1, lanesA, 0x3, lanesB, shl(0x6, lane3)]
+    swap3                       // [lane1, shl(0x6, lane3), 0x3, lanesB, lanesA]
+    joinLane()                  // [lane1, shl(0x6, lane3), lane2]
+    0x3                         // [lane1, shl(0x6, lane3), lane2, 0x3]
+    shl                         // [lane1, shl(0x6, lane3), shl(0x3, lane2)]
+    or                          // [lane1, or(shl(0x3, lane2), shl(0x6, lane3))]
+    or                          // [lanes]
+    // returns:                    [lanes]
+}
+
+#define macro decodeObstacle() = takes(2) returns(1) {
+    // takes:                      [pos, seed]
+    0x7                         // [pos, seed, 0x7]
+    dup3                        // [pos, seed, 0x7, pos]
+    0x3                         // [pos, seed, 0x7, pos, 0x3]
+    mul                         // [pos, seed, 0x7, mul(0x3, pos)]
+    shl                         // [pos, seed, mask]
+    and                         // [pos, and(mask, seed)]
+    swap1                       // [and(mask, seed), pos]
+    0x3                         // [and(mask, seed), pos, 0x3]
+    mul                         // [and(mask, seed), mul(0x3, pos)]
+    shr                         // [obstacle]
+    // returns:                    [obstacle]
+}
+
+#define macro encodeObstacle() = takes(1) returns(1) {
+    // takes:                      [code]
+    0x3                         // [code, 0x3]
+    0x862311                    // [code, 0x3, 0x862311]
+    0x3                         // [code, 0x3, 0x862311, 0x3]
+    dup4                        // [code, 0x3, 0x862311, 0x3, code]
+    mul                         // [code, 0x3, 0x862311, mul(code, 0x3)]
+    shr                         // [code, 0x3, shr(mul(code, 0x3), 0x862311)]
+    0x7                         // [code, 0x3, shr(mul(code, 0x3), 0x862311), 0x7]
+    and                         // [code, 0x3, laneMask]
+    swap2                       // [laneMask, 0x3, code]
+    div                         // [laneMask, div(code, 0x3)]
+    0x1                         // [laneMask, div(code, 0x3), 0x1]
+    add                         // [laneMask, value]
+    0x1                         // [laneMask, value, 0x1]
+    dup3                        // [laneMask, value, 0x1, laneMask]
+    0x1                         // [laneMask, value, 0x1, laneMask, 0x1]
+    shr                         // [laneMask, value, 0x1, shr(0x1, laneMask)]
+    and                         // [laneMask, value, and(shr(0x1, laneMask), 0x1)]
+    dup2                        // [laneMask, value, and(shr(0x1, laneMask), 0x1), value]
+    mul                         // [laneMask, value, lane2]
+    0x3                         // [laneMask, value, lane2, 0x3]
+    shl                         // [laneMask, value, shl(0x3, lane2)]
+    0x1                         // [laneMask, value, shl(0x3, lane2), 0x1]
+    dup4                        // [laneMask, value, shl(0x3, lane2), 0x1, laneMask]
+    0x2                         // [laneMask, value, shl(0x3, lane2), 0x1, laneMask, 0x2]
+    shr                         // [laneMask, value, shl(0x3, lane2), 0x1, shr(0x2, laneMask)]
+    and                         // [laneMask, value, shl(0x3, lane2), and(shr(0x2, laneMask), 0x1)]
+    dup3                        // [laneMask, value, shl(0x3, lane2), and(shr(0x2, laneMask), 0x1), value]
+    mul                         // [laneMask, value, shl(0x3, lane2), lane3]
+    0x6                         // [laneMask, value, shl(0x3, lane2), lane3, 0x6]
+    shl                         // [laneMask, value, shl(0x3, lane2), shl(0x6, lane3)]
+    or                          // [laneMask, value, or(shl(0x6, lane3), shl(0x3, lane2))]
+    swap2                       // [or(shl(0x6, lane3), shl(0x3, lane2)), value, laneMask]
+    0x1                         // [or(shl(0x6, lane3), shl(0x3, lane2)), value, laneMask, 0x1]
+    and                         // [or(shl(0x6, lane3), shl(0x3, lane2)), value, and(0x1, laneMask)]
+    mul                         // [or(shl(0x6, lane3), shl(0x3, lane2)), lane1]
+    or                          // [lanes]
+    // returns:                    [lanes]
+}
+
+#define macro getAction() = takes(2) returns(1) {
+    // takes:                      [pos, actions]
+    0x7                         // [pos, actions, 0x7]
+    0x3                         // [pos, actions, 0x7, 0x3]
+    dup4                        // [pos, actions, 0x7, 0x3, pos]
+    mul                         // [pos, actions, 0x7, mul(pos, 0x3)]
+    shl                         // [pos, actions, mask]
+    and                         // [pos, and(mask, actions)]
+    swap1                       // [and(mask, actions), pos]
+    0x3                         // [and(mask, actions), pos, 0x3]
+    mul                         // [and(mask, actions), mul(0x3, pos)]
+    shr                         // [action]
+    0x7                         // [action, 0x7]
+    and                         // [action]
+    // returns:                    [action]
+}
+
+#define macro getFrontObstacle() = takes(3) returns(1) {
+    // takes:                      [pos, currentLane, lanes]
+    swap1                       // [pos, lanes, currentLane]
+    swap2                       // [currentLane, lanes, pos]
+    swap1                       // [currentLane, pos, lanes]
+    buildLane()                 // [currentLane, _lanes]
+    _getFrontObstacle()         // [obstacle]
+    // returns:                    [obstacle]
+}
+
+#define macro getObstacleDecompressed() = takes(1) returns(3) {
+    // takes:                      [obstacle]
+    encodeObstacle()            // [lanes]
+    0x7                         // [lanes, 0x7]
+    0x3                         // [lanes, 0x7, 0x3]
+    shl                         // [lanes, shl(0x3, 0x7)]
+    dup2                        // [lanes, shl(0x3, 0x7), lanes]
+    and                         // [lanes, and(lanes, shl(0x3, 0x7))]
+    0x3                         // [lanes, and(lanes, shl(0x3, 0x7)), 0x3]
+    shr                         // [lanes, lane2]
+    0x7                         // [lanes, lane2, 0x7]
+    0x7                         // [lanes, lane2, 0x7, 0x7]
+    0x6                         // [lanes, lane2, 0x7, 0x7, 0x6]
+    shl                         // [lanes, lane2, 0x7, shl(0x6, 0x7)]
+    dup4                        // [lanes, lane2, 0x7, shl(0x6, 0x7), lanes]
+    and                         // [lanes, lane2, 0x7, and(lanes, shl(0x6, 0x7))]
+    0x6                         // [lanes, lane2, 0x7, and(lanes, shl(0x6, 0x7)), 0x6]
+    shr                         // [lanes, lane2, 0x7, lane3]
+    swap3                       // [lane3, lane2, 0x7, lanes]
+    and                         // [lane3, lane2, lane1]
+    // returns:                    [lane3, lane2, lane1]
+}
+
+#define macro getSeeds() = takes(1) returns(2) {
+    // takes:                      [seed]
+    0x20                        // [seed, 0x20]
+    caller                      // [seed, 0x20, caller()]
+    0x0                         // [seed, 0x20, caller(), 0x0]
+    mstore                      // [seed, 0x20]
+    mstore                      // []
+    0x40                        // [0x40]
+    0x0                         // [0x40, 0x0]
+    sha3                        // [seedA]
+    0x20                        // [seedA, 0x20]
+    dup2                        // [seedA, 0x20, seedA]
+    0x0                         // [seedA, 0x20, seedA, 0x0]
+    mstore                      // [seedA, 0x20]
+    0x0                         // [seedA, 0x20, 0x0]
+    sha3                        // [seedA, seedB]
+    swap1                       // [seedB, seedA]
+    // returns:                    [seedB, seedA]
+}
+
+#define macro joinLane() = takes(3) returns(1) {
+    // takes:                      [offset, lanesB, lanesA]
+    0x7                         // [offset, lanesB, lanesA, 0x7]
+    dup4                        // [offset, lanesB, lanesA, 0x7, offset]
+    shl                         // [offset, lanesB, lanesA, mask]
+    swap1                       // [offset, lanesB, mask, lanesA]
+    dup2                        // [offset, lanesB, mask, lanesA, mask]
+    and                         // [offset, lanesB, mask, and(mask, lanesA)]
+    swap2                       // [offset, and(mask, lanesA), mask, lanesB]
+    and                         // [offset, and(mask, lanesA), and(lanesB, mask)]
+    dup3                        // [offset, and(mask, lanesA), and(lanesB, mask), offset]
+    shr                         // [offset, and(mask, lanesA), shr(offset, and(lanesB, mask))]
+    swap2                       // [shr(offset, and(lanesB, mask)), and(mask, lanesA), offset]
+    shr                         // [shr(offset, and(lanesB, mask)), shr(offset, and(mask, lanesA))]
+    select()                    // [out]
+    // returns:                    [out]
+}
+
+#define macro select() = takes(2) returns(1) {
+    // takes:                      [b, a]
+    dup1                        // [b, a, a]
+    iszero                      // [b, a, mask]
+    swap1                       // [b, mask, a]
+    dup2                        // [b, mask, a, mask]
+    iszero                      // [b, mask, a, iszero(mask)]
+    mul                         // [b, mask, mul(iszero(mask), a)]
+    swap2                       // [mul(iszero(mask), a), mask, b]
+    mul                         // [mul(iszero(mask), a), mul(b, mask)]
+    add                         // [out]
+    // returns:                    [out]
+}
+
+#define macro solve() = takes(5) returns(5) {
+    // takes:                      [actions, seedB, seedA, pos, currentLane]
+    dup2                        // [actions, seedB, seedA, pos, currentLane, pos]
+    dup6                        // [actions, seedB, seedA, pos, currentLane, pos, actions]
+    getAction()                 // [actions, seedB, seedA, pos, currentLane, action]
+    dup3                        // [actions, seedB, seedA, pos, currentLane, action, pos]
+    0x1                         // [actions, seedB, seedA, pos, currentLane, action, pos, 0x1]
+    add                         // [actions, seedB, seedA, pos, currentLane, action, newPos]
+    swap3                       // [actions, seedB, seedA, newPos, currentLane, action, pos]
+    dup6                        // [actions, seedB, seedA, newPos, currentLane, action, pos, seedB]
+    dup6                        // [actions, seedB, seedA, newPos, currentLane, action, pos, seedB, seedA]
+    buildTracks()               // [actions, seedB, seedA, newPos, currentLane, action, lanes]
+    solvePosition()             // [actions, seedB, seedA, newPos, newLane]
+    // returns:                    [actions, seedB, seedA, newPos, newLane]
+}
+
+#define macro solvePosition() = takes(3) returns(1) {
+    // takes:                      [currentLane, action, lanes]
+    swap2                       // [lanes, action, currentLane]
+    dup2                        // [lanes, action, currentLane, action]
+    swap1                       // [lanes, action, action, currentLane]
+    updateCurrentLane()         // [lanes, action, _newLane]
+    dup1                        // [lanes, action, _newLane, _newLane]
+    swap3                       // [_newLane, action, _newLane, lanes]
+    _getFrontObstacle()         // [_newLane, action, obstacle]
+    validateMove()              // [_newLane]
+    // returns:                    [_newLane]
+}
+
+#define macro updateCurrentLane() = takes(2) returns(1) {
+    // takes:                      [userAction, currentLane]
+    swap1                       // [currentLane, userAction]
+    0x1                         // [currentLane, userAction, 0x1]
+    [ACTION_DOWN]               // [currentLane, userAction, 0x1, ACTION_DOWN]
+    [ACTION_UP]                 // [currentLane, userAction, 0x1, ACTION_DOWN, ACTION_UP]
+    dup4                        // [currentLane, userAction, 0x1, ACTION_DOWN, ACTION_UP, userAction]
+    eq                          // [currentLane, userAction, 0x1, ACTION_DOWN, eq(userAction, ACTION_UP)]
+    0x1                         // [currentLane, userAction, 0x1, ACTION_DOWN, eq(userAction, ACTION_UP), 0x1]
+    0x0                         // [currentLane, userAction, 0x1, ACTION_DOWN, eq(userAction, ACTION_UP), 0x1, 0x0]
+    sub                         // [currentLane, userAction, 0x1, ACTION_DOWN, eq(userAction, ACTION_UP), sub(0x0, 0x1)]
+    mul                         // [currentLane, userAction, 0x1, ACTION_DOWN, upMove]
+    swap3                       // [currentLane, upMove, 0x1, ACTION_DOWN, userAction]
+    eq                          // [currentLane, upMove, 0x1, eq(userAction, ACTION_DOWN)]
+    mul                         // [currentLane, upMove, downMove]
+    add                         // [currentLane, add(downMove, upMove)]
+    add                         // [newLane]
+    0x0                         // [newLane, 0x0]
+    dup2                        // [newLane, 0x0, newLane]
+    gt                          // [newLane, gt(newLane, 0x0)]
+    dup2                        // [newLane, gt(newLane, 0x0), newLane]
+    0x4                         // [newLane, gt(newLane, 0x0), newLane, 0x4]
+    gt                          // [newLane, gt(newLane, 0x0), gt(0x4, newLane)]
+    and                         // [newLane, and(gt(0x4, newLane), gt(newLane, 0x0))]
+    REQUIRE(0x52ee6251)         // [newLane]
+    // returns:                    [newLane]
+}
+
+#define macro validateMove() = takes(2) returns(0) {
+    // takes:                      [userAction, obstacle]
+    [LANE_WIRE]                 // [userAction, obstacle, LANE_WIRE]
+    [ACTION_DODGE]              // [userAction, obstacle, LANE_WIRE, ACTION_DODGE]
+    dup4                        // [userAction, obstacle, LANE_WIRE, ACTION_DODGE, userAction]
+    eq                          // [userAction, obstacle, LANE_WIRE, eq(userAction, ACTION_DODGE)]
+    swap3                       // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, userAction]
+    [ACTION_JUMP]               // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, userAction, ACTION_JUMP]
+    eq                          // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, eq(ACTION_JUMP, userAction)]
+    [LANE_ROCK]                 // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, eq(ACTION_JUMP, userAction), LANE_ROCK]
+    dup4                        // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, eq(ACTION_JUMP, userAction), LANE_ROCK, obstacle]
+    eq                          // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, eq(ACTION_JUMP, userAction), eq(obstacle, LANE_ROCK)]
+    iszero                      // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, eq(ACTION_JUMP, userAction), iszero(eq(obstacle, LANE_ROCK))]
+    [LANE_WALL]                 // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, eq(ACTION_JUMP, userAction), iszero(eq(obstacle, LANE_ROCK)), LANE_WALL]
+    dup5                        // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, eq(ACTION_JUMP, userAction), iszero(eq(obstacle, LANE_ROCK)), LANE_WALL, obstacle]
+    eq                          // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, eq(ACTION_JUMP, userAction), iszero(eq(obstacle, LANE_ROCK)), eq(obstacle, LANE_WALL)]
+    iszero                      // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, eq(ACTION_JUMP, userAction), iszero(eq(obstacle, LANE_ROCK)), iszero(eq(obstacle, LANE_WALL))]
+    REQUIRE(0xa10673e)          // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, eq(ACTION_JUMP, userAction), iszero(eq(obstacle, LANE_ROCK))]
+    or                          // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE, or(iszero(eq(obstacle, LANE_ROCK)), eq(ACTION_JUMP, userAction))]
+    REQUIRE(0xb93e0e39)         // [eq(userAction, ACTION_DODGE), obstacle, LANE_WIRE]
+    eq                          // [eq(userAction, ACTION_DODGE), eq(LANE_WIRE, obstacle)]
+    iszero                      // [eq(userAction, ACTION_DODGE), iszero(eq(LANE_WIRE, obstacle))]
+    or                          // [or(iszero(eq(LANE_WIRE, obstacle)), eq(userAction, ACTION_DODGE))]
+    REQUIRE(0xff98295)          // []
+    // returns:                    []
+}
+// balls-insert-end

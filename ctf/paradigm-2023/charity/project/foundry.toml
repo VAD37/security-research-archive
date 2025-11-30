@@ -1,0 +1,18 @@
+[profile.default]
+src = 'src'
+out = '.cache/out'
+libs = ['lib']
+cache_path = '.cache/cache'
+broadcast = '.cache/broadcast'
+fs_permissions = [{ access = 'read-write', path = '/'}]
+
+remappings = [
+    "forge-std=lib/forge-std/src",
+    "forge-ctf=lib/forge-ctf/src",
+    "@openzeppelin=lib/openzeppelin-contracts",
+]
+
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config
+
+eth_rpc_url = "http://suspicious-charity.challenges.paradigm.xyz:8545/cf3c8db8-c443-44be-8b91-f53fcc6c6736/main"
+

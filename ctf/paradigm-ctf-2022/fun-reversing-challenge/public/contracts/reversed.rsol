@@ -1,0 +1,344 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity 0.8.16;
+
+contract ChallengeReverse {
+
+    // Decompiled by library.dedaub.com
+// 2023.10.09 09:48 UTC
+// Compiled using the solidity compiler version 0.8.16
+
+
+// Data structures and variables inferred from the use of storage instructions
+uint256 _solved; // STORAGE[0x0] bytes 0 to 0
+
+
+
+function () public payable { 
+    revert();
+}
+
+function solved() public payable { 
+    return _solved;
+}
+
+function check(bytes varg0) public payable { 
+    require(msg.data.length - 4 >= 32);//@ require (flag.length == 36+6, "invalid flag");
+    require(varg0 <= uint64.max);//18446744073709600000
+    // require(varg0.length <= uint64.max);//@skip
+    // require(4 + varg0 + 31 < msg.data.length);
+    // require(4 + varg0 + varg0.length + 32 <= msg.data.length);
+    require(varg0.length == 42, Error('invalid flag')); //@ require (flag.length == 36+6, "invalid flag");
+    require(0 < varg0.length, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+    v0 = v1 = 0x5000000000000000000000000000000000000000000000000000000000000000 == bytes1(msg.data[0 + varg0.data] >> 248 << 248);
+    if (v1) {
+        require(1 < varg0.length, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+        v0 = v2 = 0x4300000000000000000000000000000000000000000000000000000000000000 == bytes1(msg.data[1 + varg0.data] >> 248 << 248);
+    }
+    if (v0) {
+        require(2 < varg0.length, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+        v0 = v3 = 0x5400000000000000000000000000000000000000000000000000000000000000 == bytes1(msg.data[2 + varg0.data] >> 248 << 248);
+    }
+    if (v0) {
+        require(3 < varg0.length, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+        v0 = v4 = 0x4600000000000000000000000000000000000000000000000000000000000000 == bytes1(msg.data[3 + varg0.data] >> 248 << 248);
+    }
+    if (v0) {
+        require(4 < varg0.length, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+        v0 = v5 = 0x7b00000000000000000000000000000000000000000000000000000000000000 == bytes1(msg.data[4 + varg0.data] >> 248 << 248);
+    }
+    require(v0, Error('invalid flag'));//require (flag[0] == "P" && flag[1] == "C" && flag[2] == "T" && flag[3] == "F" && flag[4] == "{", "invalid flag");
+    require(varg0.length - 1 <= varg0.length, Panic(17)); // arithmetic overflow or underflow
+    require(varg0.length - 1 < varg0.length, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+    require(0x7d00000000000000000000000000000000000000000000000000000000000000 == bytes1(msg.data[varg0.length - 1 + varg0.data] >> 248 << 248), Error('invalid flag'));
+    v6 = 0xb92();
+    v7 = v8 = 0;
+    while (v7 < 6) {
+        v9 = v10 = 0;
+        while (v9 < 6) {
+            require(!(bool(6) & (v7 > 0x2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)), Panic(17)); // arithmetic overflow or underflow
+            v11 = _SafeAdd(5, 6 * v7);
+            v12 = _SafeAdd(v11, v9);
+            require(v12 < varg0.length, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            require(v7 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            require(v9 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            MEM[(v9 << 5) + MEM[(v7 << 5) + v6]] = uint8(msg.data[v12 + varg0.data] >> 248);
+            v9 = 0xce6(v9);
+        }
+        v7 = 0xce6(v7);
+    }
+    v13 = new struct(6);
+    v14 = new struct(6);
+    v14.word0 = uint8(190);
+    v14.word1 = uint8(154);
+    v14.word2 = uint8(194);
+    v14.word3 = uint8(36);
+    v14.word4 = uint8(int8.max);
+    v14.word5 = uint8(77);
+    v13.word0 = v14;
+    v15.word0 = uint8(89);
+    v15.word1 = uint8(222);
+    v15.word2 = uint8(59);
+    v15.word3 = uint8(97);
+    v15.word4 = uint8(10);
+    v15.word5 = uint8(26);
+    v13.word1 = 0xde3b61;
+    v16 = new struct(6);
+    v16.word0 = uint8(200);
+    v16.word1 = uint8(24);
+    v16.word2 = uint8(150);
+    v16.word3 = uint8(14);
+    v16.word4 = uint8(148);
+    v16.word5 = uint8(77);
+    v13.word2 = v16;
+    v17 = new struct(6);
+    v17.word0 = uint8(227);
+    v17.word1 = uint8(100);
+    v17.word2 = uint8(140);
+    v17.word3 = uint8(109);
+    v17.word4 = uint8(118);
+    v17.word5 = uint8(254);
+    v13.word3 = v17;
+    v18.word0 = uint8(22);
+    v18.word1 = uint8(209);
+    v18.word2 = uint8(65);
+    v18.word3 = uint8(142);
+    v18.word4 = uint8(14);
+    v18.word5 = uint8(80);
+    v13.word4 = 0xd1418e;
+    v19 = new struct(6);
+    v19.word0 = uint8(231);
+    v19.word1 = uint8(66);
+    v19.word2 = uint8(164);
+    v19.word3 = uint8(135);
+    v19.word4 = uint8(142);
+    v19.word5 = uint8(107);
+    v13.word5 = v19;
+    v20 = new struct(6);
+    v21.word0 = uint8(35);
+    v21.word1 = uint8(171);
+    v21.word2 = uint8(30);
+    v21.word3 = uint8(76);
+    v21.word4 = uint8(233);
+    v21.word5 = uint8(14);
+    v20.word0 = 0xab1e4c;
+    v22 = new struct(6);
+    v22.word0 = uint8(239);
+    v22.word1 = uint8(83);
+    v22.word2 = uint8(180);
+    v22.word3 = uint8(172);
+    v22.word4 = uint8(24);
+    v22.word5 = uint8(177);
+    v20.word1 = v22;
+    v23.word0 = uint8(60);
+    v23.word1 = uint8(194);
+    v23.word2 = uint8(47);
+    v23.word3 = uint8(52);
+    v23.word4 = uint8(74);
+    v23.word5 = uint8(24);
+    v20.word2 = 0xc22f34;
+    v24 = new struct(6);
+    v24.word0 = uint8(101);
+    v24.word1 = uint8(148);
+    v24.word2 = uint8(103);
+    v24.word3 = uint8(211);
+    v24.word4 = uint8(89);
+    v24.word5 = uint8(41);
+    v20.word3 = v24;
+    v25 = new struct(6);
+    v25.word0 = uint8(160);
+    v25.word1 = uint8(39);
+    v25.word2 = uint8(74);
+    v25.word3 = uint8(115);
+    v25.word4 = uint8(205);
+    v25.word5 = uint8(136);
+    v20.word4 = v25;
+    v26.word0 = uint8(94);
+    v26.word1 = uint8(50);
+    v26.word2 = uint8(80);
+    v26.word3 = uint8(32);
+    v26.word4 = uint8(128);
+    v26.word5 = uint8(14);
+    v20.word5 = 0x325020;
+    v27 = new struct(6);
+    v28 = new struct(6);
+    v28.word0 = uint8(98);
+    v28.word1 = uint8(98);
+    v28.word2 = uint8(45);
+    v28.word3 = uint8(87);
+    v28.word4 = uint8(130);
+    v28.word5 = uint8(42);
+    v27.word0 = v28;
+    v29 = new struct(6);
+    v29.word0 = uint8(200);
+    v29.word1 = uint8(184);
+    v29.word2 = uint8(107);
+    v29.word3 = uint8(102);
+    v29.word4 = uint8(139);
+    v29.word5 = uint8(25);
+    v27.word1 = v29;
+    v30.word0 = uint8(73);
+    v30.word1 = uint8(139);
+    v30.word2 = uint8(58);
+    v30.word3 = uint8(136);
+    v30.word4 = uint8(217);
+    v30.word5 = uint8(129);
+    v27.word2 = 0x8b3a88;
+    v31 = new struct(6);
+    v31.word0 = uint8(219);
+    v31.word1 = uint8(21);
+    v31.word2 = uint8(107);
+    v31.word3 = uint8(204);
+    v31.word4 = uint8(18);
+    v31.word5 = uint8(219);
+    v27.word3 = v31;
+    v32 = new struct(6);
+    v32.word0 = uint8(145);
+    v32.word1 = uint8(192);
+    v32.word2 = uint8(17);
+    v32.word3 = uint8(86);
+    v32.word4 = uint8(166);
+    v32.word5 = uint8(217);
+    v27.word4 = v32;
+    v33.word0 = uint8(40);
+    v33.word1 = uint8(248);
+    v33.word2 = uint8(43);
+    v33.word3 = uint8(71);
+    v33.word4 = uint8(93);
+    v33.word5 = uint8(226);
+    v27.word5 = 0xf82b47;
+    v34 = 0x8c5(v6, v20);
+    v35 = 0x9d4(v13, v34);
+    v36 = 0x8c5(v35, v20);
+    v37 = 0x9d4(v13, v36);
+    v38 = 0x8c5(v37, v20);
+    v39 = 0x9d4(v13, v38);
+    v40 = 0x8c5(v39, v20);
+    v41 = 0x9d4(v13, v40);
+    v42 = 0x8c5(v41, v20);
+    v43 = 0x9d4(v13, v42);
+    v44 = 0x8c5(v43, v20);
+    v45 = 0x9d4(v13, v44);
+    v46 = 0xa85(v27, v45);
+    require(v46, Error('invalid flag'));
+    _solved = 1;
+}
+
+function 0x8c5(struct(6) varg0, struct(6) varg1) private { 
+    v0 = 0xb92();
+    v1 = 0xb92();
+    v2 = v3 = 0;
+    while (v2 < 6) {
+        v4 = v5 = 0;
+        while (v4 < 6) {
+            v6 = v7 = 0;
+            while (v6 < 6) {
+                require(v2 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+                require(v6 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+                v8 = v9 = MEM[(v6 << 5) + MEM[(v2 << 5) + varg1]];
+                require(v6 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+                require(v4 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+                v10 = v11 = MEM[(v4 << 5) + MEM[(v6 << 5) + varg0]];
+                v12 = v13 = 0;
+                while (uint8(v10)) {
+                    if (v10 & 0x1) {
+                        v12 = v8 ^ v12;
+                    }
+                    if (!(v8 & 0x80)) {
+                        v8 = uint8(v8) << 1;
+                    } else {
+                        v8 = 0x1b ^ uint8(v8) << 1;
+                    }
+                    v10 = uint8(v10) >> 1;
+                }
+                require(v2 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+                require(v4 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+                MEM[(v4 << 5) + MEM[(v2 << 5) + v1]] = uint8(MEM[(v4 << 5) + MEM[(v2 << 5) + v1]] ^ v12);
+                v6 = 0xce6(v6);
+            }
+            v4 = 0xce6(v4);
+        }
+        v2 = 0xce6(v2);
+    }
+    return v1;
+}
+
+function 0x9d4(struct(6) varg0, struct(6) varg1) private { 
+    v0 = 0xb92();
+    v1 = v2 = 0;
+    while (v1 < 6) {
+        v3 = v4 = 0;
+        while (v3 < 6) {
+            require(v1 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            require(v3 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            require(v1 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            require(v3 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            MEM[(v3 << 5) + MEM[(v1 << 5) + varg1]] = uint8(MEM[(v3 << 5) + MEM[(v1 << 5) + varg1]] ^ MEM[(v3 << 5) + MEM[(v1 << 5) + varg0]]);
+            v3 = 0xce6(v3);
+        }
+        v1 = 0xce6(v1);
+    }
+    return varg1;
+}
+
+function 0xa85(struct(6) varg0, struct(6) varg1) private { 
+    v0 = v1 = 0;
+    while (v0 < 6) {
+        v2 = v3 = 0;
+        while (v2 < 6) {
+            require(v0 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            require(v2 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            require(v0 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            require(v2 < 6, Panic(50)); // access an out-of-bounds or negative index of bytesN array or slice
+            if (uint8(MEM[(v2 << 5) + MEM[(v0 << 5) + varg1]]) == uint8(MEM[(v2 << 5) + MEM[(v0 << 5) + varg0]])) {
+                v2 = 0xce6(v2);
+            } else {
+                return 0;
+            }
+        }
+        v0 = 0xce6(v0);
+    }
+    return 1;
+}
+
+function 0xb92() private { 
+    v0 = v1 = new struct(6);
+    v2 = v3 = 6;
+    while (1) {
+        CALLDATACOPY(MEM[64], msg.data.length, 192);
+        MEM[v0] = MEM[64];
+        v0 += 32;
+        v2 = v2 - 1;
+        if (!v2) {
+            return v1;
+        }
+    }
+}
+
+function _SafeAdd(uint256 varg0, uint256 varg1) private { 
+    require(varg0 <= varg1 + varg0, Panic(17)); // arithmetic overflow or underflow
+    return varg1 + varg0;
+}
+
+function 0xce6(uint256 varg0) private { 
+    require(varg0 + 1, Panic(17)); // arithmetic overflow or underflow
+    return 1 + varg0;
+}
+
+// Note: The function selector is not present in the original solidity code.
+// However, we display it for the sake of completeness.
+
+function __function_selector__(bytes4 function_selector) public payable { 
+    MEM[64] = 128;
+    require(!msg.value);
+    if (msg.data.length >= 4) {
+        if (0x799320bb == function_selector >> 224) {
+            solved();
+        } else if (0xc64b3bb5 == function_selector >> 224) {
+            check(bytes);
+        }
+    }
+    ();
+}
+
+    
+}

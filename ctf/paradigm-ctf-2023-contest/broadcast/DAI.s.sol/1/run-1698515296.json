@@ -1,0 +1,85 @@
+{
+  "transactions": [
+    {
+      "hash": "0xb6a29d620f75ad1aa2da101aea28769518617b2ea971d0f320a3c664b4ee480e",
+      "transactionType": "CALL",
+      "contractName": "AccountManager",
+      "contractAddress": "0xdaE97900D4B184c5D2012dcdB658c008966466DD",
+      "function": "openAccount(address,address[]):(address)",
+      "arguments": [
+        "0x9Df59df131dac41F7b87c5b73E0626022eC4e968",
+        "[]"
+      ],
+      "transaction": {
+        "type": "0x02",
+        "from": "0x9df59df131dac41f7b87c5b73e0626022ec4e968",
+        "to": "0xdae97900d4b184c5d2012dcdb658c008966466dd",
+        "gas": "0x7514",
+        "value": "0x0",
+        "data": "0xcd9cffe20000000000000000000000009df59df131dac41f7b87c5b73e0626022ec4e96800000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000",
+        "nonce": "0x3",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0xd4e81b24376cb09d18c0d73b123e91559120c4d8be09bb3e3a0b126ff6748ffd",
+      "transactionType": "CALL",
+      "contractName": "AccountManager",
+      "contractAddress": "0xdaE97900D4B184c5D2012dcdB658c008966466DD",
+      "function": "openAccount(address,address[]):(address)",
+      "arguments": [
+        "0x9Df59df131dac41F7b87c5b73E0626022eC4e968",
+        "[]"
+      ],
+      "transaction": {
+        "type": "0x02",
+        "from": "0x9df59df131dac41f7b87c5b73e0626022ec4e968",
+        "to": "0xdae97900d4b184c5d2012dcdb658c008966466dd",
+        "gas": "0x7514",
+        "value": "0x0",
+        "data": "0xcd9cffe20000000000000000000000009df59df131dac41f7b87c5b73e0626022ec4e96800000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000",
+        "nonce": "0x4",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0x0df0a4fca67fa5cd953f716452033f31fc249f7d53f449d8cb9add3c910e021f",
+      "transactionType": "CALL",
+      "contractName": "AccountManager",
+      "contractAddress": "0xdaE97900D4B184c5D2012dcdB658c008966466DD",
+      "function": "openAccount(address,address[]):(address)",
+      "arguments": [
+        "0x9Df59df131dac41F7b87c5b73E0626022eC4e968",
+        "[]"
+      ],
+      "transaction": {
+        "type": "0x02",
+        "from": "0x9df59df131dac41f7b87c5b73e0626022ec4e968",
+        "to": "0xdae97900d4b184c5d2012dcdb658c008966466dd",
+        "gas": "0x7514",
+        "value": "0x0",
+        "data": "0xcd9cffe20000000000000000000000009df59df131dac41f7b87c5b73e0626022ec4e96800000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000",
+        "nonce": "0x5",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [],
+  "libraries": [],
+  "pending": [
+    "0xb6a29d620f75ad1aa2da101aea28769518617b2ea971d0f320a3c664b4ee480e",
+    "0xd4e81b24376cb09d18c0d73b123e91559120c4d8be09bb3e3a0b126ff6748ffd",
+    "0x0df0a4fca67fa5cd953f716452033f31fc249f7d53f449d8cb9add3c910e021f"
+  ],
+  "returns": {},
+  "timestamp": 1698515296,
+  "chain": 1,
+  "multi": false,
+  "commit": "32dff49"
+}

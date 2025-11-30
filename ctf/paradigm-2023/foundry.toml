@@ -1,0 +1,13 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+evm_version = "shanghai"
+
+# ETH_RPC_URL=https://eth-mainnet.alchemyapi.io/v2/kIP2_euA9T6Z-e5MjHzTzRUmgqCLsHUA
+
+#eth_rpc_url="https://eth-mainnet.alchemyapi.io/v2/kIP2_euA9T6Z-e5MjHzTzRUmgqCLsHUA"
+eth_rpc_url = "http://dai-plus-plus.challenges.paradigm.xyz:8545/6b870217-3f6e-433e-9af3-82a2fc863a7a/main"
+
