@@ -1,0 +1,168 @@
+INFO:Detectors:
+NudgeCampaignFactory.deployAndFundCampaign(uint32,address,address,uint256,address,uint256,address,uint256,uint256) (src/campaign/NudgeCampaignFactory.sol#133-179) sends eth to arbitrary user
+	Dangerous calls:
+	- (sent,None) = campaign.call{value: initialRewardAmount}() (src/campaign/NudgeCampaignFactory.sol#162)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+INFO:Detectors:
+Reentrancy in NudgeCampaign.claimRewards(uint256[]) (src/campaign/NudgeCampaign.sol#256-299):
+	External calls:
+	- _transfer(rewardToken,participation.userAddress,userRewards) (src/campaign/NudgeCampaign.sol#295)
+		- (sent,None) = to.call{value: amount}() (src/campaign/NudgeCampaign.sol#479)
+	State variables written after the call(s):
+	- distributedRewards += userRewards (src/campaign/NudgeCampaign.sol#289)
+	NudgeCampaign.distributedRewards (src/campaign/NudgeCampaign.sol#51) can be used in cross function reentrancies:
+	- NudgeCampaign.claimRewards(uint256[]) (src/campaign/NudgeCampaign.sol#256-299)
+	- NudgeCampaign.distributedRewards (src/campaign/NudgeCampaign.sol#51)
+	- NudgeCampaign.getCampaignInfo() (src/campaign/NudgeCampaign.sol#439-467)
+	- participation.status = ParticipationStatus.CLAIMED (src/campaign/NudgeCampaign.sol#292)
+	NudgeCampaign.participations (src/campaign/NudgeCampaign.sol#56) can be used in cross function reentrancies:
+	- NudgeCampaign.claimRewards(uint256[]) (src/campaign/NudgeCampaign.sol#256-299)
+	- NudgeCampaign.handleReallocation(uint256,address,address,uint256,bytes) (src/campaign/NudgeCampaign.sol#164-233)
+	- NudgeCampaign.invalidateParticipations(uint256[]) (src/campaign/NudgeCampaign.sol#308-321)
+	- NudgeCampaign.participations (src/campaign/NudgeCampaign.sol#56)
+	- pendingRewards -= userRewards (src/campaign/NudgeCampaign.sol#288)
+	NudgeCampaign.pendingRewards (src/campaign/NudgeCampaign.sol#48) can be used in cross function reentrancies:
+	- NudgeCampaign.claimRewards(uint256[]) (src/campaign/NudgeCampaign.sol#256-299)
+	- NudgeCampaign.claimableRewardAmount() (src/campaign/NudgeCampaign.sol#413-415)
+	- NudgeCampaign.getCampaignInfo() (src/campaign/NudgeCampaign.sol#439-467)
+	- NudgeCampaign.handleReallocation(uint256,address,address,uint256,bytes) (src/campaign/NudgeCampaign.sol#164-233)
+	- NudgeCampaign.invalidateParticipations(uint256[]) (src/campaign/NudgeCampaign.sol#308-321)
+	- NudgeCampaign.pendingRewards (src/campaign/NudgeCampaign.sol#48)
+Reentrancy in NudgePointsCampaigns.handleReallocation(uint256,address,address,uint256,bytes) (src/campaign/NudgePointsCampaigns.sol#126-178):
+	External calls:
+	- _transfer(toToken,userAddress,amountReceived) (src/campaign/NudgePointsCampaigns.sol#160)
+		- (sent,None) = to.call{value: amount}() (src/campaign/NudgePointsCampaigns.sol#237)
+	State variables written after the call(s):
+	- campaign.totalReallocatedAmount += amountReceived (src/campaign/NudgePointsCampaigns.sol#162)
+	NudgePointsCampaigns.campaigns (src/campaign/NudgePointsCampaigns.sol#22) can be used in cross function reentrancies:
+	- NudgePointsCampaigns.campaigns (src/campaign/NudgePointsCampaigns.sol#22)
+	- NudgePointsCampaigns.createPointsCampaign(uint256,uint32,address) (src/campaign/NudgePointsCampaigns.sol#50-74)
+	- NudgePointsCampaigns.createPointsCampaigns(uint256[],uint32[],address[]) (src/campaign/NudgePointsCampaigns.sol#82-117)
+	- NudgePointsCampaigns.handleReallocation(uint256,address,address,uint256,bytes) (src/campaign/NudgePointsCampaigns.sol#126-178)
+	- newpID = ++ campaign.pID (src/campaign/NudgePointsCampaigns.sol#164)
+	NudgePointsCampaigns.campaigns (src/campaign/NudgePointsCampaigns.sol#22) can be used in cross function reentrancies:
+	- NudgePointsCampaigns.campaigns (src/campaign/NudgePointsCampaigns.sol#22)
+	- NudgePointsCampaigns.createPointsCampaign(uint256,uint32,address) (src/campaign/NudgePointsCampaigns.sol#50-74)
+	- NudgePointsCampaigns.createPointsCampaigns(uint256[],uint32[],address[]) (src/campaign/NudgePointsCampaigns.sol#82-117)
+	- NudgePointsCampaigns.handleReallocation(uint256,address,address,uint256,bytes) (src/campaign/NudgePointsCampaigns.sol#126-178)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+INFO:Detectors:
+NudgeCampaign.constructor(uint32,address,address,uint256,address,uint256,uint16,address,uint256).targetToken_ (src/campaign/NudgeCampaign.sol#71) lacks a zero-check on :
+		- targetToken = targetToken_ (src/campaign/NudgeCampaign.sol#90)
+NudgeCampaign.constructor(uint32,address,address,uint256,address,uint256,uint16,address,uint256).alternativeWithdrawalAddress_ (src/campaign/NudgeCampaign.sol#77) lacks a zero-check on :
+		- alternativeWithdrawalAddress = alternativeWithdrawalAddress_ (src/campaign/NudgeCampaign.sol#113)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+INFO:Detectors:
+NudgeCampaign._transfer(address,address,uint256) (src/campaign/NudgeCampaign.sol#477-484) has external calls inside a loop: (sent,None) = to.call{value: amount}() (src/campaign/NudgeCampaign.sol#479)
+NudgeCampaignFactory.collectFeesFromCampaigns(address[]) (src/campaign/NudgeCampaignFactory.sol#261-270) has external calls inside a loop: totalAmount += NudgeCampaign(address(campaigns[i])).collectFees() (src/campaign/NudgeCampaignFactory.sol#266)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+INFO:Detectors:
+Reentrancy in NudgeCampaign.handleReallocation(uint256,address,address,uint256,bytes) (src/campaign/NudgeCampaign.sol#164-233):
+	External calls:
+	- _transfer(toToken,userAddress,amountReceived) (src/campaign/NudgeCampaign.sol#206)
+		- (sent,None) = to.call{value: amount}() (src/campaign/NudgeCampaign.sol#479)
+	State variables written after the call(s):
+	- accumulatedFees += fees (src/campaign/NudgeCampaign.sol#219)
+	- pID ++ (src/campaign/NudgeCampaign.sol#221)
+	- participations[pID] = Participation({status:ParticipationStatus.PARTICIPATING,userAddress:userAddress,toAmount:amountReceived,rewardAmount:userRewards,startTimestamp:block.timestamp,startBlockNumber:block.number}) (src/campaign/NudgeCampaign.sol#223-230)
+	- pendingRewards += userRewards (src/campaign/NudgeCampaign.sol#218)
+	- totalReallocatedAmount += amountReceived (src/campaign/NudgeCampaign.sol#208)
+Reentrancy in NudgePointsCampaigns.handleReallocation(uint256,address,address,uint256,bytes) (src/campaign/NudgePointsCampaigns.sol#126-178):
+	External calls:
+	- _transfer(toToken,userAddress,amountReceived) (src/campaign/NudgePointsCampaigns.sol#160)
+		- (sent,None) = to.call{value: amount}() (src/campaign/NudgePointsCampaigns.sol#237)
+	State variables written after the call(s):
+	- participations[campaignId][newpID] = Participation({status:ParticipationStatus.HANDLED_OFFCHAIN,userAddress:userAddress,toAmount:amountReceived,rewardAmount:0,startTimestamp:block.timestamp,startBlockNumber:block.number}) (src/campaign/NudgePointsCampaigns.sol#167-174)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2
+INFO:Detectors:
+Reentrancy in NudgeCampaign.claimRewards(uint256[]) (src/campaign/NudgeCampaign.sol#256-299):
+	External calls:
+	- _transfer(rewardToken,participation.userAddress,userRewards) (src/campaign/NudgeCampaign.sol#295)
+		- (sent,None) = to.call{value: amount}() (src/campaign/NudgeCampaign.sol#479)
+	Event emitted after the call(s):
+	- NudgeRewardClaimed(pIDs[i],participation.userAddress,userRewards) (src/campaign/NudgeCampaign.sol#297)
+Reentrancy in NudgeCampaign.collectFees() (src/campaign/NudgeCampaign.sol#341-348):
+	External calls:
+	- _transfer(rewardToken,factory.nudgeTreasuryAddress(),feesToCollect) (src/campaign/NudgeCampaign.sol#345)
+		- (sent,None) = to.call{value: amount}() (src/campaign/NudgeCampaign.sol#479)
+	Event emitted after the call(s):
+	- FeesCollected(feesToCollect) (src/campaign/NudgeCampaign.sol#347)
+Reentrancy in NudgeCampaignFactory.collectFeesFromCampaigns(address[]) (src/campaign/NudgeCampaignFactory.sol#261-270):
+	External calls:
+	- totalAmount += NudgeCampaign(address(campaigns[i])).collectFees() (src/campaign/NudgeCampaignFactory.sol#266)
+	Event emitted after the call(s):
+	- FeesCollected(campaigns,totalAmount) (src/campaign/NudgeCampaignFactory.sol#269)
+Reentrancy in NudgeCampaign.handleReallocation(uint256,address,address,uint256,bytes) (src/campaign/NudgeCampaign.sol#164-233):
+	External calls:
+	- _transfer(toToken,userAddress,amountReceived) (src/campaign/NudgeCampaign.sol#206)
+		- (sent,None) = to.call{value: amount}() (src/campaign/NudgeCampaign.sol#479)
+	Event emitted after the call(s):
+	- NewParticipation(campaignId_,userAddress,pID,amountReceived,userRewards,fees,data) (src/campaign/NudgeCampaign.sol#232)
+Reentrancy in NudgePointsCampaigns.handleReallocation(uint256,address,address,uint256,bytes) (src/campaign/NudgePointsCampaigns.sol#126-178):
+	External calls:
+	- _transfer(toToken,userAddress,amountReceived) (src/campaign/NudgePointsCampaigns.sol#160)
+		- (sent,None) = to.call{value: amount}() (src/campaign/NudgePointsCampaigns.sol#237)
+	Event emitted after the call(s):
+	- NewParticipation(campaignId,userAddress,newpID,amountReceived,0,0,data) (src/campaign/NudgePointsCampaigns.sol#177)
+Reentrancy in NudgeCampaign.rescueTokens(address) (src/campaign/NudgeCampaign.sol#378-394):
+	External calls:
+	- _transfer(token,msg.sender,amount) (src/campaign/NudgeCampaign.sol#389)
+		- (sent,None) = to.call{value: amount}() (src/campaign/NudgeCampaign.sol#479)
+	Event emitted after the call(s):
+	- TokensRescued(token,amount) (src/campaign/NudgeCampaign.sol#390)
+Reentrancy in NudgeCampaign.withdrawRewards(uint256) (src/campaign/NudgeCampaign.sol#326-336):
+	External calls:
+	- _transfer(rewardToken,to,amount) (src/campaign/NudgeCampaign.sol#333)
+		- (sent,None) = to.call{value: amount}() (src/campaign/NudgeCampaign.sol#479)
+	Event emitted after the call(s):
+	- RewardsWithdrawn(to,amount) (src/campaign/NudgeCampaign.sol#335)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+INFO:Detectors:
+NudgeCampaign.constructor(uint32,address,address,uint256,address,uint256,uint16,address,uint256) (src/campaign/NudgeCampaign.sol#69-114) uses timestamp for comparisons
+	Dangerous comparisons:
+	- startTimestamp_ != 0 && startTimestamp_ <= block.timestamp (src/campaign/NudgeCampaign.sol#84)
+	- isCampaignActive = startTimestamp <= block.timestamp (src/campaign/NudgeCampaign.sol#106)
+NudgeCampaign._validateAndActivateCampaignIfReady() (src/campaign/NudgeCampaign.sol#236-251) uses timestamp for comparisons
+	Dangerous comparisons:
+	- ! _manuallyDeactivated && block.timestamp >= startTimestamp (src/campaign/NudgeCampaign.sol#240)
+	- block.timestamp < startTimestamp (src/campaign/NudgeCampaign.sol#243)
+NudgeCampaign.claimRewards(uint256[]) (src/campaign/NudgeCampaign.sol#256-299) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < participation.startTimestamp + holdingPeriodInSeconds (src/campaign/NudgeCampaign.sol#277)
+NudgeCampaign.setIsCampaignActive(bool) (src/campaign/NudgeCampaign.sol#353-372) uses timestamp for comparisons
+	Dangerous comparisons:
+	- isActive && block.timestamp < startTimestamp (src/campaign/NudgeCampaign.sol#358)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+INFO:Detectors:
+NudgeCampaign.claimRewards(uint256[]) (src/campaign/NudgeCampaign.sol#256-299) has costly operations inside a loop:
+	- pendingRewards -= userRewards (src/campaign/NudgeCampaign.sol#288)
+NudgeCampaign.claimRewards(uint256[]) (src/campaign/NudgeCampaign.sol#256-299) has costly operations inside a loop:
+	- distributedRewards += userRewards (src/campaign/NudgeCampaign.sol#289)
+NudgeCampaign.invalidateParticipations(uint256[]) (src/campaign/NudgeCampaign.sol#308-321) has costly operations inside a loop:
+	- pendingRewards -= participation.rewardAmount (src/campaign/NudgeCampaign.sol#317)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#costly-operations-inside-a-loop
+INFO:Detectors:
+Low level call in NudgeCampaign._transfer(address,address,uint256) (src/campaign/NudgeCampaign.sol#477-484):
+	- (sent,None) = to.call{value: amount}() (src/campaign/NudgeCampaign.sol#479)
+Low level call in NudgeCampaignFactory.deployAndFundCampaign(uint32,address,address,uint256,address,uint256,address,uint256,uint256) (src/campaign/NudgeCampaignFactory.sol#133-179):
+	- (sent,None) = campaign.call{value: initialRewardAmount}() (src/campaign/NudgeCampaignFactory.sol#162)
+Low level call in NudgePointsCampaigns._transfer(address,address,uint256) (src/campaign/NudgePointsCampaigns.sol#235-242):
+	- (sent,None) = to.call{value: amount}() (src/campaign/NudgePointsCampaigns.sol#237)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+INFO:Detectors:
+Variable NudgeCampaignFactory.FEE_BPS (src/campaign/NudgeCampaignFactory.sol#24) is not in mixedCase
+Function INudgeCampaignFactory.NUDGE_ADMIN_ROLE() (src/campaign/interfaces/INudgeCampaignFactory.sol#7) is not in mixedCase
+Function INudgeCampaignFactory.NUDGE_OPERATOR_ROLE() (src/campaign/interfaces/INudgeCampaignFactory.sol#8) is not in mixedCase
+Function INudgeCampaignFactory.SWAP_CALLER_ROLE() (src/campaign/interfaces/INudgeCampaignFactory.sol#9) is not in mixedCase
+Function INudgeCampaignFactory.NATIVE_TOKEN() (src/campaign/interfaces/INudgeCampaignFactory.sol#10) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+INFO:Detectors:
+NudgeCampaignFactory.deployCampaign(uint32,address,address,uint256,address,uint256,address,uint256) (src/campaign/NudgeCampaignFactory.sol#68-119) uses literals with too many digits:
+	- bytecode = abi.encodePacked(type()(NudgeCampaign).creationCode,constructorArgs) (src/campaign/NudgeCampaignFactory.sol#111)
+NudgeCampaignFactory.getCampaignAddress(uint32,address,address,uint256,address,uint256,uint16,address,uint256) (src/campaign/NudgeCampaignFactory.sol#193-233) uses literals with too many digits:
+	- bytecode = abi.encodePacked(type()(NudgeCampaign).creationCode,constructorArgs) (src/campaign/NudgeCampaignFactory.sol#230)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#too-many-digits
+INFO:Detectors:
+NudgeCampaign.feeBps (src/campaign/NudgeCampaign.sol#37) should be immutable 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-immutable
+INFO:Slither:. analyzed (39 contracts with 93 detectors), 34 result(s) found

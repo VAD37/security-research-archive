@@ -1,0 +1,9 @@
+./src/mocks/MockTokenDecimals.sol
+./src/mocks/TestERC20.sol
+./src/mocks/TestUSDC.sol
+./src/test/NudgeCampaign.t.sol
+./src/test/NudgeCampaignAdmin.t.sol
+./src/test/NudgeCampaignFactory.t.sol
+./src/test/NudgeCampaignReallocation.t.sol
+./src/test/NudgePointsCampaigns.t.sol
+./src/test/NudgePointsCampaignsHandleReallocationTest.t.sol
