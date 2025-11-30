@@ -1,0 +1,14 @@
+@openzeppelin/contracts=lib/openzeppelin-contracts/contracts
+@openzeppelin/contracts-upgradeable=lib/openzeppelin-contracts-upgradeable/contracts
+@chainlink=lib/chainlink
+@src=src
+@test=test
+@deprecated=deprecated
+@script=script
+@solady=lib/solady/src
+@chimera=lib/chimera/src
+@crytic/properties=lib/properties
+@aave=lib/aave-v3-core/contracts
+halmos-cheatcodes=lib/halmos-cheatcodes/src
+@uniswap/v3-core=lib/v3-core
+@uniswap/v3-periphery=lib/v3-periphery
