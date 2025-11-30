@@ -1,0 +1,28 @@
+# The deployer and sender must be the same for this example.
+# The deployer is the 'attacker' and is sent INITIAL_ATTACKER_BALANCE
+deployer: '0x30000'
+# Sender must be the same so that it can use the attacker balance to try to break the invariant. 
+sender: ['0x30000']
+# Allow for multi-abi use
+allContracts: false
+# TODO
+#select the mode to test, which can be property, assertion, overflow, exploration, optimization
+testMode: "property"
+#stopOnFail makes echidna terminate as soon as any property fails and has been shrunk
+stopOnFail: false
+
+#solcArgs allows special args to solc
+solcArgs: ""
+#solcLibs is solc libraries
+solcLibs: []
+#cryticArgs allows special args to crytic
+cryticArgs: []
+
+# list of methods to filter
+filterFunctions: []
+# by default, blacklist methods in filterFunctions
+filterBlacklist: true
+# # number of workers
+# workers: 4
+#codeSize max code size for deployed contratcs (default 24576, per EIP-170)
+codeSize: 0x6966000
