@@ -1,0 +1,23 @@
+# Dependency directory
+node_modules
+
+.npm
+.env
+.env.*
+/dist
+
+*.bak
+.DS_Store
+.vscode
+.gitattributes
+package-lock.json
+contracts/artifacts
+types/
+cache/
+build/
+coverage/
+coverage.json
+abi/
+typechain-types/
+
+**/deployments/localhost/

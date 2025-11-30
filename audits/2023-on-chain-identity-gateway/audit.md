@@ -1,0 +1,3 @@
+- smartcontract receive gatewayToken as approval for identity
+- gatekeeper can revoke token, order contract
+- smartcontract must verify gatewayToken + verify sign transaction = operation on DAPP
