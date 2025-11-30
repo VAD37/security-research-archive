@@ -1,0 +1,28 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+solc = "0.8.20"
+optimizer = true
+via_ir = true
+
+remappings = [
+    "forge-std/=lib/forge-std/src/",
+    "@openzeppelin/contracts=lib/openzeppelin-contracts/contracts",
+    "@aerodrome/=lib/contracts/contracts",
+    "@chainlink/=lib/foundry-chainlink-toolkit",
+    "@contracts/=contracts/",
+    "@redstone-finance/evm-connector/dist/contracts/=lib/redstone-oracles-monorepo/packages/evm-connector/contracts/",
+
+]
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+
+eth_rpc_url = "https://base-mainnet.g.alchemy.com/v2/VVR2yASI0aR35LfTp8Xuj1L8J8RvIIo"
+# https://base-mainnet.g.alchemy.com/v2/VVR2yASI0aR35LfTp8Xuj1L8J8RvIIo_
+# OPTIMISM_URL=https://opt-mainnet.g.alchemy.com/v2/PwLgjh_gVinp6KpZENosOzc20pGeLKdD
+# GOERLI_URL=https://eth-goerli.alchemyapi.io/v2/q5Y2SBMlUiVd7ByoUkIjrruq9adhjUFz
+
+# etherscan_api_key = "64D8FMTIH1UG2BCD2A1BFMFZCTF6S2YG95" #mainnet
+etherscan_api_key = "3CFBN9S66EHM92Q4S47RVNPMM9BVQ1THVD" #base
+
+fs_permissions = [{ access = "read-write", path = "./" }]
