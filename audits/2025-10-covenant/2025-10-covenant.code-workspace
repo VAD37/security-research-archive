@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "2025-10-covenant",
+			"path": "."
+		}
+	],
+	"settings": {
+		"solidity.defaultCompiler": "localNodeModule"
+	}
+}

@@ -1,0 +1,17 @@
+{
+  "lib/aave-v3-core": {
+    "rev": "782f51917056a53a2c228701058a6c3fb233684a"
+  },
+  "lib/euler-price-oracle": {
+    "rev": "ffc3cb82615fc7d003a7f431175bd1eaf0bf41c5"
+  },
+  "lib/openzeppelin-contracts": {
+    "rev": "1cf13771092c83a060eaef0f8809493fb4c04eb1"
+  },
+  "lib/pyth-sdk-solidity": {
+    "rev": "d7dd6e149936552198c12fac1273997cefc03ceb"
+  },
+  "lib/solady": {
+    "rev": "836c169fe357b3c23ad5d5755a9b4fbbfad7a99b"
+  }
+}
