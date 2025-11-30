@@ -1,0 +1,33 @@
+[profile.default]
+src = "contracts"
+out = "out"
+libs = ["lib", "node_modules"]
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+ignored_warnings_from = ["path_to_ignore"]
+ignored_error_codes = [
+    "license",
+    "code-size",
+    "unused-return",
+    "unused-param",
+    "unused-var",
+    "func-mutability",
+    2018,
+    "init-code-size",
+    "missing-receive-ether",
+]
+# ignored_error_codes =["license", "code-size","unused-return", "unused-param", "unused-var"]
+# gas_limit = "18446744073709551615"
+
+# Remappings for OpenZeppelin via Yarn (node_modules)
+remappings = [
+    "openzeppelin-contracts=node_modules/@openzeppelin"
+]
+
+## ** API KEY ** ##
+etherscan_api_key = "64D8FMTIH1UG2BCD2A1BFMFZCTF6S2YG95" #mainnet
+# etherscan_api_key = "7NXT7DIG8HF8K1P5NV2B1CQT4EASGVIIGU" #arbitrum
+
+[etherscan]
+mainnet = { key = "${ETHERSCAN_API_KEY}" } #reading from env variable directly
+arbitrum = { key = "7NXT7DIG8HF8K1P5NV2B1CQT4EASGVIIGU" , chain = "arbitrum" }

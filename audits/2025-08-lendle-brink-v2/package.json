@@ -1,0 +1,51 @@
+{
+  "name": "brink-v2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/0xb11a/brink-v2.git",
+  "license": "UNLICENSED",
+  "scripts": {
+    "all": "yarn clean && yarn compile",
+    "clean": "rm -rf ./artifacts ./cache ./cache_hardhat ./coverage ./coverage.json ./types && yarn typechain",
+    "compile": "TS_NODE_TRANSPILE_ONLY=true hardhat compile",
+    "coverage": "hardhat coverage --solcoverjs ./.solcover.js --temp artifacts --testfiles \"test/**/*.ts\" && yarn typechain",
+    "deploy-local": "yarn hardhat scripts/deploy --network localhost",
+    "deploy": "yarn hardhat scripts/deploy --network base",
+    "lint:sol": "yarn solhint \"{script,contracts,test}/**/*.sol\"",
+    "networks": "hardhat networks",
+    "test": "hardhat test",
+    "typechain": "TS_NODE_TRANSPILE_ONLY=true hardhat typechain",
+    "verify": "hardhat run scripts/verify.ts --network",
+    "prettier:write": "prettier --write \"**/*.{js,json,md,ts,yml}\""
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.3.0",
+    "@openzeppelin/contracts-upgradeable": "^5.3.0",
+    "hardhat": "^2.24.3"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@nomicfoundation/hardhat-ignition": "^0.15.0",
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.0",
+    "@typechain/ethers-v6": "^0.5.0",
+    "@typechain/hardhat": "^9.0.0",
+    "@types/chai": "^4.2.0",
+    "@types/mocha": ">=9.1.0",
+    "@types/node": ">=18.0.0",
+    "chai": "^4.2.0",
+    "dotenv": "^16.5.0",
+    "ethers": "^6.4.0",
+    "hardhat-gas-reporter": "^1.0.8",
+    "prettier": "^3.6.0",
+    "prettier-plugin-solidity": "^2.0.0",
+    "solhint": "^5.1.0",
+    "solidity-coverage": "^0.8.0",
+    "ts-node": ">=8.0.0",
+    "typechain": "^8.3.0",
+    "typescript": ">=4.5.0"
+  }
+}
