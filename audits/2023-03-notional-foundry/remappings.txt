@@ -1,0 +1,6 @@
+compound-protocol/=lib/compound-protocol/
+ds-test/=lib/forge-std/lib/ds-test/src/
+forge-std/=lib/forge-std/src/
+openzeppelin-46/=lib/openzeppelin-contracts-fork/
+openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/
+@openzeppelin/=lib/openzeppelin-contracts/
