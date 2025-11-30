@@ -1,0 +1,1 @@
+- The lib deploy new contracts doesnt even work
