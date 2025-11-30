@@ -1,0 +1,27 @@
+# IDE
+.idea
+.vscode
+
+# Sui
+build/
+testing/
+
+# Move
+.aptos
+.move
+move-stuff
+node_modules
+
+# Testing files
+tests/data
+coverage/
+
+# Local envs
+.env
+.env.*
+
+# System files
+.DS_Store
+*.swp
+*.swo
+copy.py
