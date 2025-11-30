@@ -1,0 +1,55 @@
+{
+  "LiFiDiamond": {
+    "Facets": {
+      "0xDC954dab5dBD1Ac8d0D6e2DC600632dc84B1a840": {
+        "Name": "DiamondCutFacet",
+        "Version": "1.0.0"
+      },
+      "0x179D2F1F51765aD8943Ea223aBEB738c4c27Ac52": {
+        "Name": "DiamondLoupeFacet",
+        "Version": "1.0.0"
+      },
+      "0x80e699D7EEF0D7b0B4DE6feDF45DE881Cd2Ae506": {
+        "Name": "OwnershipFacet",
+        "Version": "1.0.0"
+      },
+      "0x341e94069f53234fE6DabeF707aD424830525715": {
+        "Name": "LiFiDiamond",
+        "Version": "1.0.0"
+      },
+      "0x862FB4813657A40D1828Cac1e28a600625D78fC0": {
+        "Name": "PeripheryRegistryFacet",
+        "Version": "1.0.0"
+      },
+      "0xa95309dF9256D52f9B61379963701fF1BA5939E4": {
+        "Name": "AcrossFacet",
+        "Version": "2.0.0"
+      },
+      "0x0C449F799010287c8ee51d7E89324dA8a1EBCB47": {
+        "Name": "AccessManagerFacet",
+        "Version": "1.0.0"
+      },
+      "0xa7aC6d44cC52B134b92Dd20015641138ba6A3C16": {
+        "Name": "CelerIMFacetMutable",
+        "Version": "2.0.0"
+      },
+      "0xC10CF1C23e20e3FE6f0b224Bc2E16C9ACabfEBB9": {
+        "Name": "AcrossFacetPacked",
+        "Version": "1.0.0"
+      },
+      "0x9209f20CEab76c53F41348393BC0E8adFC6C6241": {
+        "Name": "SymbiosisFacet",
+        "Version": "1.0.0"
+      }
+    },
+    "Periphery": {
+      "ERC20Proxy": "0x8E1cf39Df64D9DCAdA7831d90CC852e02663410a",
+      "Executor": "0xa9bfa49F26733271f4FD34A4b57bB7C563Ae056A",
+      "Receiver": "0xdeDB2DAe4a9BC63910a722a3b7DC930C7E6f6421",
+      "FeeCollector": "0x8dBf6f59187b2EB36B980F3D8F4cFC6DC4E4642e",
+      "ServiceFeeCollector": "0x3F0bD05C9A09FE07DB88aA2DD97f9d9fAf82994d",
+      "LiFuelFeeCollector": "0x4A751A91647CA1749d7ec505026427FF601C6966",
+      "TokenWrapper": "0xf15485ada1a1826fA46225032b13F6A972eC73C1"
+    }
+  }
+}

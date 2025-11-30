@@ -1,0 +1,108 @@
+{
+  "name": "lifi-contracts",
+  "version": "0.1.0",
+  "description": "LI.FI is a cross-chain bridge aggregation protocol",
+  "engines": {
+    "node": ">= 12.18.0"
+  },
+  "repository": "github:lifinance/contracts",
+  "author": "LI.FI",
+  "license": "MIT",
+  "keywords": [
+    "ethereum",
+    "smart-contracts",
+    "template",
+    "cross-chain",
+    "hardhat",
+    "solidity"
+  ],
+  "devDependencies": {
+    "@matterlabs/hardhat-zksync-deploy": "0.6.3",
+    "@matterlabs/hardhat-zksync-solc": "0.3.17",
+    "@matterlabs/hardhat-zksync-verify": "0.1.7",
+    "@nomicfoundation/hardhat-foundry": "^1.0.2",
+    "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
+    "@nomiclabs/hardhat-etherscan": "3.1.6",
+    "@nomiclabs/hardhat-waffle": "2.0.5",
+    "@typechain/ethers-v5": "10.2.0",
+    "@typechain/hardhat": "^6.1.5",
+    "@types/node": "^17.0.23",
+    "@types/pino": "^7.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "cross-env": "^7.0.2",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.27.5",
+    "ethers": "5.7.2",
+    "fs-extra": "^10.0.1",
+    "hardhat": "^2.19.1",
+    "hardhat-deploy": "^0.11.34",
+    "hardhat-preprocessor": "^0.1.5",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.2.3",
+    "patch-package": "^6.4.7",
+    "plop": "^3.1.2",
+    "postinstall-postinstall": "^2.1.0",
+    "prettier": "^2.6.0",
+    "prettier-plugin-solidity": "^1.0.0-beta.19",
+    "solhint": "^3.3.7",
+    "solhint-plugin-prettier": "^0.0.5",
+    "solidity-coverage": "^0.7.20",
+    "ts-generator": "^0.1.1",
+    "ts-node": "^10.7.0",
+    "typechain": "^8.0.0",
+    "typescript": "4.8.4",
+    "zksync-web3": "^0.14.3"
+  },
+  "resolutions": {
+    "hardhat/**/@ethereumjs/tx": "3.5.0"
+  },
+  "scripts": {
+    "postinstall": "patch-package",
+    "prepare": "yarn prepare:husky",
+    "prepare:husky": "husky install",
+    "lint": "eslint \"**/*.{js,ts}\" && solhint src/**/*.sol",
+    "lint:fix": "eslint --fix \"**/*.{js,ts}\" && solhint --fix src/**/*.sol",
+    "format": "prettier --check \"**/*.{ts,js,sol}\"",
+    "format:fix": "prettier --write \"**/*.{ts,js,sol}\"",
+    "compile": "make build",
+    "test": "make test",
+    "test:fix": "npm run lint:fix; npm run format:fix; npm run test",
+    "gas": "make snapshot",
+    "coverage": "make coverage",
+    "execute": "node ./_scripts.js run",
+    "abi:generate": "make clean && forge build --skip script --skip test --skip Base --skip Test && hardhat diamondABI",
+    "typechain": "make clean && forge build --skip script --skip test --skip Base --skip Test && typechain --target ethers-v5 'out/**/*.json' --out-dir typechain",
+    "codegen": "plop"
+  },
+  "dependencies": {
+    "@arbitrum/sdk": "^3.0.0",
+    "@hop-protocol/sdk": "0.0.1-beta.310",
+    "@safe-global/api-kit": "^1.1.0",
+    "@safe-global/protocol-kit": "^1.0.1",
+    "@safe-global/safe-core-sdk-types": "^2.0.0",
+    "@uma/sdk": "^0.22.1",
+    "@uniswap/sdk": "^3.0.3",
+    "chalk": "4.1.2",
+    "defender-relay-client": "^1.26.0",
+    "enquirer": "^2.4.1",
+    "hardhat-ethers": "^1.0.1",
+    "light-spinner": "^1.0.4",
+    "merkletreejs": "^0.3.11",
+    "notify-send": "^0.1.2",
+    "pino": "^7.9.2",
+    "yarn": "^1.22.19"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.sol": [
+      "prettier --write",
+      "solhint --fix"
+    ]
+  }
+}

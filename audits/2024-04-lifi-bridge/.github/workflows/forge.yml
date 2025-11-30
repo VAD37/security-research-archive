@@ -1,0 +1,44 @@
+name: Forge
+on:
+  push:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      ETH_NODE_URI_MAINNET: ${{ secrets.ETH_NODE_URI_MAINNET }}
+      ETH_NODE_URI_POLYGON: ${{ secrets.ETH_NODE_URI_POLYGON }}
+      ETH_NODE_URI_GOERLI: ${{ secrets.ETH_NODE_URI_GOERLI }}
+      ETH_NODE_URI_ARBITRUM: ${{ secrets.ETH_NODE_URI_ARBITRUM }}
+      ETH_NODE_URI_GNOSIS: ${{ secrets.ETH_NODE_URI_GNOSIS }}
+      FORK_NUMBER: ${{ secrets.FORK_NUMBER }}
+      POLYGON_FORK_NUMBER: ${{ secrets.POLYGON_FORK_NUMBER }}
+      FORK_NUMBER_POLYGON: 36004499
+    steps:
+      - uses: actions/checkout@v4.1.1
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@v4.0.0
+        with:
+          node-version: 20
+      - name: Install dev dependencies
+        run: yarn install
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1.0.10
+        with:
+          version: nightly
+
+      - name: Install Deps
+        run: forge install
+      - name: Run forge tests
+        uses: Wandalen/wretry.action@v1.3.0
+        with:
+          command: forge test
+          attempt_limit: 10
+          attempt_delay: 5000
+      - name: Get forge test coverage
+        run: forge coverage
