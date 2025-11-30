@@ -1,0 +1,15 @@
+forge-std/=lib/jigsaw-protocol-v1/lib/forge-std/src/
+
+@jigsaw/=lib/jigsaw-protocol-v1/
+
+@openzeppelin/contracts-upgradeable/=lib/jigsaw-protocol-v1/lib/openzeppelin-contracts-upgradeable/contracts/
+@openzeppelin/contracts/=lib/jigsaw-protocol-v1/lib/openzeppelin-contracts/contracts/
+@openzeppelin-foundry-upgrades=lib/openzeppelin-foundry-upgrades/src/
+
+@uniswap/v3-core/=lib/jigsaw-protocol-v1/lib/v3-core/
+@uniswap/v3-periphery/=lib/jigsaw-protocol-v1/lib/v3-periphery/
+
+@aave/v3-periphery/=lib/aave-v3-periphery/contracts/
+@aave/v3-core/=lib/aave-v3-core/contracts/
+
+@pendle/=lib/pendle-core-v2-public/contracts/

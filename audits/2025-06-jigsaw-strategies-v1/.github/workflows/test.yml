@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  FOUNDRY_PROFILE: ci
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add GitHub to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          repository: jigsaw-finance/jigsaw-protocol-v1
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          cache: false
+
+      - name: Show Forge version
+        run: forge --version
+
+      - name: Create .env file
+        run: |
+          touch .env
+          echo MAINNET_RPC_URL=${{ secrets.MAINNET_RPC_URL }} >> .env
+          echo DEPLOYER_PRIVATE_KEY=${{ secrets.DEPLOYER_PRIVATE_KEY }} >> .env
+
+      - name: Run Forge build
+        run: forge build --sizes
+
+      # - name: Run Forge scripts
+      #   run: |
+      #     forge test --match-path "test/scripts/**"
+      #     forge test --match-path "test/aave/**"
+      #     forge test --match-path "test/dinero/**"
+      #     forge test --match-path "test/ion/**"
+      #     forge test --match-path "test/pendle/**"
+      #     forge test --match-path "test/reservoir/**"
+      #     forge test --match-path "test/staker/**"
