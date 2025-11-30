@@ -1,0 +1,18 @@
+[submodule "pools/lib/solidity-bytes-utils"]
+	path = pools/lib/solidity-bytes-utils
+	url = https://github.com/GNSPS/solidity-bytes-utils
+[submodule "pools/lib/filecoin-solidity"]
+	path = pools/lib/filecoin-solidity
+	url = https://github.com/Zondax/filecoin-solidity
+[submodule "pools/lib/solidity-cborutils"]
+	path = pools/lib/solidity-cborutils
+	url = https://github.com/smartcontractkit/solidity-cborutils
+[submodule "pools/lib/buffer"]
+	path = pools/lib/buffer
+	url = https://github.com/ensdomains/buffer
+[submodule "pools/lib/fevmate"]
+	path = pools/lib/fevmate
+	url = https://github.com/wadealexc/fevmate
+[submodule "pools/lib/glifmate"]
+	path = pools/lib/glifmate
+	url = https://github.com/glifio/glifmate
