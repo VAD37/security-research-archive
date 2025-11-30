@@ -1,0 +1,35 @@
+{
+  "transactions": [
+    {
+      "hash": "0xfc5d01d6c02fdc02134709a406eda883f70155a517a8f8177fe1cc523ed36e40",
+      "transactionType": "CALL",
+      "contractName": null,
+      "contractAddress": "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+      "function": "swapExactETHForTokens(uint256,address[],address,uint256)",
+      "arguments": [
+        "0",
+        "[0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2, 0xf3f5ccfc376f2063334C5ca210578f7dBe5F2129]",
+        "0xF0Bd9c08184f8a29a0c4Fc1aeF4a01650e356Bf0",
+        "1737095774"
+      ],
+      "transaction": {
+        "from": "0xf0bd9c08184f8a29a0c4fc1aef4a01650e356bf0",
+        "to": "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+        "gas": "0x28996",
+        "value": "0xc7d713b49da0000",
+        "input": "0x7ff36ab500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080000000000000000000000000f0bd9c08184f8a29a0c4fc1aef4a01650e356bf0000000000000000000000000000000000000000000000000000000006789fa5e0000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2000000000000000000000000f3f5ccfc376f2063334c5ca210578f7dbe5f2129",
+        "nonce": "0x0",
+        "chainId": "0x1"
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [],
+  "libraries": [],
+  "pending": [],
+  "returns": {},
+  "timestamp": 1737735373,
+  "chain": 1,
+  "commit": "0d890ff"
+}
