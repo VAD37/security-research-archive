@@ -1,0 +1,1444 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "_path",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_sellAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "UniV3SwapInput",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "burnRebalancer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "collateralFactor",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "collateralList",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "mint",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "redeem",
+              "type": "bool"
+            },
+            {
+              "internalType": "contract IStableOracle",
+              "name": "oracle",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "pathbuy",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bytes",
+              "name": "pathsell",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "ratios",
+              "type": "uint256[]"
+            }
+          ],
+          "internalType": "struct CollateralInfo[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "mintRebalancer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "UniV3SwapInput(bytes,uint256)": "92a32b24",
+    "allowance(address,address)": "dd62ed3e",
+    "approve(address,uint256)": "095ea7b3",
+    "balanceOf(address)": "70a08231",
+    "burnRebalancer(uint256)": "1c16f373",
+    "collateralFactor()": "df011c41",
+    "collateralList()": "80250341",
+    "mintRebalancer(uint256)": "8b3415b5",
+    "totalSupply()": "18160ddd",
+    "transfer(address,uint256)": "a9059cbb",
+    "transferFrom(address,address,uint256)": "23b872dd"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.15+commit.e14f2714\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_path\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"_sellAmount\",\"type\":\"uint256\"}],\"name\":\"UniV3SwapInput\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"burnRebalancer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"collateralFactor\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"collateralList\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"mint\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"redeem\",\"type\":\"bool\"},{\"internalType\":\"contract IStableOracle\",\"name\":\"oracle\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"pathbuy\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"pathsell\",\"type\":\"bytes\"},{\"internalType\":\"uint256[]\",\"name\":\"ratios\",\"type\":\"uint256[]\"}],\"internalType\":\"struct CollateralInfo[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"mintRebalancer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"allowance(address,address)\":{\"details\":\"Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called.\"},\"approve(address,uint256)\":{\"details\":\"Sets `amount` as the allowance of `spender` over the caller's tokens. Returns a boolean value indicating whether the operation succeeded. IMPORTANT: Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 Emits an {Approval} event.\"},\"balanceOf(address)\":{\"details\":\"Returns the amount of tokens owned by `account`.\"},\"totalSupply()\":{\"details\":\"Returns the amount of tokens in existence.\"},\"transfer(address,uint256)\":{\"details\":\"Moves `amount` tokens from the caller's account to `to`. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event.\"},\"transferFrom(address,address,uint256)\":{\"details\":\"Moves `amount` tokens from `from` to `to` using the allowance mechanism. `amount` is then deducted from the caller's allowance. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/interfaces/IUSSDRebalancer.sol\":\"IUSSD\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@uniswap/v3-core/=lib/v3-core/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts-upgradeable/contracts/\",\":uniswap-v3/=lib/v3-core/\",\":v3-core/=lib/v3-core/\",\":v3-periphery/=lib/v3-periphery/contracts/\"]},\"sources\":{\"lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/IERC20Upgradeable.sol\":{\"keccak256\":\"0x5f83581950887be701a44c250c1c6e38e9d421809a56717dc99d1d216e5bc41a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://45516064c5e566f9ca1f854cbf142c37d86ac4a771c3a92aeecbf160ec92133c\",\"dweb:/ipfs/QmR8a8iwevbt8dvpDhpskPSQsfs5kCL8Ztz1pLZLJfHf5Z\"]},\"src/interfaces/IStableOracle.sol\":{\"keccak256\":\"0x23dc1769ee395c66a8bbb1cd62b228d0a8ce505bbb4360060f15aaefd723b030\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://aa26de917062509eb2e90a4d75032a0404de87649f06ce9864420d1ef0adfbc6\",\"dweb:/ipfs/QmNVVdhL3LdubZBSojMEtjz1HheQrArTu7EqjwmXXZesrM\"]},\"src/interfaces/IUSSDRebalancer.sol\":{\"keccak256\":\"0xe3f920fb7be804086be93218856181d45d5c40e9c31eb75f365d923f2ebf0848\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f2af56e6bf59f48705d1c30420a58f37b0af00bf4d0cc59e8517316088b5ea4b\",\"dweb:/ipfs/QmPNsVs5FfvnzcRcsmK2Ekte2oUSqAcUnUVxbvGSimmAJk\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.15+commit.e14f2714"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Approval",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Transfer",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "_path",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_sellAmount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "UniV3SwapInput"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "allowance",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "approve",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "balanceOf",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "burnRebalancer"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "collateralFactor",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "collateralList",
+          "outputs": [
+            {
+              "internalType": "struct CollateralInfo[]",
+              "name": "",
+              "type": "tuple[]",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "token",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "mint",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "redeem",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "contract IStableOracle",
+                  "name": "oracle",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "pathbuy",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "pathsell",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "uint256[]",
+                  "name": "ratios",
+                  "type": "uint256[]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "mintRebalancer"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "totalSupply",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "transfer",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "transferFrom",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "allowance(address,address)": {
+            "details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
+          },
+          "approve(address,uint256)": {
+            "details": "Sets `amount` as the allowance of `spender` over the caller's tokens. Returns a boolean value indicating whether the operation succeeded. IMPORTANT: Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 Emits an {Approval} event."
+          },
+          "balanceOf(address)": {
+            "details": "Returns the amount of tokens owned by `account`."
+          },
+          "totalSupply()": {
+            "details": "Returns the amount of tokens in existence."
+          },
+          "transfer(address,uint256)": {
+            "details": "Moves `amount` tokens from the caller's account to `to`. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
+          },
+          "transferFrom(address,address,uint256)": {
+            "details": "Moves `amount` tokens from `from` to `to` using the allowance mechanism. `amount` is then deducted from the caller's allowance. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":@openzeppelin/=lib/openzeppelin-contracts/",
+        ":@uniswap/v3-core/=lib/v3-core/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
+        ":forge-std/=lib/forge-std/src/",
+        ":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/",
+        ":openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":openzeppelin/=lib/openzeppelin-contracts-upgradeable/contracts/",
+        ":uniswap-v3/=lib/v3-core/",
+        ":v3-core/=lib/v3-core/",
+        ":v3-periphery/=lib/v3-periphery/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "src/interfaces/IUSSDRebalancer.sol": "IUSSD"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/IERC20Upgradeable.sol": {
+        "keccak256": "0x5f83581950887be701a44c250c1c6e38e9d421809a56717dc99d1d216e5bc41a",
+        "urls": [
+          "bzz-raw://45516064c5e566f9ca1f854cbf142c37d86ac4a771c3a92aeecbf160ec92133c",
+          "dweb:/ipfs/QmR8a8iwevbt8dvpDhpskPSQsfs5kCL8Ztz1pLZLJfHf5Z"
+        ],
+        "license": "MIT"
+      },
+      "src/interfaces/IStableOracle.sol": {
+        "keccak256": "0x23dc1769ee395c66a8bbb1cd62b228d0a8ce505bbb4360060f15aaefd723b030",
+        "urls": [
+          "bzz-raw://aa26de917062509eb2e90a4d75032a0404de87649f06ce9864420d1ef0adfbc6",
+          "dweb:/ipfs/QmNVVdhL3LdubZBSojMEtjz1HheQrArTu7EqjwmXXZesrM"
+        ],
+        "license": "MIT"
+      },
+      "src/interfaces/IUSSDRebalancer.sol": {
+        "keccak256": "0xe3f920fb7be804086be93218856181d45d5c40e9c31eb75f365d923f2ebf0848",
+        "urls": [
+          "bzz-raw://f2af56e6bf59f48705d1c30420a58f37b0af00bf4d0cc59e8517316088b5ea4b",
+          "dweb:/ipfs/QmPNsVs5FfvnzcRcsmK2Ekte2oUSqAcUnUVxbvGSimmAJk"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "src/interfaces/IUSSDRebalancer.sol",
+    "id": 38768,
+    "exportedSymbols": {
+      "CollateralInfo": [
+        38726
+      ],
+      "IERC20Upgradeable": [
+        30449
+      ],
+      "IStableOracle": [
+        38523
+      ],
+      "IUSSD": [
+        38767
+      ],
+      "IUSSDRebalancer": [
+        38735
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "32:1362:75",
+    "nodes": [
+      {
+        "id": 38707,
+        "nodeType": "PragmaDirective",
+        "src": "32:23:75",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".6"
+        ]
+      },
+      {
+        "id": 38708,
+        "nodeType": "ImportDirective",
+        "src": "57:29:75",
+        "nodes": [],
+        "absolutePath": "src/interfaces/IStableOracle.sol",
+        "file": "./IStableOracle.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 38768,
+        "sourceUnit": 38524,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 38709,
+        "nodeType": "ImportDirective",
+        "src": "88:92:75",
+        "nodes": [],
+        "absolutePath": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/IERC20Upgradeable.sol",
+        "file": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/IERC20Upgradeable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 38768,
+        "sourceUnit": 30450,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 38726,
+        "nodeType": "StructDefinition",
+        "src": "519:389:75",
+        "nodes": [],
+        "canonicalName": "CollateralInfo",
+        "members": [
+          {
+            "constant": false,
+            "id": 38711,
+            "mutability": "mutable",
+            "name": "token",
+            "nameLocation": "555:5:75",
+            "nodeType": "VariableDeclaration",
+            "scope": 38726,
+            "src": "547:13:75",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 38710,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "547:7:75",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 38713,
+            "mutability": "mutable",
+            "name": "mint",
+            "nameLocation": "602:4:75",
+            "nodeType": "VariableDeclaration",
+            "scope": 38726,
+            "src": "597:9:75",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 38712,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "597:4:75",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 38715,
+            "mutability": "mutable",
+            "name": "redeem",
+            "nameLocation": "645:6:75",
+            "nodeType": "VariableDeclaration",
+            "scope": 38726,
+            "src": "640:11:75",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 38714,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "640:4:75",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 38718,
+            "mutability": "mutable",
+            "name": "oracle",
+            "nameLocation": "700:6:75",
+            "nodeType": "VariableDeclaration",
+            "scope": 38726,
+            "src": "686:20:75",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IStableOracle_$38523",
+              "typeString": "contract IStableOracle"
+            },
+            "typeName": {
+              "id": 38717,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 38716,
+                "name": "IStableOracle",
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 38523,
+                "src": "686:13:75"
+              },
+              "referencedDeclaration": 38523,
+              "src": "686:13:75",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IStableOracle_$38523",
+                "typeString": "contract IStableOracle"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 38720,
+            "mutability": "mutable",
+            "name": "pathbuy",
+            "nameLocation": "757:7:75",
+            "nodeType": "VariableDeclaration",
+            "scope": 38726,
+            "src": "751:13:75",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes_storage_ptr",
+              "typeString": "bytes"
+            },
+            "typeName": {
+              "id": 38719,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "751:5:75",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 38722,
+            "mutability": "mutable",
+            "name": "pathsell",
+            "nameLocation": "804:8:75",
+            "nodeType": "VariableDeclaration",
+            "scope": 38726,
+            "src": "798:14:75",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes_storage_ptr",
+              "typeString": "bytes"
+            },
+            "typeName": {
+              "id": 38721,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "798:5:75",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 38725,
+            "mutability": "mutable",
+            "name": "ratios",
+            "nameLocation": "856:6:75",
+            "nodeType": "VariableDeclaration",
+            "scope": 38726,
+            "src": "846:16:75",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+              "typeString": "uint256[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 38723,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "846:7:75",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "id": 38724,
+              "nodeType": "ArrayTypeName",
+              "src": "846:9:75",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                "typeString": "uint256[]"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "name": "CollateralInfo",
+        "nameLocation": "526:14:75",
+        "scope": 38768,
+        "visibility": "public"
+      },
+      {
+        "id": 38735,
+        "nodeType": "ContractDefinition",
+        "src": "910:119:75",
+        "nodes": [
+          {
+            "id": 38729,
+            "nodeType": "FunctionDefinition",
+            "src": "942:30:75",
+            "nodes": [],
+            "functionSelector": "7d7c2a1c",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "rebalance",
+            "nameLocation": "951:9:75",
+            "parameters": {
+              "id": 38727,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "960:2:75"
+            },
+            "returnParameters": {
+              "id": 38728,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "971:0:75"
+            },
+            "scope": 38735,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 38734,
+            "nodeType": "FunctionDefinition",
+            "src": "977:50:75",
+            "nodes": [],
+            "functionSelector": "026b1d5f",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPool",
+            "nameLocation": "986:7:75",
+            "parameters": {
+              "id": 38730,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "993:2:75"
+            },
+            "returnParameters": {
+              "id": 38733,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 38732,
+                  "mutability": "mutable",
+                  "name": "pool",
+                  "nameLocation": "1021:4:75",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38734,
+                  "src": "1013:12:75",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 38731,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1013:7:75",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1012:14:75"
+            },
+            "scope": 38735,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IUSSDRebalancer",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          38735
+        ],
+        "name": "IUSSDRebalancer",
+        "nameLocation": "920:15:75",
+        "scope": 38768,
+        "usedErrors": []
+      },
+      {
+        "id": 38767,
+        "nodeType": "ContractDefinition",
+        "src": "1031:362:75",
+        "nodes": [
+          {
+            "id": 38742,
+            "nodeType": "FunctionDefinition",
+            "src": "1074:49:75",
+            "nodes": [],
+            "functionSelector": "8b3415b5",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "mintRebalancer",
+            "nameLocation": "1083:14:75",
+            "parameters": {
+              "id": 38740,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 38739,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "1106:6:75",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38742,
+                  "src": "1098:14:75",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 38738,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1098:7:75",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1097:16:75"
+            },
+            "returnParameters": {
+              "id": 38741,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1122:0:75"
+            },
+            "scope": 38767,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 38747,
+            "nodeType": "FunctionDefinition",
+            "src": "1128:49:75",
+            "nodes": [],
+            "functionSelector": "1c16f373",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "burnRebalancer",
+            "nameLocation": "1137:14:75",
+            "parameters": {
+              "id": 38745,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 38744,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "1160:6:75",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38747,
+                  "src": "1152:14:75",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 38743,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1152:7:75",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1151:16:75"
+            },
+            "returnParameters": {
+              "id": 38746,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1176:0:75"
+            },
+            "scope": 38767,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 38754,
+            "nodeType": "FunctionDefinition",
+            "src": "1182:71:75",
+            "nodes": [],
+            "functionSelector": "80250341",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "collateralList",
+            "nameLocation": "1191:14:75",
+            "parameters": {
+              "id": 38748,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1205:2:75"
+            },
+            "returnParameters": {
+              "id": 38753,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 38752,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38754,
+                  "src": "1226:25:75",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_CollateralInfo_$38726_calldata_ptr_$dyn_calldata_ptr",
+                    "typeString": "struct CollateralInfo[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 38750,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 38749,
+                        "name": "CollateralInfo",
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 38726,
+                        "src": "1226:14:75"
+                      },
+                      "referencedDeclaration": 38726,
+                      "src": "1226:14:75",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_CollateralInfo_$38726_storage_ptr",
+                        "typeString": "struct CollateralInfo"
+                      }
+                    },
+                    "id": 38751,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1226:16:75",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_CollateralInfo_$38726_storage_$dyn_storage_ptr",
+                      "typeString": "struct CollateralInfo[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1225:27:75"
+            },
+            "scope": 38767,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 38759,
+            "nodeType": "FunctionDefinition",
+            "src": "1258:54:75",
+            "nodes": [],
+            "functionSelector": "df011c41",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "collateralFactor",
+            "nameLocation": "1267:16:75",
+            "parameters": {
+              "id": 38755,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1283:2:75"
+            },
+            "returnParameters": {
+              "id": 38758,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 38757,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38759,
+                  "src": "1303:7:75",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 38756,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1303:7:75",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1302:9:75"
+            },
+            "scope": 38767,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 38766,
+            "nodeType": "FunctionDefinition",
+            "src": "1317:74:75",
+            "nodes": [],
+            "functionSelector": "92a32b24",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "UniV3SwapInput",
+            "nameLocation": "1326:14:75",
+            "parameters": {
+              "id": 38764,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 38761,
+                  "mutability": "mutable",
+                  "name": "_path",
+                  "nameLocation": "1354:5:75",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38766,
+                  "src": "1341:18:75",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 38760,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1341:5:75",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 38763,
+                  "mutability": "mutable",
+                  "name": "_sellAmount",
+                  "nameLocation": "1369:11:75",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38766,
+                  "src": "1361:19:75",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 38762,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1361:7:75",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1340:41:75"
+            },
+            "returnParameters": {
+              "id": 38765,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1390:0:75"
+            },
+            "scope": 38767,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 38736,
+              "name": "IERC20Upgradeable",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 30449,
+              "src": "1050:17:75"
+            },
+            "id": 38737,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1050:17:75"
+          }
+        ],
+        "canonicalName": "IUSSD",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          38767,
+          30449
+        ],
+        "name": "IUSSD",
+        "nameLocation": "1041:5:75",
+        "scope": 38768,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 75
+}

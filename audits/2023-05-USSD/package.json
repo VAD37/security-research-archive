@@ -1,0 +1,37 @@
+{
+  "name": "2023-05-ussd",
+  "version": "1.0.0",
+  "description": "- Join [Sherlock Discord](https://discord.gg/MABEWyASkp) - Submit findings using the issue page in your private contest repo (label issues as med or high) - [Read for more details](https://docs.sherlock.xyz/audits/watsons)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fork": "forge test --fork-url <your_rpc_url> --etherscan-api-key <your_etherscan_api_key> --fork-block-number"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-etherscan": "^3.0.0",
+    "@typechain/ethers-v5": "^10.1.0",
+    "@typechain/hardhat": "^6.1.6",
+    "@types/chai": "^4.3.5",
+    "@types/mocha": ">=9.1.0",
+    "@types/node": "^20.2.3",
+    "chai": "^4.2.0",
+    "dotenv": "^16.0.3",
+    "ethers": "^6.4.0",
+    "hardhat": "^2.14.0",
+    "hardhat-gas-reporter": "^1.0.8",
+    "solidity-coverage": "^0.8.1",
+    "ts-node": "^10.9.1",
+    "typechain": "^8.1.1",
+    "typescript": "^5.0.4"
+  }
+}

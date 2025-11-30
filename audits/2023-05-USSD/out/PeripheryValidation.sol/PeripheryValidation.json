@@ -1,0 +1,338 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.15+commit.e14f2714\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"lib/v3-periphery/contracts/base/PeripheryValidation.sol\":\"PeripheryValidation\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@uniswap/v3-core/=lib/v3-core/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts-upgradeable/contracts/\",\":uniswap-v3/=lib/v3-core/\",\":v3-core/=lib/v3-core/\",\":v3-periphery/=lib/v3-periphery/contracts/\"]},\"sources\":{\"lib/v3-periphery/contracts/base/BlockTimestamp.sol\":{\"keccak256\":\"0xec031d21f3edd6dd656900b7575d794a267a2594ac27b881546e2ffb1161c9f9\",\"license\":\"GPL-2.0-or-later\",\"urls\":[\"bzz-raw://0db5df546317a54302ea32442298d56bb03a4105de9ec42b0ae96d576a73c3f6\",\"dweb:/ipfs/QmWUfrtJo9oadEjohm9yd8F8WcTGjoz9yKA1AzRCVksC2p\"]},\"lib/v3-periphery/contracts/base/PeripheryValidation.sol\":{\"keccak256\":\"0xdb92575277ee95a5b14f2736eda1cc743ee24977885c1caee6f8fbb6b2714f25\",\"license\":\"GPL-2.0-or-later\",\"urls\":[\"bzz-raw://04c49d1f5d290f232db9d487773e22adfd7087c5fd55044fedce91e70b782eb4\",\"dweb:/ipfs/QmW61hmov7uZak3qhjyGhF3jKxfcmchC9sASrbbcmBkUid\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.15+commit.e14f2714"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":@openzeppelin/=lib/openzeppelin-contracts/",
+        ":@uniswap/v3-core/=lib/v3-core/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
+        ":forge-std/=lib/forge-std/src/",
+        ":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/",
+        ":openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":openzeppelin/=lib/openzeppelin-contracts-upgradeable/contracts/",
+        ":uniswap-v3/=lib/v3-core/",
+        ":v3-core/=lib/v3-core/",
+        ":v3-periphery/=lib/v3-periphery/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "lib/v3-periphery/contracts/base/PeripheryValidation.sol": "PeripheryValidation"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "lib/v3-periphery/contracts/base/BlockTimestamp.sol": {
+        "keccak256": "0xec031d21f3edd6dd656900b7575d794a267a2594ac27b881546e2ffb1161c9f9",
+        "urls": [
+          "bzz-raw://0db5df546317a54302ea32442298d56bb03a4105de9ec42b0ae96d576a73c3f6",
+          "dweb:/ipfs/QmWUfrtJo9oadEjohm9yd8F8WcTGjoz9yKA1AzRCVksC2p"
+        ],
+        "license": "GPL-2.0-or-later"
+      },
+      "lib/v3-periphery/contracts/base/PeripheryValidation.sol": {
+        "keccak256": "0xdb92575277ee95a5b14f2736eda1cc743ee24977885c1caee6f8fbb6b2714f25",
+        "urls": [
+          "bzz-raw://04c49d1f5d290f232db9d487773e22adfd7087c5fd55044fedce91e70b782eb4",
+          "dweb:/ipfs/QmW61hmov7uZak3qhjyGhF3jKxfcmchC9sASrbbcmBkUid"
+        ],
+        "license": "GPL-2.0-or-later"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "lib/v3-periphery/contracts/base/PeripheryValidation.sol",
+    "id": 35210,
+    "exportedSymbols": {
+      "BlockTimestamp": [
+        34686
+      ],
+      "PeripheryValidation": [
+        35209
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "45:253:53",
+    "nodes": [
+      {
+        "id": 35191,
+        "nodeType": "PragmaDirective",
+        "src": "45:24:53",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "=",
+          "0.8",
+          ".15"
+        ]
+      },
+      {
+        "id": 35192,
+        "nodeType": "ImportDirective",
+        "src": "71:30:53",
+        "nodes": [],
+        "absolutePath": "lib/v3-periphery/contracts/base/BlockTimestamp.sol",
+        "file": "./BlockTimestamp.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 35210,
+        "sourceUnit": 34687,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 35209,
+        "nodeType": "ContractDefinition",
+        "src": "103:194:53",
+        "nodes": [
+          {
+            "id": 35208,
+            "nodeType": "ModifierDefinition",
+            "src": "165:130:53",
+            "nodes": [],
+            "body": {
+              "id": 35207,
+              "nodeType": "Block",
+              "src": "206:89:53",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 35202,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "id": 35199,
+                            "name": "_blockTimestamp",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 34685,
+                            "src": "224:15:53",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_view$__$returns$_t_uint256_$",
+                              "typeString": "function () view returns (uint256)"
+                            }
+                          },
+                          "id": 35200,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "224:17:53",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "<=",
+                        "rightExpression": {
+                          "id": 35201,
+                          "name": "deadline",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 35196,
+                          "src": "245:8:53",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "224:29:53",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "5472616e73616374696f6e20746f6f206f6c64",
+                        "id": 35203,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "255:21:53",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_c2621685b6a86291a4533558eb72fba04db12a0363db47624d86d9bbb608d293",
+                          "typeString": "literal_string \"Transaction too old\""
+                        },
+                        "value": "Transaction too old"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_c2621685b6a86291a4533558eb72fba04db12a0363db47624d86d9bbb608d293",
+                          "typeString": "literal_string \"Transaction too old\""
+                        }
+                      ],
+                      "id": 35198,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "216:7:53",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 35204,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "216:61:53",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 35205,
+                  "nodeType": "ExpressionStatement",
+                  "src": "216:61:53"
+                },
+                {
+                  "id": 35206,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "287:1:53"
+                }
+              ]
+            },
+            "name": "checkDeadline",
+            "nameLocation": "174:13:53",
+            "parameters": {
+              "id": 35197,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 35196,
+                  "mutability": "mutable",
+                  "name": "deadline",
+                  "nameLocation": "196:8:53",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 35208,
+                  "src": "188:16:53",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 35195,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "188:7:53",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "187:18:53"
+            },
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 35193,
+              "name": "BlockTimestamp",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 34686,
+              "src": "144:14:53"
+            },
+            "id": 35194,
+            "nodeType": "InheritanceSpecifier",
+            "src": "144:14:53"
+          }
+        ],
+        "canonicalName": "PeripheryValidation",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          35209,
+          34686
+        ],
+        "name": "PeripheryValidation",
+        "nameLocation": "121:19:53",
+        "scope": 35210,
+        "usedErrors": []
+      }
+    ],
+    "license": "GPL-2.0-or-later"
+  },
+  "id": 53
+}

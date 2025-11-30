@@ -1,0 +1,15 @@
+[profile.default]
+src = 'src'
+out = 'out'
+libs = ['lib']
+# solidity version 0.8.6
+solc = '0.8.15'
+
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config
+
+# This translates to `solc --allow-paths ../node_modules`
+allow_paths = ["../node_modules", "../lib"]
+
+fork_block_number = 17313107
+eth_rpc_url = "https://eth-mainnet.alchemyapi.io/v2/kIP2_euA9T6Z-e5MjHzTzRUmgqCLsHUA"
+etherscan_api_key = "64D8FMTIH1UG2BCD2A1BFMFZCTF6S2YG95"

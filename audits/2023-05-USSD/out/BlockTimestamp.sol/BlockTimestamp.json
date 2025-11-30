@@ -1,0 +1,226 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.15+commit.e14f2714\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"Base contract that is overridden for tests\",\"kind\":\"dev\",\"methods\":{},\"title\":\"Function for getting block timestamp\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"lib/v3-periphery/contracts/base/BlockTimestamp.sol\":\"BlockTimestamp\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@uniswap/v3-core/=lib/v3-core/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts-upgradeable/contracts/\",\":uniswap-v3/=lib/v3-core/\",\":v3-core/=lib/v3-core/\",\":v3-periphery/=lib/v3-periphery/contracts/\"]},\"sources\":{\"lib/v3-periphery/contracts/base/BlockTimestamp.sol\":{\"keccak256\":\"0xec031d21f3edd6dd656900b7575d794a267a2594ac27b881546e2ffb1161c9f9\",\"license\":\"GPL-2.0-or-later\",\"urls\":[\"bzz-raw://0db5df546317a54302ea32442298d56bb03a4105de9ec42b0ae96d576a73c3f6\",\"dweb:/ipfs/QmWUfrtJo9oadEjohm9yd8F8WcTGjoz9yKA1AzRCVksC2p\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.15+commit.e14f2714"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":@openzeppelin/=lib/openzeppelin-contracts/",
+        ":@uniswap/v3-core/=lib/v3-core/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
+        ":forge-std/=lib/forge-std/src/",
+        ":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/",
+        ":openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":openzeppelin/=lib/openzeppelin-contracts-upgradeable/contracts/",
+        ":uniswap-v3/=lib/v3-core/",
+        ":v3-core/=lib/v3-core/",
+        ":v3-periphery/=lib/v3-periphery/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "lib/v3-periphery/contracts/base/BlockTimestamp.sol": "BlockTimestamp"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "lib/v3-periphery/contracts/base/BlockTimestamp.sol": {
+        "keccak256": "0xec031d21f3edd6dd656900b7575d794a267a2594ac27b881546e2ffb1161c9f9",
+        "urls": [
+          "bzz-raw://0db5df546317a54302ea32442298d56bb03a4105de9ec42b0ae96d576a73c3f6",
+          "dweb:/ipfs/QmWUfrtJo9oadEjohm9yd8F8WcTGjoz9yKA1AzRCVksC2p"
+        ],
+        "license": "GPL-2.0-or-later"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "lib/v3-periphery/contracts/base/BlockTimestamp.sol",
+    "id": 34687,
+    "exportedSymbols": {
+      "BlockTimestamp": [
+        34686
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "45:384:48",
+    "nodes": [
+      {
+        "id": 34674,
+        "nodeType": "PragmaDirective",
+        "src": "45:24:48",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "=",
+          "0.8",
+          ".15"
+        ]
+      },
+      {
+        "id": 34686,
+        "nodeType": "ContractDefinition",
+        "src": "171:257:48",
+        "nodes": [
+          {
+            "id": 34685,
+            "nodeType": "FunctionDefinition",
+            "src": "320:106:48",
+            "nodes": [],
+            "body": {
+              "id": 34684,
+              "nodeType": "Block",
+              "src": "387:39:48",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "expression": {
+                      "id": 34681,
+                      "name": "block",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -4,
+                      "src": "404:5:48",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_block",
+                        "typeString": "block"
+                      }
+                    },
+                    "id": 34682,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "timestamp",
+                    "nodeType": "MemberAccess",
+                    "src": "404:15:48",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 34680,
+                  "id": 34683,
+                  "nodeType": "Return",
+                  "src": "397:22:48"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 34676,
+              "nodeType": "StructuredDocumentation",
+              "src": "210:105:48",
+              "text": "@dev Method that exists purely to be overridden for tests\n @return The current block timestamp"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_blockTimestamp",
+            "nameLocation": "329:15:48",
+            "parameters": {
+              "id": 34677,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "344:2:48"
+            },
+            "returnParameters": {
+              "id": 34680,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 34679,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 34685,
+                  "src": "378:7:48",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 34678,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "378:7:48",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "377:9:48"
+            },
+            "scope": 34686,
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [],
+        "canonicalName": "BlockTimestamp",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 34675,
+          "nodeType": "StructuredDocumentation",
+          "src": "71:100:48",
+          "text": "@title Function for getting block timestamp\n @dev Base contract that is overridden for tests"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          34686
+        ],
+        "name": "BlockTimestamp",
+        "nameLocation": "189:14:48",
+        "scope": 34687,
+        "usedErrors": []
+      }
+    ],
+    "license": "GPL-2.0-or-later"
+  },
+  "id": 48
+}
