@@ -1,0 +1,43 @@
+{
+    "name": "poolshark-limit-subgraph",
+    "version": "0.0.1",
+    "repository": "https://github.com/poolshark-protocol/limit",
+    "license": "MIT",
+    "prettier": {
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "semi": false,
+        "singleQuote": true
+    },
+    "scripts": {
+        "studio-auth": "graph auth  --studio",
+        "auth": "graph auth --product hosted-service ",
+        "create": "graph create example --node https://api.thegraph.com/deploy/",
+        "create-local": "graph create example --node http://127.0.0.1:3001",
+        "codegen": "graph codegen",
+        "build": "graph build",
+        "deploy": "graph deploy --product hosted-service alphak3y/poolshark-limit",
+        "deploy-scroll": "graph deploy --product hosted-service alphak3y/poolshark-limit-scroll-mainnet",
+        "deploy-scroll-sepolia": "graph deploy --product hosted-service alphak3y/limit-scroll-sepolia",
+        "test": "graph codegen; graph test -v 0.2.0",
+        "prepare:subgraph": "mustache ./config/${NETWORK}.json ./templates/${BLOCKCHAIN}.subgraph.template.yaml > subgraph.yaml && rm -rf generated && npm run generate:schema && npm run subgraph:codegen && npm run subgraph:build",
+        "deploy:chainstack:arb-goerli": "BLOCKCHAIN=arbitrum =arbitrum-goerli env-cmd npm run prepare:subgraph && SLUG=aave/protocol-v2-goerli env-cmd npm run subgraph:deploy:chainstack:ordertest"
+    },
+    "dependencies": {
+        "babel-polyfill": "^6.26.0",
+        "babel-register": "^6.26.0"
+    },
+    "devDependencies": {
+        "@graphprotocol/graph-cli": "^0.60.0",
+        "@graphprotocol/graph-ts": "^0.31.0",
+        "@trivago/prettier-plugin-sort-imports": "4.1.0",
+        "@typescript-eslint/eslint-plugin": "^5.59.11",
+        "@typescript-eslint/parser": "^5.59.11",
+        "eslint": "^8.25.0",
+        "eslint-config-prettier": "^8.5.0",
+        "mustache": "^4.2.0",
+        "prettier": "^2.8.8",
+        "rimraf": "^3.0.2",
+        "typescript": "5.1.3"
+    }
+}
