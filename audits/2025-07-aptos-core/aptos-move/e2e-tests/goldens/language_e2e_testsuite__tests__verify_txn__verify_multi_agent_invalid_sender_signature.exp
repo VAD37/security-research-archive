@@ -1,0 +1,21 @@
+Ok(
+    [
+        TransactionOutput {
+            write_set: Value(
+                V0(
+                    WriteSetV0(
+                        WriteSetMut {
+                            write_set: {},
+                        },
+                    ),
+                ),
+            ),
+            events: [],
+            gas_used: 0,
+            status: Discard(
+                INVALID_SIGNATURE,
+            ),
+            auxiliary_data: None,
+        },
+    ],
+)
