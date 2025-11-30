@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "no-unused-vars": "ignore",
+    "const-name-snakecase": "ignore",
+    "contract-name-camelcase": "ignore",
+    "event-name-camelcase": "ignore",
+    "func-name-mixedcase": "ignore",
+    "func-param-name-mixedcase": "ignore",
+    "modifier-name-mixedcase": "ignore",
+    "private-vars-leading-underscore": "ignore",
+    "var-name-mixedcase": "ignore",
+    "imports-on-top": "ignore"
+  }
+}
