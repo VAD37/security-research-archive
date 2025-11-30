@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "2025-08-gte-perps",
+			"path": "."
+		}
+	],
+	"settings": {
+		"github.copilot.enable": {
+			"markdown": true
+		}
+	}
+}

