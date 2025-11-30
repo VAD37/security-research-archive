@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "module": "commonjs",
+    "outDir": "./dist/cmd/",
+    "sourceMap": true,
+    "inlineSources": true
+  },
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
