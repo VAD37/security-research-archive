@@ -1,0 +1,11 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+optimizer_runs = 20000
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+eth_rpc_url = "https://eth-mainnet.alchemyapi.io/v2/kIP2_euA9T6Z-e5MjHzTzRUmgqCLsHUA"
+# SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/bYAe3DKRJKXsEcYK7Cq7Sd43HoWXDIh9
+# eth_rpc_url = "https://eth-sepolia.g.alchemy.com/v2/bYAe3DKRJKXsEcYK7Cq7Sd43HoWXDIh9"
+etherscan_api_key = "64D8FMTIH1UG2BCD2A1BFMFZCTF6S2YG95"
