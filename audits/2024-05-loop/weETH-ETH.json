@@ -1,0 +1,149 @@
+{
+    "chainId": 1,
+    "price": "1.0355292140863174",
+    "grossPrice": "1.0355292140863174",
+    "estimatedPriceImpact": "0.1",
+    "value": "0",
+    "gasPrice": "22000000000",
+    "gas": "145040",
+    "estimatedGas": "145040",
+    "protocolFee": "0",
+    "minimumProtocolFee": "0",
+    "buyTokenAddress": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "buyAmount": "1035529214086317400",
+    "grossBuyAmount": "1035529214086317400",
+    "sellTokenAddress": "0xcd5fe23c85820f7b72d0926fc9b05b43e359b7ee",
+    "sellAmount": "1000000000000000000",
+    "grossSellAmount": "1000000000000000000",
+    "sources": [
+        {
+            "name": "0x",
+            "proportion": "0"
+        },
+        {
+            "name": "Uniswap",
+            "proportion": "0"
+        },
+        {
+            "name": "Uniswap_V2",
+            "proportion": "0"
+        },
+        {
+            "name": "Curve",
+            "proportion": "0"
+        },
+        {
+            "name": "Balancer",
+            "proportion": "0"
+        },
+        {
+            "name": "Balancer_V2",
+            "proportion": "0"
+        },
+        {
+            "name": "BancorV3",
+            "proportion": "0"
+        },
+        {
+            "name": "SushiSwap",
+            "proportion": "0"
+        },
+        {
+            "name": "DODO",
+            "proportion": "0"
+        },
+        {
+            "name": "DODO_V2",
+            "proportion": "0"
+        },
+        {
+            "name": "CryptoCom",
+            "proportion": "0"
+        },
+        {
+            "name": "Lido",
+            "proportion": "0"
+        },
+        {
+            "name": "MakerPsm",
+            "proportion": "0"
+        },
+        {
+            "name": "KyberDMM",
+            "proportion": "0"
+        },
+        {
+            "name": "Uniswap_V3",
+            "proportion": "1"
+        },
+        {
+            "name": "Curve_V2",
+            "proportion": "0"
+        },
+        {
+            "name": "ShibaSwap",
+            "proportion": "0"
+        },
+        {
+            "name": "Synapse",
+            "proportion": "0"
+        },
+        {
+            "name": "Synthetix",
+            "proportion": "0"
+        },
+        {
+            "name": "Aave_V2",
+            "proportion": "0"
+        },
+        {
+            "name": "Compound",
+            "proportion": "0"
+        },
+        {
+            "name": "KyberElastic",
+            "proportion": "0"
+        },
+        {
+            "name": "Maverick_V1",
+            "proportion": "0"
+        },
+        {
+            "name": "PancakeSwap_V3",
+            "proportion": "0"
+        }
+    ],
+    "allowanceTarget": "0xdef1c0ded9bec7f1a1670819833240f027b25eff",
+    "sellTokenToEthRate": "0.96472428126294485",
+    "buyTokenToEthRate": "1",
+    "to": "0xdef1c0ded9bec7f1a1670819833240f027b25eff",
+    "data": "0x803ba26d00000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000e3a26401a8d86920000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002bcd5fe23c85820f7b72d0926fc9b05b43e359b7ee0001f4c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2000000000000000000000000000000000000000000869584cd000000000000000000000000100000000000000000000000000000000000001100000000000000000000000000000000cd2e894fbd5c23e551a905b85e26948a",
+    "decodedUniqueId": "0xcd2e894fbd5c23e551a905b85e26948a",
+    "guaranteedPrice": "1.025173921945454226",
+    "orders": [
+        {
+            "type": 0,
+            "source": "Uniswap_V3",
+            "makerToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            "takerToken": "0xcd5fe23c85820f7b72d0926fc9b05b43e359b7ee",
+            "makerAmount": "1035529214086317400",
+            "takerAmount": "1000000000000000000",
+            "fillData": {
+                "router": "0xe592427a0aece92de3edee1f18e0157c05861564",
+                "path": "0xcd5fe23c85820f7b72d0926fc9b05b43e359b7ee0001f4c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                "gasUsed": 9520,
+                "routerVersion": 1
+            },
+            "fill": {
+                "input": "1000000000000000000",
+                "output": "1035529214086317400",
+                "adjustedOutput": "1032910378086317400",
+                "gas": 119038
+            }
+        }
+    ],
+    "fees": {
+        "zeroExFee": null
+    },
+    "auxiliaryChainData": {}
+}
