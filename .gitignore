@@ -8,3 +8,6 @@
 **/lib/
 **/cache/
 **/.vscode/
+
+# ignore script files
+*.sh 
